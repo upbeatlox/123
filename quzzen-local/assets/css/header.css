@@ -648,88 +648,77 @@ html.hdr-over-hero:not(.menu-open) .header-nav{background:transparent!important;
 .float-cta{transition:background-color .2s,transform .3s,opacity .3s}
 html.intro-on .float-cta{opacity:0;transform:translateY(12px);pointer-events:none}
 
-/* ===== Первый экран v5: 3D-логотип по центру, заголовок «лесенкой», стеклянные карточки ===== */
-.intro-v5 .intro3d-copy,.intro-v5 .hero2,.intro-v5 .hero3,.intro-v5 .hero4,.intro-v5 .intro3d-scroll,.intro-v5 .intro3d-fallback{display:none!important}
-.intro-v5 #intro3dCanvas{display:block!important}
-.intro3d.intro-v5.is-fallback #intro3dCanvas{display:none!important}
-/* тот же свет, что у фона 3D-сцены — пока движок грузится, экран не пустой и не «прыгает» */
-.intro-v5 .intro3d-sticky{background:
- linear-gradient(to bottom,rgba(10,11,14,0) 72%,#0a0b0e 100%),
- radial-gradient(34% 46% at 50% 48%,rgba(210,255,0,.13) 0%,rgba(210,255,0,.04) 50%,rgba(210,255,0,0) 100%),
- radial-gradient(70% 45% at 50% -5%,rgba(230,236,245,.10) 0%,rgba(230,236,245,0) 100%),
- #0a0b0e!important}
-.intro-v5 .intro3d-poster{left:50%;top:48%;height:min(64vh,60vw);opacity:calc(1 - var(--intro-p,0))}
+/* ===== Первый экран v7 (по референсу, много воздуха) =====
+   узкая панель с именем и фото · карточка кейсов · большая панель с 3D-логотипом и вырезом под заголовок */
+.intro-v7 .intro3d-copy,.intro-v7 .hero2,.intro-v7 .hero3,.intro-v7 .hero4,.intro-v7 .intro3d-scroll,.intro-v7 .intro3d-fallback{display:none!important}
+.intro-v7 .intro3d-sticky{background:#0a0b0e!important}
+/* холст в панели сдвинут вверх-вправо, чтобы логотип не прятался за вырезом */
+.intro-v7 #intro3dCanvas{display:block!important;position:absolute;left:0;top:-14%;width:112%;height:114%;-webkit-mask-image:none!important;mask-image:none!important}
+.intro3d.intro-v7.is-fallback #intro3dCanvas{display:none!important}
+.intro-v7 .intro3d-poster{left:56%;top:43%;height:62%;width:auto;z-index:1}
 
-.hero5{--h5-pad:clamp(16px,4vw,72px);--h5-fs:clamp(3rem,7.4vw,9.6rem);--h5-top:calc(50% - var(--h5-fs) * 1.35 - 36px);
- position:absolute;inset:0;z-index:2;pointer-events:none}
-.hero5 a{pointer-events:auto;text-decoration:none}
-.hero5-center{position:absolute;left:var(--h5-pad);right:var(--h5-pad);top:var(--h5-top);display:flex;flex-direction:column;align-items:center;
- opacity:calc(1 - var(--intro-p,0) * 1.15);filter:blur(calc(var(--intro-p,0) * 14px));transform:translateY(calc(var(--intro-p,0) * -60px))}
-.hero5-title{align-self:stretch;margin:0;color:#fff;font:600 var(--h5-fs)/.9 'Inter',sans-serif;letter-spacing:-.055em;text-transform:uppercase;
- text-shadow:0 4px 30px rgba(0,0,0,.25)}
-.hero5-line{display:block;white-space:nowrap}
-.hero5-l1,.hero5-l3{padding-left:31%}
-.hero5-l2{padding-left:9%}
-.hero5-title .hero3-type{color:#d2ff00}
-.hero5-title .hero3-caret{width:.06em;height:.72em;margin-left:.05em}
-.hero5-cta{margin-top:clamp(28px,5vh,52px);display:inline-flex;align-items:center;gap:10px;padding:17px 30px;border-radius:999px;background:#d2ff00;color:#0a0b0e!important;
- font:600 1rem/1 'Inter',sans-serif;transition:background-color .2s,transform .25s cubic-bezier(.22,1,.36,1)}
-.hero5-cta:hover{background:#fff;transform:translateY(-2px)}
-.hero5-cta svg{transition:transform .25s}
-.hero5-cta:hover svg{transform:translateY(2px)}
+.hero7{--pad:clamp(16px,4vw,72px);--gap:clamp(12px,1.3vw,20px);--r:clamp(22px,2.3vw,34px);--h7-fs:clamp(3rem,6.2vw,7.6rem);
+ position:absolute;z-index:2;left:var(--pad);right:var(--pad);top:84px;bottom:clamp(16px,3vh,32px);
+ display:grid;grid-template-columns:clamp(56px,4.2vw,70px) minmax(0,.95fr) minmax(0,1.35fr);grid-template-rows:minmax(0,1fr);gap:var(--gap);
+ opacity:calc(1 - var(--intro-p,0) * 1.15)}
+.hero7 a{text-decoration:none}
 
-/* стекло — лёгкое: почти прозрачная подложка, тонкая грань, лёгкое размытие, без тяжёлых теней */
-.hero5-card{position:absolute;border-radius:16px;color:#fff;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.09);
- -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);opacity:calc(1 - var(--intro-p,0) * 1.4)}
-.hero5-card p{margin:0}
-.hero5-about{left:var(--h5-pad);top:calc(var(--h5-top) + var(--h5-fs) * .84);transform:translateY(-100%);
- max-width:calc((100% - var(--h5-pad) * 2) * .31 - 28px);padding:14px 18px 14px 16px;white-space:nowrap}
-.hero5-about-name{display:flex;align-items:center;gap:9px;font:500 .92rem/1.2 'Inter',sans-serif;letter-spacing:-.01em}
-.hero5-dot{flex:none;width:6px;height:6px;border-radius:50%;background:#d2ff00;animation:statusPulse 2s infinite ease-in-out}
-.hero5-about-role{margin:5px 0 0 15px!important;color:rgba(255,255,255,.5);font:400 .8rem/1.4 'Inter',sans-serif}
+/* узкая панель: знак, имя, фото — сразу понятно, чей сайт */
+.hero7-rail{grid-column:1;grid-row:1;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:18px 0;border-radius:999px;background:#121419}
+.hero7-rail-logo{width:24px;height:auto}
+.hero7-rail-name{writing-mode:vertical-rl;transform:rotate(180deg);color:rgba(255,255,255,.55);font:500 .72rem/1 'Inter',sans-serif;letter-spacing:.22em;text-transform:uppercase;white-space:nowrap}
+.hero7-rail-me{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#d2ff00;color:#0a0b0e!important;
+ font:600 .8rem/1 'Inter',sans-serif;letter-spacing:.02em;transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.hero7-rail-me:hover{transform:scale(1.08)}
 
-.hero5-stat{bottom:clamp(20px,4.5vh,44px);width:clamp(200px,16vw,250px);padding:16px 16px 18px 18px;
- display:grid;grid-template-columns:1fr auto;grid-template-areas:"label arrow" "num num" "sub sub";align-items:center;
- transition:border-color .3s,background-color .3s,translate .35s cubic-bezier(.22,1,.36,1)}
-.hero5-stat--left{left:var(--h5-pad)}
-.hero5-stat--right{right:var(--h5-pad)}
-.hero5-stat:hover{translate:0 -3px;border-color:rgba(210,255,0,.35);background:rgba(255,255,255,.05)}
-.hero5-stat-label{grid-area:label;color:rgba(255,255,255,.6);font:400 .82rem/1.2 'Inter',sans-serif}
-.hero5-stat-arrow{grid-area:arrow;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.2);color:#fff;
- transition:background-color .2s,border-color .2s,color .2s}
-.hero5-stat-arrow svg{width:11px;height:11px;transition:transform .3s cubic-bezier(.22,1,.36,1)}
-.hero5-stat:hover .hero5-stat-arrow{background:#d2ff00;border-color:#d2ff00;color:#0a0b0e}
-.hero5-stat:hover .hero5-stat-arrow svg{transform:translate(1px,-1px)}
-.hero5-stat-num{grid-area:num;margin-top:clamp(14px,3vh,28px);font:500 clamp(2rem,2.6vw,2.7rem)/1 'Inter',sans-serif;letter-spacing:-.04em}
-.hero5-stat-sub{grid-area:sub;margin-top:6px;color:rgba(255,255,255,.45);font:400 .78rem/1.35 'Inter',sans-serif}
+/* карточка кейсов вверху слева */
+.hero7-left{grid-column:2;grid-row:1;align-self:start}
+.hero7-card{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1fr);gap:18px;padding:12px;border-radius:var(--r);background:#121419;color:#fff;transition:background-color .3s}
+.hero7-card:hover{background:#171a20}
+.hero7-card-img{display:block;width:100%;height:100%;min-height:150px;object-fit:cover;border-radius:calc(var(--r) - 10px)}
+.hero7-card-body{display:flex;flex-direction:column;justify-content:space-between;gap:18px;padding:8px 8px 4px 0}
+.hero7-card-text{color:rgba(255,255,255,.7);font:400 .92rem/1.5 'Inter',sans-serif}
+.hero7-card-btn{display:inline-flex;align-items:center;gap:6px;align-self:flex-start}
+.hero7-card-btn span{padding:12px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.22);font:500 .82rem/1 'Inter',sans-serif;transition:border-color .2s,color .2s}
+.hero7-card-btn i{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#d2ff00;color:#0a0b0e;transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.hero7-card:hover .hero7-card-btn span{border-color:#d2ff00;color:#d2ff00}
+.hero7-card:hover .hero7-card-btn i{transform:translateY(2px)}
 
-/* появление: строки поднимаются из размытия одна за другой, потом кнопка и карточки */
-@keyframes h5Up{from{opacity:0;translate:0 42px;filter:blur(12px)}to{opacity:1;translate:0 0;filter:blur(0)}}
-@keyframes h5Rise{from{opacity:0;translate:0 26px}to{translate:0 0}}
-.intro-v5:not(.hero5-go) .hero5-line,.intro-v5:not(.hero5-go) .hero5-anim{opacity:0}
-.hero5-go:not(.hero5-done) .hero5-line{animation:h5Up 1.1s cubic-bezier(.22,1,.36,1) both}
-.hero5-go:not(.hero5-done) .hero5-l2{animation-delay:.12s}
-.hero5-go:not(.hero5-done) .hero5-l3{animation-delay:.24s}
-.hero5-go:not(.hero5-done) .hero5-anim{animation:h5Rise .9s cubic-bezier(.22,1,.36,1) .5s both}
-.hero5-go:not(.hero5-done) .hero5-about{animation-delay:.62s}
-.hero5-go:not(.hero5-done) .hero5-stat--left{animation-delay:.74s}
-.hero5-go:not(.hero5-done) .hero5-stat--right{animation-delay:.86s}
+/* большая панель с 3D; вырез снизу-слева в цвет фона + два скругления-«перехода» */
+.hero7-panel{grid-column:3;grid-row:1;position:relative;overflow:hidden;border-radius:var(--r);background:#121419;--nw:47%;--nh:40%}
+.hero7-notch{position:absolute;z-index:2;left:0;bottom:0;width:var(--nw);height:var(--nh);background:#0a0b0e;border-top-right-radius:var(--r)}
+.hero7-corner{position:absolute;z-index:2;width:var(--r);height:var(--r);background:radial-gradient(circle at 100% 0,transparent calc(var(--r) - .5px),#0a0b0e var(--r))}
+.hero7-corner--a{left:0;bottom:var(--nh)}
+.hero7-corner--b{left:var(--nw);bottom:0}
+.hero7-note{position:absolute;z-index:3;right:clamp(18px,2vw,28px);bottom:clamp(16px,2vw,24px);color:rgba(255,255,255,.55);font:500 .78rem/1 'Inter',sans-serif;letter-spacing:.02em}
 
-@media (max-width:1024px){
- .hero5{--h5-fs:clamp(2.6rem,10vw,6rem)}
- .hero5-about{display:none}
- .hero5-l1{padding-left:22%}.hero5-l2{padding-left:4%}.hero5-l3{padding-left:16%}
+/* заголовок: снизу слева, заходит в вырез панели */
+.hero7-copy{grid-column:2;grid-row:1;align-self:end;position:relative;z-index:3;width:calc(168% + var(--gap) - 24px);padding-bottom:6px}
+.hero7-kicker{margin:0 0 clamp(14px,2vh,22px);color:rgba(255,255,255,.5);font:500 .78rem/1 'Inter',sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.hero7-title{margin:0;color:#fff;font:500 var(--h7-fs)/.95 'Inter',sans-serif;letter-spacing:-.055em}
+.hero7-line{display:block;white-space:nowrap}
+.hero7-title .hero3-type{color:#d2ff00}
+.hero7-title .hero3-caret{width:.05em;height:.7em;margin-left:.04em}
+.hero7-cta{display:none;margin-top:20px;align-items:center;gap:10px;padding:15px 24px;border-radius:999px;background:#d2ff00;color:#0a0b0e!important;font:600 .95rem/1 'Inter',sans-serif}
+
+/* появление: мягко, по очереди */
+@keyframes h7Up{from{opacity:0;translate:0 24px}to{opacity:1;translate:0 0}}
+.intro-v7:not(.hero-go) .hero7-anim,.intro-v7:not(.hero-go) .hero7-line{opacity:0}
+.hero-go:not(.hero-done) .hero7-anim,.hero-go:not(.hero-done) .hero7-line{animation:h7Up 1s cubic-bezier(.22,1,.36,1) both}
+.hero-go:not(.hero-done) .hero7-rail{animation-delay:.05s}
+.hero-go:not(.hero-done) .hero7-panel{animation-delay:.12s}
+.hero-go:not(.hero-done) .hero7-card{animation-delay:.24s}
+.hero-go:not(.hero-done) .hero7-kicker{animation-delay:.34s}
+.hero-go:not(.hero-done) .hero7-line{animation-delay:.42s}
+.hero-go:not(.hero-done) .hero7-line+.hero7-line{animation-delay:.52s}
+
+@media (max-width:900px){
+ .hero7{--h7-fs:11vw;top:80px;bottom:16px;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;gap:20px}
+ .hero7-rail,.hero7-left,.hero7-notch,.hero7-corner{display:none}
+ .hero7-panel{grid-column:1;grid-row:1}
+ .hero7-copy{grid-column:1;grid-row:2;width:auto}
+ .hero7-cta{display:inline-flex}
+ .intro-v7 #intro3dCanvas{top:0;width:100%;height:100%}
+ .intro-v7 .intro3d-poster{left:50%;top:50%;height:auto;width:70%}
 }
-@media (max-width:768px){
- .hero5{--h5-fs:12.5vw;--h5-top:calc(48% - var(--h5-fs) * 1.35 - 44px)}
- .hero5-l1{padding-left:16%}.hero5-l2,.hero5-l3{padding-left:0}
- .hero5-cta{padding:14px 22px;font-size:.95rem}
- .hero5-stat{width:calc((100% - var(--h5-pad) * 2 - 10px) / 2);padding:13px 13px 14px;border-radius:14px;bottom:16px}
- .hero5-stat-label{font-size:.76rem}
- .hero5-stat-arrow{width:26px;height:26px}
- .hero5-stat-num{margin-top:12px;font-size:1.8rem}
- .hero5-stat-sub{font-size:.72rem}
- .intro-v5 .intro3d-poster{top:48%;height:auto;width:86vw}
-}
-/* без анимаций слово не печатается — мигающая каретка не нужна */
-@media (prefers-reduced-motion: reduce){.hero5-title .hero3-caret{display:none}.hero5-dot{animation:none}}
+@media (prefers-reduced-motion: reduce){.hero7-title .hero3-caret{display:none}}

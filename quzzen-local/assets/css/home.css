@@ -578,3 +578,19 @@ html body .services-section .services-grid>.service-card.is-wide-feature{grid-te
 .sloy-card .sloy-card-top{justify-content:space-between!important}
 /* клиенты на телефоне — 3 колонки, чтобы стена логотипов не растягивалась на полстраницы */
 @media (max-width:480px){.clients-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}.clients-grid .client-card{min-height:78px;padding:10px!important}}
+
+/* =====================================================================
+   v7 — больше воздуха, меньше текста: остаются заголовки и главное,
+   второстепенные пояснения скрыты (в разметке они остаются — вернуть можно, удалив строку)
+   ===================================================================== */
+:root{--section-y:clamp(96px,11vw,176px)}
+.section-header{margin-bottom:clamp(40px,5vw,72px)!important}
+.squad-perk p{display:none!important}                          /* пункты «Команды под ключ» — только заголовки */
+.squad-perk{padding:20px 0!important}
+.specialists-grid .spec-desc{display:none!important}           /* специалисты — код и название */
+.specialists-grid .spec-card{padding:22px 0 30px!important}
+.sloy-cards-grid .sloy-card-txt{display:none!important}        /* «Экономия» — цифра, метка, заголовок */
+.sloy-cards-grid .sloy-card{padding:26px 0 34px!important}
+.case-card .case-snippet{-webkit-line-clamp:2!important}       /* кейсы — описание в 2 строки */
+.sloy-bottom-info span{display:none}
+.tier-teaser-section,.squad-section{row-gap:0}

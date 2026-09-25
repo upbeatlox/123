@@ -338,3 +338,6 @@
 .footer-main-btn:hover{background:#fff!important;box-shadow:none!important}
 .audit-text{font-size:clamp(1rem,1.2vw,1.12rem)!important}
 .cta-location{font-size:.875rem!important}
+/* v7 — один абзац вместо двух, больше воздуха */
+.footer-audit-content .audit-text+.audit-text{display:none!important}
+.site-footer{padding-top:clamp(96px,11vw,176px)!important}

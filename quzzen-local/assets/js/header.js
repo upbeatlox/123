@@ -203,12 +203,10 @@
 })();
 
 ;
-/* Первый экран v5 (по референсу): стеклянный 3D-логотип по центру; поверх — огромный заголовок «лесенкой»
-   в три строки (последнее слово печатается) и салатовая кнопка «Смотреть кейсы»; стеклянные карточки:
-   слева у первой строки — кто я, внизу слева и справа — цифры со стрелкой. Шапка над экраном прозрачная.
-   Фото-экран v4 отключён (картинки и стили не удалены). Стили — header.css, 3D — intro3d.js */
+/* Первый экран v7 (по референсу, много воздуха): слева узкая панель — знак, «Денис Савицкий» вертикально и фото;
+   рядом карточка кейсов; справа большая скруглённая панель со стеклянным 3D-логотипом и вырезом снизу-слева,
+   в который заходит заголовок. Никакого лишнего текста. Стили — header.css, 3D — intro3d.js */
 (function () {
- var ARROW = '<svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
  var DOWN = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
  // слова из прежнего первого экрана (бэкап от 24.09.2026)
  var WORDS = ['киберспорта', 'медиаспорта', 'про-клубов', 'спортивных лиг', 'турниров', 'блогеров', 'стримеров'];
@@ -216,47 +214,56 @@
  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
  function build(sec, st) {
-  sec.classList.remove('intro-v2', 'intro-v3', 'intro-v4'); sec.classList.add('intro-v5');
-  st.querySelectorAll('.hero2,.hero3,.hero3-photo,.hero4,.hero5,.intro3d-poster').forEach(function (e) { e.remove(); });
-  var clients = document.querySelector('.clients-section'); if (clients && !clients.id) clients.id = 'clients';
+  sec.classList.remove('intro-v2', 'intro-v3', 'intro-v4', 'intro-v5'); sec.classList.add('intro-v7');
+  st.querySelectorAll('.hero2,.hero3,.hero3-photo,.hero4,.hero5,.hero7,.intro3d-poster').forEach(function (e) { e.remove(); });
   st.insertAdjacentHTML('beforeend',
-   '<img class="intro3d-poster" src="/assets/img/logo-glass-poster.webp" alt="" aria-hidden="true">' +
-   '<div class="hero5">' +
-    '<div class="hero5-center">' +
-     '<h1 class="hero5-title">' +
-      '<span class="hero5-line hero5-l1">Дизайн для</span> ' +
-      '<span class="hero5-line hero5-l2">спорта и</span> ' +
-      '<span class="hero5-line hero5-l3"><span class="hero3-type">' + WORDS[0] + '</span><span class="hero3-caret" aria-hidden="true"></span></span>' +
+   '<div class="hero7">' +
+    '<aside class="hero7-rail hero7-anim">' +
+     '<img class="hero7-rail-logo" src="/Logo.svg" alt="">' +
+     '<span class="hero7-rail-name">Денис Савицкий</span>' +
+     '<a class="hero7-rail-me" href="/about_me" title="Обо мне — Денис Савицкий">ДС</a>' +
+    '</aside>' +
+    '<div class="hero7-left">' +
+     '<a class="hero7-card hero7-anim" href="#cases">' +
+      '<img class="hero7-card-img" src="/assets/img/works/w1.jpg" alt="">' +
+      '<span class="hero7-card-body">' +
+       '<span class="hero7-card-text">Айдентика, форма и SMM для клубов, лиг и киберспортивных команд</span>' +
+       '<span class="hero7-card-btn"><span>Смотреть кейсы</span><i>' + DOWN + '</i></span>' +
+      '</span>' +
+     '</a>' +
+    '</div>' +
+    '<div class="hero7-panel hero7-anim">' +
+     '<img class="intro3d-poster" src="/assets/img/logo-glass-poster.webp" alt="" aria-hidden="true">' +
+     '<span class="hero7-notch"></span><span class="hero7-corner hero7-corner--a"></span><span class="hero7-corner hero7-corner--b"></span>' +
+     '<span class="hero7-note">35+ клубов, лиг и брендов</span>' +
+    '</div>' +
+    '<div class="hero7-copy">' +
+     '<p class="hero7-kicker hero7-anim">Арт-директор и бренд-дизайнер</p>' +
+     '<h1 class="hero7-title">' +
+      '<span class="hero7-line">Дизайн для спорта</span> ' +
+      '<span class="hero7-line">и <span class="hero3-type">' + WORDS[0] + '</span><span class="hero3-caret" aria-hidden="true"></span></span>' +
      '</h1>' +
-     '<a class="hero5-cta hero5-anim" href="#cases"><span>Смотреть кейсы</span>' + DOWN + '</a>' +
+     '<a class="hero7-cta hero7-anim" href="#cases"><span>Смотреть кейсы</span>' + DOWN + '</a>' +
     '</div>' +
-    '<div class="hero5-card hero5-about hero5-anim">' +
-     '<p class="hero5-about-name"><span class="hero5-dot" aria-hidden="true"></span>Денис Савицкий</p>' +
-     '<p class="hero5-about-role">Арт-директор и бренд-дизайнер</p>' +
-    '</div>' +
-    '<a class="hero5-card hero5-stat hero5-stat--left hero5-anim" href="#clients">' +
-     '<span class="hero5-stat-label">Клиенты и проекты</span><span class="hero5-stat-arrow">' + ARROW + '</span>' +
-     '<span class="hero5-stat-num">35+</span><span class="hero5-stat-sub">клубов, лиг и брендов</span>' +
-    '</a>' +
-    '<a class="hero5-card hero5-stat hero5-stat--right hero5-anim" href="/rating">' +
-     '<span class="hero5-stat-label">CS2 Design Tier List</span><span class="hero5-stat-arrow">' + ARROW + '</span>' +
-     '<span class="hero5-stat-num">20+</span><span class="hero5-stat-sub">команд в рейтинге</span>' +
-    '</a>' +
    '</div>');
+  // 3D-холст переезжает внутрь панели и пересчитывает размер
+  var panel = st.querySelector('.hero7-panel'), canvas = document.getElementById('intro3dCanvas');
+  if (canvas) panel.insertBefore(canvas, panel.firstChild);
+  window.dispatchEvent(new Event('resize'));
  }
 
  // кегль заголовка — по CSS, но уменьшаем, если строка с самым длинным словом не влезает в ширину
  function fitter(hero) {
-  var title = hero.querySelector('.hero5-title'), type = hero.querySelector('.hero3-type');
+  var copy = hero.querySelector('.hero7-copy'), title = hero.querySelector('.hero7-title'), type = hero.querySelector('.hero3-type');
   return function fit() {
-   hero.style.removeProperty('--h5-fs');
+   hero.style.removeProperty('--h7-fs');
    var keep = type.textContent; type.textContent = LONGEST;
-   var fs = parseFloat(getComputedStyle(title).fontSize), right = title.getBoundingClientRect().right, k = 1;
-   title.querySelectorAll('.hero5-line').forEach(function (ln) {
+   var fs = parseFloat(getComputedStyle(title).fontSize), box = copy.getBoundingClientRect(), k = 1;
+   title.querySelectorAll('.hero7-line').forEach(function (ln) {
     var r = document.createRange(); r.selectNodeContents(ln); var b = r.getBoundingClientRect();
-    if (b.right > right) k = Math.min(k, (right - b.left) / b.width);
+    if (b.right > box.right) k = Math.min(k, (box.right - b.left) / b.width);
    });
-   if (k < 1) hero.style.setProperty('--h5-fs', (fs * k * 0.97).toFixed(1) + 'px');
+   if (k < 1) hero.style.setProperty('--h7-fs', (fs * k * 0.97).toFixed(1) + 'px');
    type.textContent = keep;
   };
  }
@@ -275,14 +282,13 @@
   setTimeout(step, 2600);
  }
 
- // появление — когда снят прелоадер (иначе анимация пройдёт под ним); потом анимации снимаются,
- // чтобы карточки гасли при прокрутке по общему правилу
+ // появление — когда снят прелоадер (иначе анимация пройдёт под ним)
  function reveal(sec, then) {
   var fired = false;
   function go() {
    if (fired) return; fired = true;
-   sec.classList.add('hero5-go'); then();
-   setTimeout(function () { sec.classList.add('hero5-done'); }, reduce ? 0 : 2400);
+   sec.classList.add('hero-go'); then();
+   setTimeout(function () { sec.classList.add('hero-done'); }, reduce ? 0 : 2400);
   }
   var p = document.querySelector('.site-preloader');
   if (!p || p.classList.contains('is-done') || p.style.display === 'none') return go();
@@ -292,7 +298,7 @@
  }
 
  // шапка прозрачная, пока страница в самом верху; «Обсудить проект» в углу (телефон, планшет)
- // прячется, пока виден первый экран — там уже есть кнопка и карточки
+ // прячется, пока виден первый экран
  function watch(sec) {
   var root = document.documentElement, queued = false;
   function upd() {
@@ -308,9 +314,9 @@
 
  function start() {
   var sec = document.getElementById('intro3d'), st = sec && sec.querySelector('.intro3d-sticky');
-  if (!st || sec.classList.contains('intro-v5')) return;
+  if (!st || sec.classList.contains('intro-v7')) return;
   build(sec, st);
-  var hero = st.querySelector('.hero5'), fit = fitter(hero);
+  var hero = st.querySelector('.hero7'), fit = fitter(hero);
   fit(); window.addEventListener('resize', fit);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
   watch(sec);
