@@ -443,3 +443,138 @@
 .intro3d-cta:hover{background:#d2ff00;transform:translateY(-2px)}
 @media (max-width:768px){.intro3d-cta{padding:14px 22px;font-size:.95rem}}
 .intro3d-accent{color:#d2ff00}
+
+/* =====================================================================
+   v6 — МИНИМАЛИЗМ И СТРУКТУРА (все блоки после первого экрана)
+   Одна сетка и один ритм: тонкие линии-разделители вместо подложек, одинаковое устройство
+   карточек внутри блока (ничего не «пляшет»), основной текст не мельче 15–16px
+   ===================================================================== */
+:root{--line:rgba(255,255,255,.08);--section-y:clamp(64px,7.5vw,112px)}
+
+/* секции: одинаковый отступ и тонкая линия сверху */
+.clients-section,.cases-section,.tier-teaser-section,.squad-section,.services-section{padding:var(--section-y) 0!important;border-top:1px solid var(--line)!important;border-bottom:none!important}
+.clients-section{border-top:none!important}
+
+/* шапка секции: заголовок слева, пояснение справа по нижней линии */
+.section-header{display:grid!important;grid-template-columns:minmax(0,7fr) minmax(0,5fr);align-items:end;column-gap:clamp(24px,4vw,64px);row-gap:16px;margin-bottom:clamp(32px,4vw,56px)!important}
+.section-header .section-desc{justify-self:end;max-width:46ch;margin:0;font-size:1rem;line-height:1.6}
+.section-header>a{justify-self:end}
+.section-title{font-size:clamp(2rem,3.6vw,3.2rem)!important;line-height:1.02!important;letter-spacing:-.04em!important}
+.dprofile-all-btn{font-size:.95rem!important;font-weight:500!important}
+.dprofile-all-btn::after{content:none!important}
+@media (max-width:860px){.section-header{grid-template-columns:minmax(0,1fr)}.section-header .section-desc,.section-header>a{justify-self:start}}
+
+/* кнопки-призывы — одна форма на всём сайте: салатовая «пилюля», как на первом экране */
+.btn-primary,.sloy-cta-btn{border-radius:999px!important;padding:16px 26px!important;font:600 .95rem/1 'Inter',sans-serif!important;background:#d2ff00!important;color:#0a0b0e!important;transition:background-color .2s,transform .2s!important}
+.btn-primary:hover,.sloy-cta-btn:hover{background:#fff!important;transform:translateY(-2px)!important;box-shadow:none!important}
+
+/* --- Клиенты: ровная сетка логотипов в тонких линиях --- */
+.clients-grid{gap:0!important;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.clients-grid .client-card{min-height:clamp(92px,8.5vw,132px);padding:16px!important;opacity:1!important;border:none!important;
+ border-right:1px solid var(--line)!important;border-bottom:1px solid var(--line)!important;transition:background-color .3s}
+.clients-grid .client-card:hover{background:rgba(255,255,255,.025)!important}
+.clients-grid .client-card img{filter:grayscale(1) brightness(1.2);opacity:.5;transition:opacity .3s,filter .3s,transform .3s cubic-bezier(.16,1,.3,1)}
+.clients-grid .client-card:hover img{filter:none;opacity:1}
+
+/* --- Кейсы: обложка, под ней название → описание (до 4 строк) → 3 тега одной строкой --- */
+.cases-grid{column-gap:clamp(20px,2.6vw,40px)!important;row-gap:clamp(48px,5vw,72px)!important}
+.case-card .case-media{border-radius:16px;overflow:hidden}
+.case-card img.case-cover-img{border-radius:0!important}
+/* «Dprofile» поверх обложки (белый текст терялся на светлых картинках) → салатовая стрелка при наведении */
+.case-card .case-badge-platform{top:16px;right:16px;width:44px;height:44px;justify-content:center;border-radius:50%!important;background:#d2ff00!important;color:#0a0b0e!important;
+ text-shadow:none!important;opacity:0;transform:scale(.85)!important;transition:opacity .3s,transform .3s cubic-bezier(.22,1,.36,1)}
+.case-card .case-badge-platform span{display:none}
+.case-card .case-badge-platform svg{width:14px;height:14px}
+.case-card:hover .case-badge-platform{opacity:1;transform:none!important}
+@media (hover:none){.case-card .case-badge-platform{display:none}}
+.case-card .case-meta{padding:22px 0 0!important;display:flex;flex-direction:column}
+.case-card .case-name{order:1;margin:0 0 10px!important;font-size:clamp(1.2rem,1.6vw,1.5rem)!important;font-weight:600!important;letter-spacing:-.02em;text-transform:uppercase}
+.case-card .case-snippet{order:2;margin:0 0 16px!important;max-width:62ch;font-size:1rem;line-height:1.6;color:var(--text-muted);
+ display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.case-card .case-tags{order:3;margin:0!important;flex-wrap:nowrap!important;overflow:hidden}
+.case-card .case-tag{font-size:.82rem!important;letter-spacing:0!important;text-transform:none!important;font-weight:500!important;white-space:nowrap}
+.case-card .case-tag:nth-child(n+4){display:none}
+.case-card .case-action-hint{display:none!important}
+
+/* --- Рейтинг CS2: слева заголовок и кнопка, справа цифры строками таблицы --- */
+.tier-teaser-box{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)!important;align-items:center!important}
+.tier-title{font-size:clamp(2.2rem,4.4vw,3.8rem)!important}
+.tier-lead{font-size:1.05rem!important;line-height:1.65}
+.tier-features-grid{flex-direction:column!important;gap:0!important;border-bottom:1px solid var(--line)}
+.tier-feature{grid-template-columns:minmax(110px,.7fr) minmax(0,1fr)!important;align-items:center;column-gap:24px!important;padding:22px 0!important;border-top:1px solid var(--line)}
+.tier-feature .feature-num{font-size:clamp(2.4rem,3.6vw,3.4rem)!important;font-weight:600!important}
+.tier-feature .feature-label{font-size:1rem!important;line-height:1.5}
+@media (max-width:960px){.tier-features-grid{margin:8px 0 32px!important}}
+
+/* --- Команда под ключ: текст слева, пункты справа строками; специалисты — ровная сетка с линиями --- */
+.squad-banner{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)!important;align-items:start}
+.squad-banner-title{font-size:clamp(1.5rem,2.4vw,2.1rem)!important;font-weight:600!important}
+.squad-banner-text{font-size:1.02rem!important;line-height:1.65;max-width:56ch}
+.squad-banner-right{border:none!important;padding:0!important;gap:0!important}
+.squad-perk{padding:18px 0!important;border-top:1px solid var(--line)!important}
+.squad-perk:last-child{border-bottom:1px solid var(--line)!important}
+.squad-perk strong{font-size:1.02rem;font-weight:600;margin-bottom:4px}
+.squad-perk p{font-size:.95rem!important;line-height:1.55}
+.specialists-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:0 clamp(24px,3vw,48px)!important}
+.specialists-grid .spec-card{padding:24px 0 40px!important;border-top:1px solid var(--line)!important}
+.spec-card .spec-code{font-size:.75rem;letter-spacing:.08em;margin-bottom:14px!important}
+.spec-card .spec-title{font-size:1.15rem!important;font-weight:600!important;margin-bottom:10px}
+.spec-card .spec-desc{font-size:.95rem!important;line-height:1.6}
+@media (max-width:1100px){.squad-banner{grid-template-columns:minmax(0,1fr)!important}.specialists-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media (max-width:640px){.specialists-grid{grid-template-columns:minmax(0,1fr)!important}.specialists-grid .spec-card{padding-bottom:28px!important}}
+
+/* --- Услуги 01–06: строки списка через тонкие линии --- */
+html body .services-section .services-grid{gap:0!important}
+html body .services-section .services-grid>.service-card:not(.is-wide-feature){border:none!important;border-top:1px solid var(--line)!important;border-radius:0!important;padding:26px 8px!important}
+html body .services-section .services-grid>.service-card:nth-child(6){border-bottom:1px solid var(--line)!important}
+.services-grid .service-num{font-size:1rem!important;font-weight:600!important;font-variant-numeric:tabular-nums}
+.services-grid .service-name{font-size:clamp(1.15rem,1.7vw,1.5rem)!important;font-weight:600!important;letter-spacing:-.02em}
+.services-grid .service-chip{font-size:.75rem!important}
+.services-grid .service-card .service-lead{font-size:1rem!important;line-height:1.6}
+.services-grid .service-card .service-list li{font-size:.95rem!important;line-height:1.55;color:var(--text-muted)}
+
+/* --- 07 Дизайн-поддержка: салатовая линия сверху, текст слева, преимущества справа списком --- */
+html body .services-section .services-grid>.service-card.is-wide-feature{display:grid!important;grid-template-columns:minmax(0,7fr) minmax(0,5fr);grid-template-areas:"meta meta" "name tags" "lead tags";
+ column-gap:clamp(32px,5vw,96px);row-gap:0;align-items:start;margin-top:clamp(48px,6vw,88px);padding:28px 0 0!important;border:none!important;border-top:1px solid rgba(210,255,0,.5)!important}
+.is-wide-feature .service-wide-body{display:contents}
+.is-wide-feature .service-wide-meta{grid-area:meta;flex-direction:row!important;align-items:baseline!important;gap:14px!important;margin-bottom:20px}
+.is-wide-feature .service-wide-meta .service-num{font-size:1rem!important}
+.is-wide-feature .service-name{grid-area:name;margin:0 0 14px!important;font-size:clamp(1.6rem,2.6vw,2.3rem)!important;font-weight:600!important;letter-spacing:-.03em}
+.is-wide-feature .service-lead{grid-area:lead;margin:0!important;max-width:60ch;font-size:1.05rem!important;line-height:1.65;color:var(--text-muted)}
+.is-wide-feature .service-wide-tags{grid-area:tags;display:flex!important;flex-direction:column;gap:0!important}
+.is-wide-feature .service-wide-tags span{display:flex;align-items:center;gap:12px;padding:14px 0!important;border-bottom:1px solid var(--line)!important;
+ font-size:.98rem!important;letter-spacing:0!important;text-transform:none!important;color:#fff!important;font-weight:500!important}
+.is-wide-feature .service-wide-tags span:first-child{border-top:1px solid var(--line)!important}
+.is-wide-feature .service-wide-tags span::before,.is-wide-feature .service-wide-tags span+span::before{content:""!important;flex:none;width:12px;height:11px;margin:0!important;opacity:1;background:url(/Logo.svg) center/contain no-repeat}
+@media (max-width:860px){html body .services-section .services-grid>.service-card.is-wide-feature{grid-template-columns:minmax(0,1fr);grid-template-areas:"meta" "name" "lead" "tags"}
+ .is-wide-feature .service-wide-tags{margin-top:24px}}
+
+/* --- Почему выгоднее: 6 одинаковых карточек — цифра и метка, название, текст --- */
+.sloy-perks-box{margin-top:clamp(64px,8vw,112px)!important}
+.sloy-perks-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);align-items:end;column-gap:clamp(24px,4vw,64px);row-gap:12px;max-width:none!important;margin-bottom:clamp(28px,3.4vw,44px)!important}
+.sloy-perks-title{margin:0!important;font-size:clamp(1.6rem,2.8vw,2.4rem)!important;font-weight:600!important;letter-spacing:-.03em}
+.sloy-perks-desc{justify-self:end;max-width:46ch;font-size:1rem!important;line-height:1.6}
+.sloy-cards-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:0 clamp(24px,3vw,48px)!important;margin-bottom:0!important}
+.sloy-cards-grid .sloy-card{display:flex!important;flex-direction:column;padding:24px 0 40px!important;border-top:1px solid var(--line)!important;cursor:default}
+.sloy-card .sloy-card-top{flex-direction:row!important;justify-content:space-between;align-items:baseline;gap:12px!important;margin:0 0 18px!important}
+.sloy-card .sloy-stat{font-size:clamp(2.2rem,3.2vw,3rem)!important;font-weight:600!important;white-space:nowrap}
+.sloy-card .sloy-tag{font-size:.72rem!important}
+.sloy-card .sloy-card-name{margin:0 0 8px!important;font-size:1.1rem!important;font-weight:600!important;line-height:1.35}
+.sloy-card .sloy-card-txt{font-size:.95rem!important;line-height:1.6;color:var(--text-muted)}
+.sloy-bottom-bar{padding-top:28px!important;border-top:1px solid var(--line)!important}
+.sloy-bottom-info strong{font-size:1.1rem;font-weight:600;margin-bottom:4px}
+.sloy-bottom-info span{font-size:.95rem}
+@media (max-width:1024px){.sloy-cards-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media (max-width:860px){.sloy-perks-head{grid-template-columns:minmax(0,1fr)}.sloy-perks-desc{justify-self:start}}
+@media (max-width:640px){.sloy-cards-grid{grid-template-columns:minmax(0,1fr)!important}.sloy-cards-grid .sloy-card{padding-bottom:28px!important}}
+
+/* v6 — доводка раскладки */
+@media (max-width:960px){.tier-teaser-box{grid-template-columns:minmax(0,1fr)!important}}
+.tier-cta-wrap .btn-primary{white-space:nowrap}
+/* кейсы в одном ряду: теги по одной нижней линии, даже если описания разной длины */
+.case-card .case-tags{margin-top:auto!important}
+/* 07: лишняя высота списка справа уходит вниз, а не в разрыв между заголовком и текстом */
+html body .services-section .services-grid>.service-card.is-wide-feature{grid-template-rows:auto auto 1fr}
+.sloy-card .sloy-card-top{justify-content:space-between!important}
+/* клиенты на телефоне — 3 колонки, чтобы стена логотипов не растягивалась на полстраницы */
+@media (max-width:480px){.clients-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}.clients-grid .client-card{min-height:78px;padding:10px!important}}

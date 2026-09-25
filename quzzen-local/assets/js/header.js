@@ -233,7 +233,6 @@
     '<div class="hero5-card hero5-about hero5-anim">' +
      '<p class="hero5-about-name"><span class="hero5-dot" aria-hidden="true"></span>Денис Савицкий</p>' +
      '<p class="hero5-about-role">Арт-директор и бренд-дизайнер</p>' +
-     '<p class="hero5-tags"><span>Айдентика</span><span>Форма</span><span>Мерч</span><span>SMM</span></p>' +
     '</div>' +
     '<a class="hero5-card hero5-stat hero5-stat--left hero5-anim" href="#clients">' +
      '<span class="hero5-stat-label">Клиенты и проекты</span><span class="hero5-stat-arrow">' + ARROW + '</span>' +

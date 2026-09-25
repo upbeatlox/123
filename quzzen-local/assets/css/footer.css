@@ -329,3 +329,12 @@
 
 /* надзаголовок-метка убран */
 .cta-pill{display:none!important}
+
+/* v6 — минимализм: без огромного отступа перед подвалом и без пульсирующего свечения */
+.site-footer{margin-top:0!important;border-top:1px solid rgba(255,255,255,.08)!important}
+.accent-free{animation:none!important;text-shadow:none!important;transform:none!important}
+.footer-headline{font-weight:600!important;letter-spacing:-.04em!important}
+.footer-main-btn{border-radius:999px!important;padding:16px 26px!important;font-weight:600!important;transition:background-color .2s,transform .2s!important}
+.footer-main-btn:hover{background:#fff!important;box-shadow:none!important}
+.audit-text{font-size:clamp(1rem,1.2vw,1.12rem)!important}
+.cta-location{font-size:.875rem!important}

@@ -112,7 +112,7 @@ if (section && canvas) {
       g.save(); g.globalCompositeOperation = 'screen'; g.filter = 'blur(50px)';
       g.translate(W / 2, H * 0.48); g.scale(0.8, 1);
       const aura = g.createRadialGradient(0, 0, 0, 0, 0, H * 0.5);
-      aura.addColorStop(0, 'rgba(210,255,0,0.24)'); aura.addColorStop(0.45, 'rgba(210,255,0,0.08)'); aura.addColorStop(1, 'rgba(210,255,0,0)');
+      aura.addColorStop(0, 'rgba(236,255,150,0.30)'); aura.addColorStop(0.45, 'rgba(210,255,0,0.08)'); aura.addColorStop(1, 'rgba(210,255,0,0)');
       g.fillStyle = aura; g.fillRect(-W, -H, W * 2, H * 2); g.restore();
       g.save(); g.globalCompositeOperation = 'screen'; g.filter = 'blur(40px)';
       g.translate(W / 2, H * 1.02); g.scale(3.2, 1);
@@ -167,17 +167,17 @@ if (section && canvas) {
         if (o.isMesh && o.material) {
           const m = o.material;
           if (m.isMeshPhysicalMaterial) {
-            m.transmission = 1; m.thickness = 1.2; m.ior = 1.5;
-            m.roughness = 0; m.metalness = 0;                       // без шероховатости — фон виден чётко, без «матовости»
+            m.transmission = 1; m.thickness = 0.9; m.ior = 1.5;
+            m.roughness = 0.15; m.metalness = 0;                    // лёгкая матовость: стекло светлее и мягче, не «тяжёлое» (0 — полностью прозрачное)
             m.dispersion = 0;                                       // без дисперсии — она давала цветные «пиксельные» каймы                                      // радужное расслоение на гранях
             m.clearcoat = 1; m.clearcoatRoughness = 0.04;
             m.specularIntensity = 0.6;
-            m.color = new THREE.Color(0xeaff8a);                     // светлый салатовый: стекло пропускает фон, а не красит его в пластик                     // фирменный салатовый — окрашивает прозрачное стекло                     // почти белое стекло — цвет даёт толщина
-            m.attenuationColor = new THREE.Color(0xd2ff00); m.attenuationDistance = 1.1;   // насыщенный #d2ff00 в толще и на торцах, как у цветного стекла
+            m.color = new THREE.Color(0xf6ffd0);                     // светлый салатовый: стекло пропускает фон, а не красит его в пластик                     // фирменный салатовый — окрашивает прозрачное стекло                     // почти белое стекло — цвет даёт толщина
+            m.attenuationColor = new THREE.Color(0xd2ff00); m.attenuationDistance = 4;   // насыщенный #d2ff00 в толще и на торцах, как у цветного стекла
             m.emissive = new THREE.Color(0x000000); m.emissiveIntensity = 0;    // в толще цвет чуть гуще, как у цветного стекла
             m.iridescence = 0.15; m.iridescenceIOR = 1.3; m.iridescenceThicknessRange = [120, 420];
           }
-          m.envMapIntensity = 1.4;
+          m.envMapIntensity = 2.2;
           m.transparent = true;
           modelMats.push(m);
           m.needsUpdate = true;
@@ -210,7 +210,7 @@ if (section && canvas) {
       // камера отъезжает так, чтобы логотип занимал ~70% высоты (заголовок первого экрана идёт поверх него)
       // и не больше 70% ширины экрана; на телефоне — почти во всю ширину
       const half = THREE.MathUtils.degToRad(camera.fov / 2);
-      const byH = (modelSize.y / 2) / Math.tan(half) / (camera.aspect > 1.2 ? 0.7 : 0.5);
+      const byH = (modelSize.y / 2) / Math.tan(half) / (camera.aspect > 1.2 ? 0.64 : 0.5);
       const byW = (modelSize.x / 2) / (Math.tan(half) * camera.aspect) / (camera.aspect < 0.7 ? 0.88 : 0.70);
       camera.position.z = Math.max(byH, byW) + modelSize.z / 2;
       // на широком экране логотип смещён вправо от центра, освобождая место под заголовок
