@@ -1,0 +1,445 @@
+@charset "UTF-8";
+
+/* Common */
+.section-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;gap:24px;flex-wrap:wrap}
+.section-tag{display:block;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent);font-weight:700;margin-bottom:8px}
+.section-title{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;letter-spacing:-0.03em;color:#fff;line-height:1.1}
+.section-desc{font-size:0.95rem;color:var(--text-muted);max-width:460px;line-height:1.55}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#000;padding:14px 26px;border-radius:8px;font-size:0.88rem;font-weight:700;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px var(--accent-glow);color:#000}
+.btn-secondary{display:inline-flex;align-items:center;gap:10px;background:var(--bg-surface);border:1px solid var(--border);color:#fff;padding:14px 24px;border-radius:8px;font-size:0.88rem;font-weight:600;text-decoration:none;transition:all .2s}
+.btn-secondary:hover{background:var(--bg-surface-elevated);border-color:var(--border-hover)}
+.badge-accent{font-size:0.65rem;font-weight:800;background:var(--accent);color:#000;padding:2px 6px;border-radius:3px;text-transform:uppercase}
+.btn-ghost{font-size:0.88rem;font-weight:600;color:var(--text-muted);padding:14px 16px;text-decoration:none;transition:color .2s}
+.btn-ghost:hover{color:#fff}
+
+/* Hero */
+.hero-section{padding:80px 0 70px;border-bottom:1px solid var(--border)}
+.hero-grid{display:grid;grid-template-columns:1fr 400px;gap:48px;align-items:center}
+.hero-tag{display:flex;align-items:center;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+.tag-badge{font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);background:var(--accent-glow);padding:4px 10px;border-radius:4px}
+.tag-location{font-size:0.8rem;color:var(--text-muted)}
+.hero-title{font-family:var(--font-display)!important;font-size:clamp(2rem,3.3vw,3.3rem)!important;font-weight:900;line-height:1.08!important;letter-spacing:-0.02em;color:#fff;margin-bottom:24px}
+.hero-title .text-accent{color:var(--accent)}
+.hero-line-accent{white-space:nowrap!important;display:inline-flex;align-items:baseline}
+.typing-text{display:inline-block;min-width:2ch}
+.typing-cursor{display:inline-block;width:3px;height:0.85em;background-color:var(--accent);margin-left:6px;vertical-align:baseline;animation:cursorBlink .8s infinite;box-shadow:0 0 8px var(--accent)}
+@keyframes cursorBlink{0%,49%{opacity:1}50%,100%{opacity:0}}
+.hero-lead{font-size:clamp(1.02rem,1.25vw,1.2rem);color:var(--text-muted);line-height:1.65;max-width:660px;margin-bottom:38px}
+.hero-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.hero-visual{display:flex;justify-content:flex-end}
+.director-card{position:relative;width:100%;max-width:400px;aspect-ratio:3/4.4;background:#0d0f14;border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.6);transition:border-color .3s,transform .3s}
+.director-card:hover{border-color:rgba(210,255,0,.35);transform:translateY(-4px)}
+.card-glow{position:absolute;top:-20%;right:-20%;width:300px;height:300px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);pointer-events:none;z-index:1}
+.card-photo-wrap{width:100%;height:100%;position:relative}
+.card-photo{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;filter:contrast(1.05) brightness(.95)}
+.photo-fade{position:absolute;bottom:0;left:0;width:100%;height:65%;background:linear-gradient(to top,#090a0d 20%,rgba(9,10,13,.7) 60%,transparent 100%)}
+.card-floating-badge{position:absolute;z-index:3;background:rgba(13,15,20,.75);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:100px;display:inline-flex;align-items:center;gap:8px;box-shadow:0 10px 24px rgba(0,0,0,.4)}
+.badge-top{top:20px;left:20px;padding:6px 14px}
+.badge-top .badge-pulse{width:6px;height:6px;border-radius:50%;background-color:var(--accent);box-shadow:0 0 8px var(--accent)}
+.badge-top .badge-text{font-size:0.68rem;font-weight:700;letter-spacing:0.08em;color:#fff}
+.badge-mid{top:60px;right:16px;padding:5px 12px;border-radius:8px;display:flex;flex-direction:column;align-items:flex-start;gap:2px}
+.badge-accent-tag{font-size:0.62rem;font-weight:800;color:var(--accent);letter-spacing:0.05em}
+.badge-text-sub{font-size:0.72rem;font-weight:600;color:#fff}
+.card-bottom-info{position:absolute;bottom:0;left:0;width:100%;padding:24px;z-index:3;display:flex;flex-direction:column;gap:16px}
+.bottom-name-row{display:flex;flex-direction:column;gap:2px}
+.player-handle{font-family:var(--font-display);font-size:1.4rem;font-weight:900;color:#fff;line-height:1;letter-spacing:-0.02em}
+.player-realname{font-size:0.8rem;color:var(--text-muted);font-weight:500}
+.card-stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding-top:14px;border-top:1px solid var(--border)}
+.stat-item{display:flex;flex-direction:column;gap:2px}
+.stat-val{font-family:var(--font-display);font-size:1.05rem;font-weight:900;color:var(--accent);line-height:1}
+.stat-lbl{font-size:0.68rem;color:var(--text-muted);font-weight:500}
+
+/* Clients */
+.clients-section{padding:80px 0;border-bottom:1px solid var(--border)}
+.clients-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.client-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:8px;min-height:84px;padding:10px 14px;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;user-select:none;transition:border-color .25s,transform .25s,background-color .25s;--scale:1}
+.client-card:hover{border-color:rgba(210,255,0,.4);background:var(--bg-surface-elevated);transform:translateY(-2px)}
+.client-name{font-family:var(--font-main);font-size:0.76rem;font-weight:600;letter-spacing:0.02em;color:var(--text-muted);line-height:1.25}
+.client-card:hover .client-name{color:#fff}
+.client-card:has(img) .client-name{display:none}
+.client-card img{max-width:78%;max-height:38px;width:auto;height:auto;object-fit:contain;transform:scale(var(--scale));filter:grayscale(100%) brightness(.8) opacity(.65);transition:transform .25s cubic-bezier(0.16,1,0.3,1),filter .25s}
+.client-card:hover img{filter:grayscale(0%) brightness(1) opacity(1);transform:scale(calc(var(--scale)*1.08))}
+.client-card.is-tall img{max-height:54px;max-width:82%}
+.client-card.is-wide img{max-height:24px;max-width:78%}
+.client-card.is-max img{max-height:60px;max-width:88%}
+
+/* Cases */
+.cases-section{padding:90px 0;border-bottom:1px solid var(--border)}
+.dprofile-all-btn{display:inline-flex;align-items:center;gap:8px;font-size:0.82rem;font-weight:600;color:var(--text-muted);border:1px solid var(--border);background:var(--bg-surface);padding:10px 18px;border-radius:6px;text-decoration:none;transition:all .2s}
+.dprofile-all-btn:hover{color:#fff;border-color:var(--border-hover);background:var(--bg-surface-elevated)}
+.cases-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px}
+.case-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:transform .25s cubic-bezier(0.16,1,0.3,1),border-color .25s,box-shadow .25s}
+.case-card:hover{transform:translateY(-5px);border-color:rgba(210,255,0,.4);box-shadow:0 16px 40px rgba(0,0,0,.4)}
+.case-media{width:100%;aspect-ratio:16/10;position:relative;background:#0f1014;overflow:hidden}
+.case-cover-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.case-card:hover .case-cover-img{transform:scale(1.03)}
+.case-badge-platform{position:absolute;top:16px;right:16px;display:inline-flex;align-items:center;gap:6px;background:rgba(10,11,14,.85);backdrop-filter:blur(8px);border:1px solid var(--border);padding:5px 12px;border-radius:100px;font-size:0.7rem;font-weight:700;color:#fff;letter-spacing:0.04em;transition:all .2s}
+.case-card:hover .case-badge-platform{background:var(--accent);color:#000;border-color:var(--accent)}
+.case-meta{padding:24px;display:flex;flex-direction:column;flex-grow:1}
+.case-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.case-tag{font-size:0.7rem;font-weight:600;color:var(--text-muted);background:rgba(255,255,255,.04);padding:3px 8px;border-radius:4px}
+.case-name{font-family:var(--font-display);font-size:1.25rem;font-weight:800;color:#fff;line-height:1.25;margin-bottom:8px;transition:color .2s}
+.case-card:hover .case-name{color:var(--accent)}
+.case-snippet{font-size:0.88rem;color:var(--text-muted);line-height:1.5;margin-bottom:20px}
+.case-action-hint{margin-top:auto;display:flex;align-items:center;gap:6px;font-size:0.8rem;font-weight:700;color:var(--text-muted);transition:all .2s}
+.case-card:hover .case-action-hint{color:var(--accent);transform:translateX(4px)}
+
+/* Tier Teaser */
+.tier-teaser-section{padding:90px 0;border-bottom:1px solid var(--border)}
+.tier-teaser-box{background:radial-gradient(circle at 10% 20%,rgba(210,255,0,.05) 0%,transparent 50%),var(--bg-surface);border:1px solid var(--border);border-radius:16px;padding:56px 48px;position:relative}
+.tier-badge-row{display:flex;align-items:center;gap:16px;margin-bottom:24px}
+.tier-pill{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;background:#fff;color:#000;padding:4px 10px;border-radius:4px}
+.tier-status{font-size:0.8rem;color:var(--accent);font-weight:600}
+.tier-title{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,3rem);font-weight:900;line-height:1.1;letter-spacing:-0.03em;color:#fff;margin-bottom:18px}
+.tier-lead{font-size:1.05rem;color:var(--text-muted);line-height:1.6;max-width:680px;margin-bottom:40px}
+.tier-lead strong{color:#fff}
+.tier-features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:40px;padding-top:32px;border-top:1px solid var(--border)}
+.tier-feature{display:flex;flex-direction:column;gap:6px}
+.feature-num{font-family:var(--font-display);font-size:2.2rem;font-weight:900;color:var(--accent);line-height:1}
+.feature-label{font-size:0.82rem;color:var(--text-muted);line-height:1.4}
+
+/* Pipeline */
+.approach-section{padding:90px 0;border-bottom:1px solid var(--border)}
+.pipeline-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.pipeline-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:12px;padding:28px 24px;display:flex;flex-direction:column;transition:border-color .25s,transform .25s}
+.pipeline-card:hover{border-color:rgba(210,255,0,.4);transform:translateY(-3px)}
+.pipeline-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.pipeline-idx{font-family:var(--font-display);font-size:1.3rem;font-weight:900;color:var(--accent);line-height:1}
+.pipeline-phase{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);background:rgba(255,255,255,.04);padding:3px 8px;border-radius:4px}
+.pipeline-name{font-family:var(--font-display);font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:10px;line-height:1.3}
+.pipeline-text{font-size:0.85rem;color:var(--text-muted);line-height:1.55}
+
+/* Squad */
+.squad-section{padding:90px 0;border-bottom:1px solid var(--border)}
+.squad-banner{background:radial-gradient(circle at 90% 10%,rgba(210,255,0,.06) 0%,transparent 60%),var(--bg-surface);border:1px solid var(--border);border-radius:16px;padding:44px;display:grid;grid-template-columns:1.2fr 1fr;gap:48px;margin-bottom:32px}
+.squad-badge{display:inline-block;font-size:0.7rem;font-weight:800;letter-spacing:0.1em;color:var(--accent);background:var(--accent-glow);padding:4px 10px;border-radius:4px;margin-bottom:16px}
+.squad-banner-title{font-family:var(--font-display);font-size:clamp(1.4rem,2.5vw,2rem);font-weight:900;color:#fff;line-height:1.2;letter-spacing:-0.02em;margin-bottom:16px}
+.squad-banner-text{font-size:0.95rem;color:var(--text-muted);line-height:1.6}
+.squad-banner-right{display:flex;flex-direction:column;gap:20px;justify-content:center;border-left:1px solid var(--border);padding-left:36px}
+.squad-perk{display:flex;align-items:flex-start;gap:14px}
+.perk-bullet{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);margin-top:6px;flex-shrink:0}
+.squad-perk strong{display:block;font-size:0.92rem;color:#fff;margin-bottom:3px}
+.squad-perk p{font-size:0.82rem;color:var(--text-muted);line-height:1.45}
+.specialists-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.spec-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:12px;padding:26px;transition:border-color .25s}
+.spec-card:hover{border-color:rgba(210,255,0,.35)}
+.spec-code{font-size:0.7rem;font-weight:700;letter-spacing:0.08em;color:var(--accent);display:block;margin-bottom:10px}
+.spec-title{font-family:var(--font-display);font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:8px;line-height:1.3}
+.spec-desc{font-size:0.85rem;color:var(--text-muted);line-height:1.55}
+
+/* Services & Card 07 */
+.services-section{padding:90px 0}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.service-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:14px;padding:32px 28px;display:flex;flex-direction:column;transition:transform .25s,border-color .25s,box-shadow .25s}
+.service-card:hover{transform:translateY(-4px);border-color:rgba(210,255,0,.4);box-shadow:0 16px 40px rgba(0,0,0,.4)}
+.service-card.is-accented{background:radial-gradient(circle at 100% 0%,rgba(210,255,0,.08) 0%,transparent 60%),var(--bg-surface);border-color:rgba(210,255,0,.25)}
+.service-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.service-num{font-family:var(--font-display);font-size:1.4rem;font-weight:900;color:var(--accent);line-height:1}
+.service-chip{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);background:rgba(255,255,255,.04);padding:4px 10px;border-radius:4px}
+.chip-accent{color:#000;background:var(--accent)}
+.service-name{font-family:var(--font-display);font-size:1.25rem;font-weight:900;color:#fff;line-height:1.25;margin-bottom:10px}
+.service-lead{font-size:0.88rem;color:var(--text-muted);line-height:1.5;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.service-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:auto}
+.service-list li{font-size:0.82rem;color:var(--text-muted);line-height:1.45;position:relative;padding-left:14px}
+.service-list li::before{content:"";position:absolute;left:0;top:6px;width:4px;height:4px;border-radius:50%;background-color:var(--accent)}
+.service-card.is-wide-feature{grid-column:1/-1;display:flex;flex-direction:row;align-items:center;gap:36px;background:radial-gradient(circle at 15% 50%,rgba(210,255,0,.07) 0%,transparent 60%),var(--bg-surface);border-color:rgba(210,255,0,.3);padding:36px 40px}
+.service-wide-meta{display:flex;flex-direction:column;gap:12px;align-items:flex-start;flex-shrink:0}
+.service-wide-meta .service-num{font-size:2.2rem}
+.service-wide-body .service-name{font-size:1.4rem;margin-bottom:8px}
+.service-wide-body .service-lead{border-bottom:none;padding-bottom:0;margin-bottom:16px;font-size:0.95rem;max-width:820px}
+.service-wide-tags{display:flex;gap:10px;flex-wrap:wrap}
+.service-wide-tags span{font-size:0.75rem;font-weight:600;color:#fff;background:rgba(255,255,255,.05);border:1px solid var(--border);padding:5px 12px;border-radius:6px}
+
+/* Sloy Perks Block */
+.sloy-perks-box{grid-column:1/-1;margin-top:16px;background:radial-gradient(circle at 50% 0%,rgba(210,255,0,.04) 0%,transparent 70%),var(--bg-surface);border:1px solid var(--border);border-radius:16px;padding:40px;position:relative;overflow:hidden}
+.sloy-perks-head{margin-bottom:32px;max-width:680px}
+.sloy-head-badge{display:inline-flex;align-items:center;gap:8px;font-size:0.68rem;font-weight:800;letter-spacing:0.1em;color:var(--accent);background:rgba(210,255,0,.08);border:1px solid rgba(210,255,0,.2);padding:4px 10px;border-radius:100px;margin-bottom:14px}
+.sloy-pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);animation:sloyPulse 1.8s infinite ease-in-out}
+@keyframes sloyPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.6);opacity:.4}}
+.sloy-perks-title{font-family:var(--font-display);font-size:clamp(1.4rem,2.4vw,1.9rem);font-weight:900;color:#fff;line-height:1.2;letter-spacing:-0.02em;margin-bottom:8px}
+.sloy-perks-desc{font-size:0.9rem;color:var(--text-muted);line-height:1.55}
+.sloy-cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:30px}
+.sloy-card{background:#0d0f14;border:1px solid var(--border);border-radius:12px;padding:24px;position:relative;overflow:hidden;display:flex;flex-direction:column;cursor:default;transition:transform .35s cubic-bezier(0.16,1,0.3,1),border-color .3s,box-shadow .3s}
+.sloy-card::before{content:"";position:absolute;top:0;left:-120%;width:80%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.04),transparent);transform:skewX(-20deg);transition:left .6s ease;pointer-events:none}
+.sloy-card:hover::before{left:150%}
+.sloy-card:hover{transform:translateY(-6px) scale(1.015);border-color:rgba(210,255,0,.45);box-shadow:0 16px 36px rgba(0,0,0,.6),0 0 24px rgba(210,255,0,.12)}
+.sloy-card-glow{position:absolute;bottom:-30px;right:-30px;width:90px;height:90px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);opacity:0;transition:opacity .3s;pointer-events:none}
+.sloy-card:hover .sloy-card-glow{opacity:1}
+.sloy-card-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.sloy-stat{font-family:var(--font-display);font-size:1.7rem;font-weight:900;color:var(--accent);line-height:1;letter-spacing:-0.02em;transition:transform .25s}
+.sloy-card:hover .sloy-stat{transform:scale(1.05)}
+.sloy-tag{font-size:0.64rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);background:rgba(255,255,255,.04);padding:3px 8px;border-radius:4px}
+.sloy-card-name{font-family:var(--font-display);font-size:0.98rem;font-weight:900;color:#fff;line-height:1.3;margin-bottom:8px}
+.sloy-card-txt{font-size:0.81rem;color:var(--text-muted);line-height:1.5}
+.sloy-bottom-bar{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-top:24px;border-top:1px solid var(--border);flex-wrap:wrap}
+.sloy-bottom-info strong{display:block;font-size:0.95rem;color:#fff;margin-bottom:2px}
+.sloy-bottom-info span{font-size:0.82rem;color:var(--text-muted)}
+.sloy-cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#000;padding:12px 22px;border-radius:8px;font-size:0.84rem;font-weight:800;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.sloy-cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px var(--accent-glow);color:#000}
+
+/* Media Queries */
+@media (max-width:1200px){.clients-grid{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:1100px){
+ .pipeline-grid,.services-grid{grid-template-columns:repeat(2,1fr)}
+ .squad-banner{grid-template-columns:1fr;gap:28px}
+ .squad-banner-right{border-left:none;padding-left:0;border-top:1px solid var(--border);padding-top:24px}
+}
+@media (max-width:1024px){.sloy-cards-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:960px){
+ .hero-grid{grid-template-columns:1fr;gap:40px}
+ .hero-visual{justify-content:center}
+ .director-card{max-width:340px}
+ .hero-section{padding:50px 0 40px}
+ .hero-line-accent{white-space:normal!important;display:inline}
+}
+@media (max-width:860px){
+ .cases-grid,.specialists-grid{grid-template-columns:1fr}
+ .cases-grid{gap:24px}
+ .cases-section{padding:60px 0}
+ .section-header{flex-direction:column;align-items:flex-start}
+ .service-card.is-wide-feature{flex-direction:column;align-items:flex-start;gap:20px;padding:28px}
+}
+@media (max-width:768px){
+ .clients-grid{grid-template-columns:repeat(3,1fr);gap:8px}
+ .client-card{min-height:72px;padding:8px}
+ .client-card img{max-height:32px}
+ .client-card.is-tall img{max-height:44px}
+ .client-card.is-wide img{max-height:20px}
+ .client-card.is-max img{max-height:48px}
+}
+@media (max-width:640px){
+ .pipeline-grid,.services-grid,.tier-features-grid,.sloy-cards-grid{grid-template-columns:1fr}
+ .tier-teaser-box{padding:36px 24px}
+ .squad-banner{padding:28px 20px}
+ .sloy-perks-box{padding:24px 18px}
+ .sloy-bottom-bar{flex-direction:column;align-items:flex-start}
+ .sloy-cta-btn{width:100%;justify-content:center}
+}
+@media (max-width:480px){.clients-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ===== ЭКСПЕРИМЕНТ: фото арт-директора без плашки, растворено в фоне =====
+   Чтобы вернуть карточку — удалить этот блок целиком. */
+.director-card{background:transparent;border:none;border-radius:0;box-shadow:none;overflow:visible;max-width:560px}
+.director-card:hover{transform:none;border-color:transparent}
+.card-photo-wrap{-webkit-mask-image:none;mask-image:none}
+/* края фото уходят в ноль до границы кадра (овал + низ), без сплошных заливок —
+   поэтому прямоугольник кадра нигде не виден; тёмный фон снимка сливается с фоном страницы */
+.card-photo{mix-blend-mode:lighten;filter:grayscale(1) contrast(1.05) brightness(.95);
+ -webkit-mask-image:radial-gradient(closest-side at 50% 40%,#000 45%,rgba(0,0,0,.5) 70%,transparent 100%);
+ mask-image:radial-gradient(closest-side at 50% 40%,#000 45%,rgba(0,0,0,.5) 70%,transparent 100%);
+ transform:scale(1.45);transform-origin:85% 30%}
+.photo-fade{display:none}
+/* свет: мягкий белый контровой ореол за головой */
+.card-glow{top:-6%;right:-2%;width:280px;height:280px;opacity:.5;filter:blur(30px);background:radial-gradient(circle,rgba(255,255,255,.14) 0%,transparent 65%)}
+/* подписи сдвинуты влево вслед за увеличенным фото, все по одной линии;
+   цифры — с одинаковыми промежутками между блоками */
+@media (min-width:961px){
+ .badge-top{left:-66px}
+ .card-bottom-info{left:-90px}
+ .card-stats-grid{display:flex;gap:48px}
+}
+/* левая колонка героя по высоте = фото: верх тегов на уровне «BRAND DESIGNER» (20px),
+   низ кнопок на уровне нижнего края цифр (24px) */
+@media (min-width:961px){
+ .hero-grid{align-items:stretch}
+ .hero-content{display:flex;flex-direction:column;padding:20px 0 24px}
+ .hero-actions{margin-top:auto}
+ /* заголовок+описание по центру: свободное место делится поровну сверху и снизу */
+ .hero-tag{margin-bottom:24px}
+ .hero-title{margin-top:auto}
+ .hero-lead{margin-bottom:24px}
+}
+@media (max-width:960px){.director-card{max-width:340px}}
+
+/* ===== Ховер карточек: без обводки, при наведении из правого нижнего угла плавно проявляется мягкий салатовый свет =====
+   только opacity — без скриптов и перерисовки */
+.client-card,.case-card,.pipeline-card,.spec-card,.service-card,.sloy-card{position:relative;isolation:isolate;overflow:hidden;transition:transform .35s ease,background-color .35s ease,box-shadow .35s ease,border-color .35s ease}
+.client-card::after,.case-card::after,.pipeline-card::after,.spec-card::after,.service-card::after,.sloy-card::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;opacity:0;transition:opacity .8s cubic-bezier(.22,1,.36,1);
+ background:radial-gradient(ellipse 75% 110% at 100% 100%,rgba(210,255,0,.14) 0%,rgba(210,255,0,.07) 35%,rgba(210,255,0,.02) 65%,transparent 100%)}
+.client-card:hover::after,.case-card:hover::after,.pipeline-card:hover::after,.spec-card:hover::after,.service-card:hover::after,.sloy-card:hover::after{opacity:1}
+.client-card:hover,.pipeline-card:hover,.spec-card:hover,.case-card:hover,.service-card:hover,.sloy-card:hover{border-color:transparent}
+.service-card.is-accented,.service-card.is-wide-feature,.service-card.is-accented:hover,.service-card.is-wide-feature:hover{border-color:transparent}
+
+/* блок «Рейтинг дизайна»: свет с правой стороны */
+.tier-teaser-box{background:radial-gradient(ellipse 55% 90% at 100% 50%,rgba(210,255,0,.09) 0%,rgba(210,255,0,.04) 40%,rgba(210,255,0,.01) 70%,transparent 100%),var(--bg-surface)}
+
+/* теги «ART DIRECTION • BRANDING» и «CREATIVE PRODUCTION» — без зелёной плашки, только текст */
+.tag-badge,.squad-badge{background:transparent;padding-left:0;padding-right:0}
+/* «ПОЧЕМУ ЭТО ВЫГОДНЕЕ…» — без плашки и точки, только текст */
+.sloy-head-badge{background:transparent!important;border:none!important;box-shadow:none!important;padding-left:0!important;padding-right:0!important}
+.sloy-head-badge .sloy-pulse-dot{display:none}
+/* метки этапов (Стратегия, Производство…) — без плашки, только текст */
+.pipeline-phase{background:transparent!important;border:none!important;padding-left:0!important;padding-right:0!important}
+/* маркеры списка — маленький логотип вместо светящейся точки */
+.perk-bullet{width:12px;height:11px;border-radius:0;background:url(/Logo.svg) center/contain no-repeat;box-shadow:none;margin-top:5px}
+/* основная кнопка — без свечения при наведении */
+.btn-primary:hover{box-shadow:none!important}
+/* «CS2 DESIGN TIER LIST» — без белой плашки, белый текст */
+.tier-pill{background:transparent!important;color:#fff!important;border:none!important;box-shadow:none!important;padding-left:0!important;padding-right:0!important}
+
+/* ===== Услуги 01–06: список-аккордеон вместо карточек =====
+   строка: номер · название + подзаголовок · метка · стрелка; по клику раскрывается список пунктов.
+   Карточка 07 «Дизайн-поддержка» остаётся как была */
+.services-grid{display:flex!important;flex-direction:column;gap:6px}
+.services-grid>.service-card:not(.is-wide-feature){
+ display:grid!important;grid-template-columns:72px 1fr auto 36px;grid-template-areas:"num name chip arrow" ". lead lead ." ". list list .";
+ align-items:center;column-gap:24px;row-gap:0;background:transparent!important;box-shadow:none!important;transform:none!important;
+ padding:22px 20px!important;border-radius:12px;cursor:pointer;transition:background-color .3s ease}
+.services-grid>.service-card:not(.is-wide-feature):hover,.services-grid>.service-card.is-open{background:transparent!important}
+.services-grid>.service-card:not(.is-wide-feature)::after{display:none}
+.services-grid .service-top{display:contents}
+.services-grid .service-num{grid-area:num;margin:0}
+.services-grid .service-name{grid-area:name;margin:0}
+.services-grid .service-lead{grid-area:lead;margin:6px 0 0}
+.services-grid .service-chip{grid-area:chip;background:transparent!important;border:none!important;padding:0!important;color:var(--text-muted)!important;box-shadow:none!important}
+.services-grid .service-arrow{grid-area:arrow;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:var(--accent);transition:transform .4s cubic-bezier(.22,1,.36,1),background-color .3s}
+.services-grid .service-card.is-open .service-arrow{transform:rotate(45deg)}
+.services-grid .service-card:not(.is-wide-feature) .service-list{grid-area:list;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:32px;margin:0;
+ max-height:0;opacity:0;overflow:hidden;transition:max-height .5s cubic-bezier(.22,1,.36,1),opacity .35s ease,margin .4s ease}
+.services-grid .service-card.is-open .service-list{max-height:400px;opacity:1;margin-top:18px}
+@media (max-width:768px){
+ .services-grid>.service-card:not(.is-wide-feature){grid-template-columns:40px 1fr 28px;grid-template-areas:"num name arrow" ". chip ." ". lead ." ". list .";column-gap:12px;padding:18px 12px!important}
+ .services-grid .service-card:not(.is-wide-feature) .service-list{grid-template-columns:1fr}
+}
+/* в закрытом виде — только номер, название и метка; подзаголовок и пункты видны после раскрытия */
+.services-grid .service-card:not(.is-wide-feature) .service-lead{max-height:0;opacity:0;overflow:hidden;margin:0;transition:max-height .5s cubic-bezier(.22,1,.36,1),opacity .35s ease,margin .4s ease}
+.services-grid .service-card.is-open .service-lead{max-height:120px;opacity:1;margin-top:10px}
+
+/* ================= ДИЗАЙН-СИСТЕМА (по правилам UI/UX Pro Max) =================
+   1) никаких «плашек» вокруг текста: метки = мелкий капс-текст, группы тегов — через « · »
+   2) единый вертикальный ритм секций и модульная шкала заголовков
+   3) минимум свечения на тёмной теме, контраст текста ≥ 4.5:1 */
+:root{--section-y:clamp(72px,9vw,128px);--label-size:.72rem;--label-track:.1em}
+
+/* 1. Метки без плашек */
+.badge-accent,.case-badge-platform,.case-tag,.service-wide-tags span,.sloy-tag,.service-chip{background:transparent!important;border:none!important;box-shadow:none!important;padding:0!important;border-radius:0!important}
+.badge-accent{color:var(--accent)!important;font-size:.7rem;letter-spacing:var(--label-track);margin-left:2px}
+.case-tag,.service-wide-tags span,.sloy-tag,.service-chip,.pipeline-phase{font-size:var(--label-size)!important;letter-spacing:var(--label-track)!important;text-transform:uppercase;color:var(--text-muted)!important;font-weight:600}
+.case-tag+.case-tag::before,.service-wide-tags span+span::before{content:"·";margin:0 10px 0 2px;color:var(--text-muted);opacity:.6}
+.service-wide-tags,.case-tags{column-gap:0!important;row-gap:6px!important}
+/* метка площадки поверх обложки кейса — текст с тенью для читаемости на фото */
+.case-badge-platform{color:#fff!important;text-shadow:0 1px 12px rgba(0,0,0,.85);font-size:var(--label-size);letter-spacing:var(--label-track)}
+
+/* 2. Ритм и типографика */
+.clients-section,.cases-section,.tier-teaser-section,.approach-section,.squad-section,.services-section{padding:var(--section-y) 0!important}
+.section-header{margin-bottom:clamp(32px,4vw,56px)}
+.section-title{font-size:clamp(2rem,3.6vw,3rem);line-height:1.05;letter-spacing:-.035em}
+.section-desc{font-size:1rem;line-height:1.6;max-width:52ch}
+.section-tag{font-size:var(--label-size);letter-spacing:var(--label-track);margin-bottom:14px}
+
+/* 3. Интерактив: указатель и плавность 150–300ms */
+.client-card,.case-card,.service-card,.sloy-card,.btn-primary,.btn-secondary,.btn-ghost{cursor:pointer}
+
+/* ===== Все оставшиеся плашки — в текст. Сплошной фон только у главных кнопок-призывов (салатовых) ===== */
+.card-floating-badge{background:transparent!important;background-image:none!important;border:none!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;padding:0!important;border-radius:0!important}
+.badge-top .badge-text,.badge-mid .badge-text-sub{text-shadow:0 1px 10px rgba(0,0,0,.9)}
+.badge-mid .badge-accent-tag{text-shadow:0 1px 10px rgba(0,0,0,.9)}
+/* второстепенные кнопки — текстовые ссылки со стрелкой */
+.btn-secondary,.dprofile-all-btn{background:transparent!important;background-image:none!important;border:none!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;padding-left:0!important;padding-right:0!important;color:#fff!important}
+.btn-secondary:hover,.dprofile-all-btn:hover{color:var(--accent)!important;background:transparent!important}
+.dprofile-all-btn::after{content:" →";margin-left:4px}
+
+/* =====================================================================
+   EDITORIAL GRID (UI/UX Pro Max: style «Editorial Grid / Magazine», pattern «Portfolio Grid»)
+   Контент без подложек: разделы держатся на воздухе, крупной типографике и нумерации.
+   ===================================================================== */
+.tier-teaser-box,.squad-banner,.sloy-perks-box,.pipeline-card,.spec-card,.sloy-card,.client-card,.case-card,.service-card.is-wide-feature{
+ background:transparent!important;background-image:none!important;border:none!important;box-shadow:none!important;border-radius:0!important;transform:none!important}
+.pipeline-card::after,.spec-card::after,.sloy-card::after,.client-card::after,.case-card::after,.service-card.is-wide-feature::after,.sloy-card::before,.sloy-card-glow{display:none!important}
+
+/* --- Рейтинг: слева заголовок и кнопка, справа «табло» из крупных цифр --- */
+.tier-teaser-box{padding:0!important;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);column-gap:clamp(40px,6vw,120px);
+ grid-template-areas:"badge stats" "title stats" "lead stats" "cta stats";align-items:start}
+.tier-badge-row{grid-area:badge;margin-bottom:20px}
+.tier-title{grid-area:title;font-size:clamp(2.4rem,5vw,4.2rem)!important;line-height:.98!important;letter-spacing:-.04em;margin:0 0 24px}
+.tier-lead{grid-area:lead;max-width:52ch;margin:0 0 36px}
+.tier-cta-wrap{grid-area:cta}
+.tier-features-grid{grid-area:stats;display:flex!important;flex-direction:column;gap:clamp(24px,3vw,40px);align-self:center;margin:0!important}
+.tier-feature{display:grid!important;grid-template-columns:minmax(0,1fr);gap:4px;padding:0!important;background:transparent!important}
+.tier-feature .feature-num{font-size:clamp(3rem,6vw,5.2rem)!important;line-height:.9;letter-spacing:-.05em;font-weight:900}
+.tier-feature .feature-label{font-size:.95rem;color:var(--text-muted)}
+
+/* --- Как я работаю: 4 колонки-этапа с крупными номерами --- */
+.pipeline-grid{gap:clamp(32px,4vw,56px)!important}
+.pipeline-card{padding:0!important}
+.pipeline-card .pipeline-idx{font-size:clamp(3rem,5vw,4.4rem)!important;line-height:.9;letter-spacing:-.05em;font-weight:900}
+.pipeline-card .pipeline-top{margin-bottom:22px;align-items:flex-end}
+.pipeline-card .pipeline-name{margin-bottom:10px}
+
+/* --- Команда под ключ: текст слева, пункты справа; специалисты — редакционный список --- */
+.squad-banner{padding:0!important;margin-bottom:clamp(56px,7vw,96px)!important;gap:clamp(40px,6vw,120px)!important}
+.squad-banner-title{font-size:clamp(1.6rem,2.8vw,2.3rem)!important;line-height:1.1;letter-spacing:-.03em}
+.squad-perk{padding:0!important;background:transparent!important;border:none!important}
+.specialists-grid{gap:clamp(36px,4vw,56px) clamp(32px,4vw,64px)!important}
+.spec-card{padding:0!important}
+.spec-card .spec-code{display:block;color:var(--accent)!important;margin-bottom:12px}
+
+/* --- Почему выгоднее: крупная цифра слева, текст справа, строки в две колонки --- */
+.sloy-perks-box{padding:0!important;margin-top:clamp(56px,7vw,96px)!important}
+.sloy-cards-grid{gap:clamp(32px,4vw,48px) clamp(32px,5vw,80px)!important}
+.sloy-card{padding:0!important;display:grid!important;grid-template-columns:minmax(120px,auto) 1fr;grid-template-areas:"top name" "top txt";column-gap:28px;align-items:start}
+.sloy-card-top{grid-area:top;display:flex;flex-direction:column;gap:6px;margin:0!important}
+.sloy-card .sloy-stat{font-size:clamp(2.4rem,4vw,3.4rem)!important;line-height:.9;letter-spacing:-.05em;font-weight:900}
+.sloy-card-name{grid-area:name;margin:0 0 8px!important}
+.sloy-card-txt{grid-area:txt;margin:0!important}
+
+/* --- 07 Дизайн-поддержка: редакционный блок без подложки --- */
+.service-card.is-wide-feature{padding:clamp(32px,4vw,56px) 0 0!important}
+
+/* --- Клиенты: чистая стена логотипов, приглушены, на наведение — в полный цвет --- */
+.client-card{padding:8px!important;opacity:.55;transition:opacity .25s ease}
+.client-card:hover{opacity:1}
+
+/* --- Кейсы: сначала картинка, подписи под ней --- */
+.case-card{overflow:visible!important}
+.case-card img{border-radius:14px}
+.case-card .case-meta{padding:20px 0 0!important}
+
+@media (max-width:960px){
+ .tier-teaser-box{grid-template-columns:1fr;grid-template-areas:"badge" "title" "lead" "stats" "cta"}
+ .tier-features-grid{flex-direction:row!important;flex-wrap:wrap;margin:0 0 32px!important}
+ .sloy-card{grid-template-columns:1fr;grid-template-areas:"top" "name" "txt";row-gap:8px}
+}
+
+/* ===== ИНТРО: 3D-логотип на весь экран, прокрутка через 2 экрана «прокручивает» анимацию ===== */
+.intro3d{position:relative;height:100vh;height:100svh;width:100vw;margin-left:calc(50% - 50vw);margin-top:-76px}   /* заходит под шапку — засветки до самого верха */
+.intro3d-sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.intro3d-sticky::before{content:none}
+#intro3dCanvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity 1s ease}
+.intro3d.is-ready #intro3dCanvas{opacity:1}
+.intro3d-fallback{display:none;width:min(40vw,260px);opacity:calc(1 - var(--intro-p,0) * 1.6)}
+.intro3d.is-fallback .intro3d-fallback{display:block}
+.intro3d-scroll{position:absolute;left:50%;bottom:clamp(28px,6vh,56px);transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;
+ color:var(--text-muted);text-decoration:none;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;opacity:calc(1 - var(--intro-p,0) * 6);transition:color .2s}
+.intro3d-scroll:hover{color:#fff}
+.intro3d-scroll svg{color:var(--accent);animation:introArrow 1.8s ease-in-out infinite}
+@keyframes introArrow{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(8px);opacity:1}}
+@media (prefers-reduced-motion: reduce){.intro3d{height:100vh}.intro3d-scroll svg{animation:none}}
+/* края 3D-сцены плавно растворяются в фоне — без резкой границы сверху/снизу/по бокам */
+/* низ сцены плавно уходит в фон страницы, чтобы переход к следующему блоку был мягким */
+#intro3dCanvas{-webkit-mask-image:linear-gradient(to bottom,#000 78%,transparent 100%);mask-image:linear-gradient(to bottom,#000 78%,transparent 100%)}
+/* Текст интро: огромный заголовок слева сверху, описание слева снизу; логотип правее центра (intro3d.js) */
+.intro3d-copy{position:absolute;inset:0;z-index:2;pointer-events:none;
+ padding:calc(76px + clamp(24px,6vh,72px)) clamp(16px,4vw,72px) clamp(64px,11vh,120px);
+ display:flex;flex-direction:column;justify-content:space-between;
+ opacity:calc(1 - var(--intro-p,0));transform:translateY(calc(var(--intro-p,0) * -60px))}
+.intro3d-title{margin:0;font-family:var(--font-main);font-weight:600;text-transform:uppercase;color:#fff;
+ font-size:clamp(3.2rem,9.5vw,10rem);line-height:.92;letter-spacing:-.035em}
+.intro3d-lead{margin:0;max-width:46ch;font-size:clamp(.95rem,1.1vw,1.1rem);line-height:1.6;color:#fff}
+@media (max-width:768px){
+ .intro3d-copy{padding-top:calc(76px + 24px);padding-bottom:110px}
+ .intro3d-title{font-size:clamp(2.6rem,13vw,4rem)}
+}
+/* после появления холст гаснет строго в такт прокрутке, без запаздывания */
+.intro3d.is-ready #intro3dCanvas{transition:opacity .08s linear}
+
+/* надзаголовки-метки (салатовый капс над заголовками) — убраны везде */
+.section-tag,.tag-badge,.tag-location,.hero-tag,.squad-badge,.sloy-head-badge,.tier-badge-row{display:none!important}
+/* кнопка «Обсудить проект» под заголовком интро */
+.intro3d-top{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(28px,5vh,56px)}
+.intro3d-cta{pointer-events:auto;display:inline-flex;align-items:center;gap:12px;background:#fff;color:#0a0b0e!important;text-decoration:none;
+ padding:18px 30px;border-radius:10px;font:600 1.05rem/1 'Inter',sans-serif;transition:background-color .2s,transform .2s}
+.intro3d-cta:hover{background:#d2ff00;transform:translateY(-2px)}
+@media (max-width:768px){.intro3d-cta{padding:14px 22px;font-size:.95rem}}
+.intro3d-accent{color:#d2ff00}

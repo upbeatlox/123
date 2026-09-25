@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>quzzeN — Дизайн для спорта и киберспорта — Главная</title>
+
+ <!-- CS2 TACTICAL CROSSHAIR -->
+<div class="cs-crosshair" id="csCrosshair">
+ <span class="ch-dot"></span>
+ <span class="ch-line ch-top"></span>
+ <span class="ch-line ch-bottom"></span>
+ <span class="ch-line ch-left"></span>
+ <span class="ch-line ch-right"></span>
+</div>
+ 
+ <!-- Google Fonts: Inter -->
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+ 
+ <!-- Base CSS (Базовые системные переменные и ресет) -->
+ <link rel="stylesheet" href="/assets/css/page.css?v=7">
+
+	<link rel="stylesheet" href="/.s/src/base.min.css" />
+	<link rel="stylesheet" href="/.s/src/layer7.min.css" />
+
+	<script src="/.s/src/jquery-3.6.0.min.js"></script>
+	
+	<script src="/.s/src/uwnd.min.js"></script>
+	<link rel="stylesheet" href="/.s/src/fancybox5/dist/css/fancybox5.min.css" />
+	<link rel="stylesheet" href="/.s/src/social.css" />
+	<script async type="module" src="/.s/src/fancybox5/dist/js/chunks/uFancy-runtime.min.js"></script>
+	<script async type="module" src="/.s/src/fancybox5/dist/js/vendors/fancybox5.min.js"></script>
+	<script type="module" src="/.s/src/fancybox5/dist/js/uFancy.min.js"></script>
+	<script src="/.s/src/bottomInfo.min.js"></script>
+	<script>
+/* --- UCOZ-JS-DATA --- */
+window.uCoz = {"uLightboxType":2,"layerType":7,"sign":{"7287":"Перейти на страницу с фотографией.","230039":"Согласиться","5255":"Помощник","230038":"Этот сайт использует файлы cookies для более комфортной работы пользователя. Продолжая просмотр страниц сайта, вы соглашаетесь с <a href=/index/cookiepolicy target=_blank >Политикой использования файлов cookies</a>."},"site":{"host":"quzzen.usite.pro","domain":null,"id":"lquzzen"},"bottomInfoData":[{"button":230039,"cookieKey":"cPolOk","message":230038,"class":"","id":"cookiePolicy"}],"ssid":"467242630742122255637","country":"US","language":"ru","module":"index"};
+/* --- UCOZ-JS-CODE --- */
+ function uSocialLogin(t) {
+			var params = {"vkontakte":{"height":400,"width":790},"yandex":{"width":870,"height":515},"google":{"height":600,"width":700},"ok":{"width":710,"height":390}};
+			var ref = escape(location.protocol + '//' + ('quzzen.usite.pro' || location.hostname) + location.pathname + ((location.hash ? ( location.search ? location.search + '&' : '?' ) + 'rnd=' + Date.now() + location.hash : ( location.search || '' ))));
+			window.open('/'+t+'?ref='+ref,'conwin','width='+params[t].width+',height='+params[t].height+',status=1,resizable=1,left='+parseInt((screen.availWidth/2)-(params[t].width/2))+',top='+parseInt((screen.availHeight/2)-(params[t].height/2)-20)+'screenX='+parseInt((screen.availWidth/2)-(params[t].width/2))+',screenY='+parseInt((screen.availHeight/2)-(params[t].height/2)-20));
+			return false;
+		}
+		function TelegramAuth(user){
+			user['a'] = 9; user['m'] = 'telegram';
+			_uPostForm('', {type: 'POST', url: '/index/sub', data: user});
+		}
+function loginPopupForm(params = {}) { new _uWnd('LF', ' ', -250, -100, { closeonesc:1, resize:1 }, { url:'/index/40' + (params.urlParams ? '?'+params.urlParams : '') }) }
+/* --- UCOZ-JS-END --- */
+</script>
+
+	<style>.UhideBlock{display:none; }</style>
+<link rel="canonical" href="/" />
+</head>
+<body class="module-index page-sitePage1">
+ <div class="site-wrapper">
+ <!-- Шапка сайта -->
+ <!--U1AHEADER1Z--><!-- ХИДЕР САЙТА (2026 Minimalist Sports/Esports) -->
+<header class="header-nav">
+ <div class="header-inner">
+  <div class="hdr-side"></div>
+
+  <!-- Центр: логотип + «меню» -->
+  <div class="hdr-center">
+   <a href="/" class="brand-logo" aria-label="quzzeN — на главную">
+    <img src="/Logo.svg" alt="quzzeN" class="header-logo-img">
+   </a>
+   <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="siteMenu">
+    <span class="menu-label" data-open="меню" data-close="закрыть">меню</span>
+   </button>
+  </div>
+
+  <div class="header-actions">
+   <a href="https://t.me/quzzen" target="_blank" rel="noopener noreferrer" class="btn-cta">
+    <span>Обсудить проект</span>
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+   </a>
+  </div>
+ </div>
+
+</header>
+<!-- Меню (вне <header>, иначе размытие шапки ломает fixed-позиционирование): выпадает под шапкой, крупные пункты в ряд; страница под ним затемняется -->
+ <div class="site-menu" id="siteMenu" aria-hidden="true">
+  <nav class="site-menu-nav" aria-label="Основная навигация">
+   <a href="/#cases" class="site-menu-link">Кейсы</a>
+   <a href="/rating" class="site-menu-link">Рейтинг</a>
+   <a href="/publ" class="site-menu-link">Статьи</a>
+   <a href="/about_me" class="site-menu-link">Обо мне</a>
+   <a href="/#contacts" class="site-menu-link">Контакты</a>
+  </nav>
+ </div>
+ <div class="site-menu-backdrop" id="siteMenuBackdrop"></div>
+
+
+<!-- Стили шапки -->
+<link rel="stylesheet" href="/assets/css/header.css?v=local">
+
+<!-- Скрипт мобильного меню -->
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="/assets/js/header.js?v=local" charset="utf-8"></script><!--/U1AHEADER1Z-->
+
+ <!-- Основной контент -->
+ <main class="site-main">
+ <!-- <middle> -->
+ <!-- <body> --><div class="page-content-wrapper"><link rel="stylesheet" href="/assets/css/home.css?v=46">
+<!-- ИНТРО: стеклянный 3D-логотип (three.js). Стили — home.css, логика — /assets/js/intro3d.js -->
+<section class="intro3d" id="intro3d" aria-label="quzzeN">
+ <div class="intro3d-sticky">
+  <canvas id="intro3dCanvas" aria-hidden="true"></canvas>
+  <img class="intro3d-fallback" src="/Logo.svg" alt="">
+  <div class="intro3d-copy">
+   <h1 class="intro3d-title"><span class="intro3d-accent">Дизайн</span><br>для спорта</h1>
+   <a class="intro3d-cases" href="#cases"><span>Смотреть кейсы</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+   <p class="intro3d-lead">Денис Савицкий — независимый арт-директор и бренд-дизайнер. Создаю айдентику, форму команд и визуальные экосистемы: от бренд-платформы и логотипа до предпечатной подготовки мерча и SMM-макетов.</p>
+  </div>
+  <a class="intro3d-scroll" href="#after-intro" aria-label="Прокрутить вниз">
+   <span>Листайте</span>
+   <svg width="18" height="28" viewBox="0 0 18 28" fill="none" aria-hidden="true"><path d="M9 2v22M2 17l7 7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+ </div>
+</section>
+<div id="after-intro"></div>
+<script type="importmap">{"imports":{"three":"/assets/vendor/three/build/three.module.min.js","three/addons/":"/assets/vendor/three/examples/jsm/"}}</script>
+<script type="module" src="/assets/js/intro3d.js?v=37"></script>
+<!-- HERO СЕКЦИЯ С КАРТОЧКОЙ АРТ-ДИРЕКТОРА -->
+
+<!-- СЕКЦИЯ: КЛИЕНТЫ И ПРОЕКТЫ -->
+<section class="clients-section">
+ <div class="section-header">
+ <div>
+ <span class="section-tag">Опыт &amp; Доверие</span>
+ <h2 class="section-title">КЛИЕНТЫ И ПРОЕКТЫ</h2>
+ </div>
+ <p class="section-desc">Более 35 клубов, лиг, команд, брендов и медийных персон, для которых разработаны айдентика, форма, мерч и другие услуги в рамках графического дизайна.</p>
+ </div>
+ <div class="clients-grid">
+ <div class="client-card is-tall" title="ХК «Црвена Звезда»"><span class="client-name">ХК «Црвена Звезда»</span><img src="https://upload.wikimedia.org/wikipedia/ru/c/c5/Crvena_Zvezda_FC_Logo.svg" alt="ХК Црвена Звезда"></div>
+ <div class="client-card is-tall" title="OviCup (Кубок Александра Овечкина)"><span class="client-name">OviCup (Кубок Александра Овечкина)</span><img src="/Logos/Ovicup.webp" alt="OviCup"></div>
+ <div class="client-card is-wide" title="Fonbet Overtime"><span class="client-name">Fonbet Overtime</span><img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Fonbet.svg" alt="Fonbet Overtime"></div>
+ <div class="client-card is-tall" title="ХК «Ленинградец»"><span class="client-name">ХК «Ленинградец»</span><img src="https://upload.wikimedia.org/wikipedia/ru/a/aa/%D0%A5%D0%9A_%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B3%D1%80%D0%B0%D0%B4%D0%B5%D1%86.svg" alt="ХК Ленинградец"></div>
+ <div class="client-card" title="HOTU"><span class="client-name">HOTU</span><img src="https://static.tildacdn.com/tild3333-6565-4063-a364-613166313661/HOTU_logo_2.png" alt="HOTU"></div>
+ <div class="client-card" title="Virtus.Pro"><span class="client-name">Virtus.Pro</span><img src="https://virtus.pro/img/logo.svg" alt="Virtus.Pro"></div>
+ <div class="client-card" title="Oxuji"><span class="client-name">Oxuji</span><img src="/Logos/Oxuji.svg" alt="Oxuji"></div>
+ <div class="client-card is-tall" title="Nuclear TigeRES"><span class="client-name">Nuclear TigeRES</span><img src="https://static.tildacdn.com/tild3736-3965-4535-b138-643166343430/01______01.svg" alt="Nuclear TigeRES"></div>
+ <div class="client-card" title="BESTIA"><span class="client-name">BESTIA</span><img src="/Logos/Bestia.png" alt="BESTIA"></div>
+ <div class="client-card is-wide" style="--scale: 1.7" title="CYBERSHOKE"><span class="client-name">CYBERSHOKE</span><img src="https://cloud.cybershoke.net/img/brand/logo_full_default.svg" alt="CYBERSHOKE"></div>
+ <div class="client-card is-tall" style="--scale: 0.8" title="DEPO"><span class="client-name">DEPO</span><img src="/Logos/Depo.png" alt="DEPO"></div>
+ <div class="client-card is-tall" style="--scale: 0.8" title="TGM — The Gentlemen Esports"><span class="client-name">The Gentlemen Esports</span><img src="/Logos/TGM.svg" alt="TGM"></div>
+ <div class="client-card" title="m0NESY NEWS"><span class="client-name">m0NESY NEWS</span><img src="/Logos/m0NESY.svg" alt="m0NESY"></div>
+ <div class="client-card" title="CSPL — Киберспортивная Лига СНГ"><span class="client-name">CSPL.RU — Киберспортивная Лига СНГ</span><img src="/Logos/CSPL.svg" alt="CSPL"></div>
+ <div class="client-card is-wide" style="--scale: 1.2" title="VSCL.RU - Российская турнирная платформа"><span class="client-name">VSCL.RU - Российская турнирная платформа</span><img src="https://www.vscl.ru/img/logo/nav_logo.png" alt="VSCL"></div>
+ <div class="client-card is-tall" title="CDMGames"><span class="client-name">CDMGames</span><img src="/Logos/CDMGames.png" alt="CDMGames"></div>
+ <div class="client-card" title="Death Moon"><span class="client-name">Death Moon</span><img src="/Logos/DM.svg" alt="Death Moon"></div>
+ <div class="client-card" title="LINAONE"><span class="client-name">LINAONE</span><img src="/Logos/LINAONE.svg" alt="Linaone"></div>
+ <div class="client-card" style="--scale: 1.05" title="Major Pride"><span class="client-name">Major Pride</span><img src="/Logos/MajorPride.png" alt="Major Pride"></div>
+ <div class="client-card" title="All4Gamers"><span class="client-name">All4Gamers</span><img src="/Logos/All4Gamers.svg" alt="all4gamers"></div>
+ <div class="client-card is-tall" style="--scale: 0.8" title="PrizyvaNet Gaming"><span class="client-name">PrizyvaNet Gaming</span><img src="/Logos/PrizyvaNet.svg" alt="ПризываНет"></div>
+ <div class="client-card is-wide" title="1xBet"><span class="client-name">1xBet</span><img src="https://quzzen.usite.pro/Logos/1XBET.svg" alt="1xBet"></div>
+ <div class="client-card is-wide" title="Resource Esports"><span class="client-name">Resource Esports</span><img src="/Logos/Resource.svg" alt="Resource"></div>
+ <div class="client-card is-tall" style="--scale: 0.8" title="Leon"><span class="client-name">Leon</span><img src="/Logos/Leon.png" alt="Leon"></div>
+ <div class="client-card is-wide" style="--scale: 1.6" title="SKILLRIDER"><span class="client-name">SKILLRIDER</span><img src="/Logos/SKILLRIDER.png" alt="SKILLRIDER"></div>
+ <div class="client-card is-wide" style="--scale: 1.6" title="Jumbo"><span class="client-name">Jumbo</span><img src="/Logos/Jumbo.svg" alt="Jumbo"></div>
+ <div class="client-card is-tall" style="--scale: 0.85" title="SPARTA"><span class="client-name">SPARTA</span><img src="/Logos/SPARTA.png" alt="SPARTA"></div>
+ <div class="client-card is-tall" title="ФК Полако"><span class="client-name">ФК Полако</span><img src="/Logos/polako.svg" alt="ФК Полако"></div>
+ <div class="client-card is-tall" title="Усы Марио — Компьютерный клуб"><span class="client-name">Усы Марио — Компьютерный клуб</span><img src="/Logos/usymario.svg" alt="Усы Марио"></div>
+ <div class="client-card is-tall" title="СКА ХК Дроздецкого"><span class="client-name">СКА ХК Дроздецкого</span><img src="/Logos/drozd.svg" alt="ХК Дроздецкого"></div>
+ <div class="client-card is-tall" style="--scale: 0.8" title="Akhuta Ice"><span class="client-name">Akhuta Ice</span><img src="/Logos/akhutkin.svg" alt="Akhuta Ice"></div>
+ <div class="client-card is-wide" style="--scale: 1.5" title="Искра Льда"><span class="client-name">Искра Льда</span><img src="https://static.tildacdn.com/tild3539-6136-4366-b366-363930366634/logo_2.svg" alt="Искра Льда"></div>
+ <div class="client-card" title="Ростер"><span class="client-name">Ростер</span><img src="/Logos/Roster.svg" alt="Ростер"></div>
+ <div class="client-card is-tall" title="ХК Sunqar"><span class="client-name">ХК Sunqar</span><img src="/Logos/sunkar-logo.png" alt="ХК Sunqar"></div>
+ <div class="client-card is-max" title="Чемпионат и Первенство Москвы по Киокусинкай"><span class="client-name">Чемпионат и Первенство Москвы по Киокусинкай</span><img src="/Logos/mgfkk.svg" alt="Каратэ Москва"></div>
+ <div class="client-card is-wide" title="AIRO PC TUNING"><span class="client-name">AIRO PC TUNING</span><img src="/Logos/AIRO.svg" alt="AIRO"></div>
+ </div>
+</section>
+
+<!-- СЕКЦИЯ КЕЙСОВ -->
+<section class="cases-section" id="cases">
+ <div class="section-header">
+ <div>
+ <span class="section-tag">Портфолио на Dprofile</span>
+ <h2 class="section-title">ПРОЕКТЫ</h2>
+ </div>
+ <a href="https://dprofile.ru/quzzen" target="_blank" rel="noopener" class="dprofile-all-btn">
+ <span>Все проекты на Dprofile</span>
+ <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+ </a>
+ </div>
+ <div class="cases-grid" id="casesGridContainer"></div>
+</section>
+
+<!-- CS2 DESIGN TIER LIST -->
+<section class="tier-teaser-section">
+ <div class="tier-teaser-box">
+ <div class="tier-badge-row">
+ <span class="tier-pill">CS2 DESIGN TIER LIST</span>
+ <span class="tier-status">Обновляется ежемесячно</span>
+ </div>
+ <h2 class="tier-title">РЕЙТИНГ ДИЗАЙНА<br>В КИБЕРСПОРТЕ</h2>
+ <p class="tier-lead">Оцениваю графику ведущих CS2 команд в CIS регионе. Разбор по трём ключевым SMM-макетам: <strong>Gameday</strong>, <strong>Victory</strong> и <strong>Defeat</strong>.</p>
+ <div class="tier-features-grid">
+ <div class="tier-feature"><span class="feature-num">20+</span><span class="feature-label">Команд в интерактивном тир-листе</span></div>
+ <div class="tier-feature"><span class="feature-num">3x</span><span class="feature-label">Ключевых макета по каждой команде</span></div>
+ <div class="tier-feature"><span class="feature-num">S-F</span><span class="feature-label">Градация качества дизайн-систем</span></div>
+ </div>
+ <div class="tier-cta-wrap">
+ <a href="/rating" class="btn-primary">
+ <span>Открыть полный рейтинг CS2</span>
+ <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+ </a>
+ </div>
+ </div>
+</section>
+
+<!-- КАК Я РАБОТАЮ -->
+
+<!-- КОМАНДА ПОД КЛЮЧ -->
+<section class="squad-section" id="squad">
+ <div class="section-header">
+ <div>
+ <span class="section-tag">Дизайн-поддержка</span>
+ <h2 class="section-title">КОМАНДА ПОД КЛЮЧ</h2>
+ </div>
+ <p class="section-desc">Вам не нужно искать десятки фрилансеров и терять недели на поиски. Вы работаете напрямую со мной, а я собираю боевой состав под масштаб вашей задачи.</p>
+ </div>
+ <div class="squad-banner">
+ <div class="squad-banner-left">
+ <span class="squad-badge">CREATIVE PRODUCTION</span>
+ <h3 class="squad-banner-title">Выстраиваю процесс визуала бренда с гарантией качества</h3>
+ <p class="squad-banner-text">У меня сформирована сеть сильных узкопрофильных специалистов с подтвержденным опытом в коммерции и медиа. Я формирую архитектуру проекта, руковожу процессом, защищаю концепции и лично отвечаю за финальный результат.</p>
+ </div>
+ <div class="squad-banner-right">
+ <div class="squad-perk"><span class="perk-bullet"></span><div><strong>Единый центр ответственности</strong><p>Все согласования, дедлайны и контроль стандартов держит арт-директор.</p></div></div>
+ <div class="squad-perk"><span class="perk-bullet"></span><div><strong>Точный подбор скиллов</strong><p>Подключаю ровно тех экспертов, которые нужны вашему проекту прямо сейчас.</p></div></div>
+ <div class="squad-perk"><span class="perk-bullet"></span><div><strong>Защита бренда от плагиата</strong><p>Юридическая чистота и прямые выходы на аккредитованную регистрацию товарных знаков.</p></div></div>
+ </div>
+ </div>
+ <div class="specialists-grid">
+ <div class="spec-card"><span class="spec-code">01 // CRAFT</span><h4 class="spec-title">Иллюстраторы &amp; художники</h4><p class="spec-desc">Клубные маскоты, детализированные спортивные эмблемы, леттеринг и сюжетный арт для лимитированного мерча.</p></div>
+ <div class="spec-card"><span class="spec-code">02 // 3D &amp; MOTION</span><h4 class="spec-title">3D, Моушн и CGI-дизайнеры</h4><p class="spec-desc">Трехмерная графика для соцсетей, анимации логотипов, динамическая графика для медиаэкранов, Youtube и Twitch-трансляций.</p></div>
+ <div class="spec-card"><span class="spec-code">03 // DIGITAL</span><h4 class="spec-title">Web-дизайнеры &amp; UX/UI</h4><p class="spec-desc">Сайты и приложения для клубов, команд, турниров, личных брендов, промо-лендинги с высокой конверсией и мобильным фокусом.</p></div>
+ <div class="spec-card"><span class="spec-code">04 // STRATEGY</span><h4 class="spec-title">Стратеги &amp; Маркетологи</h4><p class="spec-desc">Глубокий аудит конкурентов, разработка легенды бренда, архитектура суббрендов, названия команд и слоганы сезонов.</p></div>
+ <div class="spec-card"><span class="spec-code">05 // LEGAL</span><h4 class="spec-title">Патентные поверенные</h4><p class="spec-desc">Проверка айдентики и названий на патентную чистоту, оформление исключительных прав и регистрация знака в Роспатенте.</p></div>
+ <div class="spec-card"><span class="spec-code">06 // PRODUCTION</span><h4 class="spec-title">Производственные фабрики</h4><p class="spec-desc">Прямые контакты с проверенными швейными фабриками в РФ и Азии. Возможность производства любых лекал, шелкография, вышивка, сублимация, ТПУ-патчи.</p></div>
+ </div>
+</section>
+
+<!-- КАТАЛОГ УСЛУГ + ДИЗАЙН-ПОДДЕРЖКА SLOY -->
+<section class="services-section" id="services">
+ <div class="section-header">
+ <div>
+ <span class="section-tag">ЧЕМ МОГУ ПОМОЧЬ</span>
+ <h2 class="section-title">МОИ УСЛУГИ</h2>
+ </div>
+ <p class="section-desc">От мелкого редизайна логотипа до комплексного запуска спортивной организации, медиа-лиги или киберспортивного клуба с нуля.</p>
+ </div>
+ <div class="services-grid">
+ <div class="service-card">
+ <div class="service-top"><span class="service-num">01</span><span class="service-chip">Foundation</span></div>
+ <h3 class="service-name">Стратегия и брендинг</h3>
+ <p class="service-lead">Создание фундамента бренда до отрисовки графики.</p>
+ <ul class="service-list">
+ <li>Аналитика рынка, аудитории и аудит конкурентов</li>
+ <li>Платформа бренда: миссия, ценности, характер</li>
+ <li>Нейминг команд, лиг, коллекций и личных брендов</li>
+ <li>Архитектура суббрендов и спонсорские интеграции</li>
+ </ul>
+ </div>
+ <div class="service-card is-accented">
+ <div class="service-top"><span class="service-num">02</span><span class="service-chip chip-accent">Identity</span></div>
+ <h3 class="service-name">Визуальная айдентика</h3>
+ <p class="service-lead">Узнаваемый образ бренда на всех носителях.</p>
+ <ul class="service-list">
+ <li>Разработка логотипа, клубного герба и суб-знаков</li>
+ <li>Фирменная цветовая палитра и шрифтовая пара</li>
+ <li>Паттерны, фотостиль и вспомогательная графика</li>
+ <li>Брендбук или гайдлайн с правилами применения</li>
+ </ul>
+ </div>
+ <div class="service-card">
+ <div class="service-top"><span class="service-num">03</span><span class="service-chip">Apparel</span></div>
+ <h3 class="service-name">Форма и мерч под ключ</h3>
+ <p class="service-lead">Полный производственный цикл одежды.</p>
+ <ul class="service-list">
+ <li>Игровые комплекты джерси</li>
+ <li>Подготовка лекал и файлов к печати</li>
+ <li>Подбор тканей, видов нанесения (сублимация, вышивка)</li>
+ <li>Контроль качества</li>
+ </ul>
+ </div>
+ <div class="service-card">
+ <div class="service-top"><span class="service-num">04</span><span class="service-chip">Social Media</span></div>
+ <h3 class="service-name">SMM-дизайн</h3>
+ <p class="service-lead">Разработка дизайн-систем и SMM-макетов.</p>
+ <ul class="service-list">
+ <li>SMM-макеты: Gameday, Victory, Defeat и др.</li>
+ <li>Оформление каналов Telegram, VK, Twitch, YouTube</li>
+ <li>Моушн-заставки и динамические сценарии для Reels</li>
+ <li>Шаблоны для быстрой сборки контентмейкерами</li>
+ </ul>
+ </div>
+ <div class="service-card">
+ <div class="service-top"><span class="service-num">05</span><span class="service-chip">3D, AI &amp; CGI</span></div>
+ <h3 class="service-name">Расширенный визуал</h3>
+ <p class="service-lead">3D-сцены, анимации и генеративные технологии.</p>
+ <ul class="service-list">
+ <li>3D-моделирование атрибутики, кубков и формы</li>
+ <li>Реалистичные мокапы и продуктовые презентации</li>
+ <li>Генеративный контент в Midjourney и Flux под ДНК клуба</li>
+ <li>Авторская персонажка и маскоты</li>
+ </ul>
+ </div>
+ <div class="service-card">
+ <div class="service-top"><span class="service-num">06</span><span class="service-chip">Web &amp; UX/UI</span></div>
+ <h3 class="service-name">Веб-разработка под ключ</h3>
+ <p class="service-lead">Сайты и приложения для брендов.</p>
+ <ul class="service-list">
+ <li>Сайты команд, турниров и ивентов</li>
+ <li>Интерфейсы и app-дизайн</li>
+ <li>UX/UI дизайн</li>
+ <li>Адаптивная верстка, анимации и интеграции</li>
+ </ul>
+ </div>
+
+ <!-- 07 Поддержка -->
+ <div class="service-card is-wide-feature">
+ <div class="service-wide-meta">
+ <span class="service-num">07</span>
+ <span class="service-chip chip-accent">Subscription</span>
+ </div>
+ <div class="service-wide-body">
+ <h3 class="service-name">Дизайн-поддержка </h3>
+ <p class="service-lead">
+ Постоянное визуальное сопровождение вашего бренда или клуба. Я заменяю собой поиск, найм и контроль штатных дизайнеров, полностью закрывая маркетинговые, продуктовые и медийные задачи в формате подписки без налоговых издержек.
+ </p>
+ <div class="service-wide-tags">
+ <span>Приоритетная очередь задач</span>
+ <span>Прямая связь в Telegram</span>
+ <span>Контроль качества каждого макета</span>
+ <span>Быстрый онбординг</span>
+ </div>
+ </div>
+ </div>
+
+ <!-- SLOY БЛОК ВЫГОДЫ -->
+ <div class="sloy-perks-box">
+ <div class="sloy-perks-head">
+ <div class="sloy-head-badge"><span class="sloy-pulse-dot"></span><span>ПОЧЕМУ ЭТО ВЫГОДНЕЕ ШТАТА И ФРИЛАНСА</span></div>
+ <h4 class="sloy-perks-title">Экономия и скорость под ключ</h4>
+ <p class="sloy-perks-desc">Вместо месяцев найма, переплат и контроля случайных исполнителей — дизайн-поддержка.</p>
+ </div>
+ <div class="sloy-cards-grid">
+ <div class="sloy-card">
+ <div class="sloy-card-top"><span class="sloy-stat">-43%</span><span class="sloy-tag">Экономика</span></div>
+ <h5 class="sloy-card-name">Без налогов на ФОТ и отпускных</h5>
+ <p class="sloy-card-txt">Никаких страховых взносов, оплаты софта, железа и больничных. Официальная работа по договору за чистый измеримый результат.</p>
+ <div class="sloy-card-glow"></div>
+ </div>
+ <div class="sloy-card">
+ <div class="sloy-card-top"><span class="sloy-stat">24 ч</span><span class="sloy-tag">Скорость</span></div>
+ <h5 class="sloy-card-name">Без поиска кандидатов</h5>
+ <p class="sloy-card-txt">Не нужно отсеивать 100+ резюме и проверять тестовые работы кандидатов. Мгновенный вход в контекст вашего бренда и начало работы с первых дней.</p>
+ <div class="sloy-card-glow"></div>
+ </div>
+ <div class="sloy-card">
+ <div class="sloy-card-top"><span class="sloy-stat">100%</span><span class="sloy-tag">Контроль</span></div>
+ <h5 class="sloy-card-name">Арт-дирекшн каждого пикселя</h5>
+ <p class="sloy-card-txt">Стиль клуба не «поплывет» от сезона к сезону. Лично контролирую качество — от SMM-макетов до производства мерча.</p>
+ <div class="sloy-card-glow"></div>
+ </div>
+ <div class="sloy-card">
+ <div class="sloy-card-top"><span class="sloy-stat">6 в 1</span><span class="sloy-tag">Команда</span></div>
+ <h5 class="sloy-card-name">Команда спецов внутри подписки</h5>
+ <p class="sloy-card-txt">Один штатный работник не закроет 3D, мерч и анимации сразу. Подключаю проверенных узких экспертов без доплат за менеджмент.</p>
+ <div class="sloy-card-glow"></div>
+ </div>
+ <div class="sloy-card">
+ <div class="sloy-card-top"><span class="sloy-stat">&lt; 30м</span><span class="sloy-tag">Связь</span></div>
+ <h5 class="sloy-card-name">Прямой диалог в Telegram</h5>
+ <p class="sloy-card-txt">Без испорченного телефона и долгих созвонов. Срочные макеты и замена текста в шаблонах выдаются день в день.</p>
+ <div class="sloy-card-glow"></div>
+ </div>
+ <div class="sloy-card">
+ <div class="sloy-card-top"><span class="sloy-stat">0 ₽</span><span class="sloy-tag">Гибкость</span></div>
+ <h5 class="sloy-card-name">Пауза в межсезонье</h5>
+ <p class="sloy-card-txt">В плей-офф и трансферные окна ускоряемся на максимум. В паузах между турнирами подписка ставится на стоп, чтобы не переплачивать.</p>
+ <div class="sloy-card-glow"></div>
+ </div>
+ </div>
+ <div class="sloy-bottom-bar">
+ <div class="sloy-bottom-info">
+ <strong>Нужен индивидуальный расчет?</strong>
+ <span>Прикинем задачи и покажем сэкономленный бюджет за 15 минут диалога.</span>
+ </div>
+ <a href="https://t.me/quzzen" target="_blank" rel="noopener" class="sloy-cta-btn">
+ <span>Обсудить формат в Telegram</span>
+ <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+ </a>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- ЕДИНЫЙ КОМПАКТНЫЙ БЛОК СТИЛЕЙ БЕЗ ДУБЛЕЙ -->
+
+
+<!-- СКРИПТЫ -->
+<script src="/assets/js/home.js?v=8" charset="utf-8"></script></div><!-- </body> -->
+ <!-- </middle> -->
+ </main>
+
+ <!-- Подвал сайта -->
+ <!--U1BFOOTER1Z--><!-- ФУТЕР САЙТА (2026 Minimalist Sports/Esports) -->
+<footer class="site-footer" id="contacts">
+ <div class="footer-container">
+ <!-- Верхняя часть: Оффер аудита и CTA -->
+ <div class="footer-cta">
+ <div class="footer-cta-meta">
+ <span class="cta-pill">COLLABORATION</span>
+ <span class="cta-location">Chita (GMT+9) / Worldwide Remote</span>
+ </div>
+
+ <h2 class="footer-headline">
+ НАЧНЁМ С <span class="accent-free">БЕСПЛАТНОГО</span><br>АУДИТА ВАШЕГО БРЕНДА?
+ </h2>
+
+ <div class="footer-audit-content">
+ <p class="audit-text">
+ Посмотрю на ваш проект со стороны, разберу визуальную систему и определим, где находятся точки роста.
+ </p>
+ <p class="audit-text">
+ На выходе вы получите конкретные наблюдения и рекомендации, которые сможете использовать независимо от того, продолжим мы работу вместе или нет.
+ </p>
+ <div class="audit-highlight">
+ <span class="audit-pulse"></span>
+ <span>Созвон занимает не более 90 минут</span>
+ </div>
+ </div>
+
+ <div class="footer-action-row">
+ <a href="https://t.me/quzzen" target="_blank" rel="noopener noreferrer" class="footer-main-btn">
+ <span>Написать в Telegram</span>
+ <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+ <path d="M1.5 12.5L12.5 1.5M12.5 1.5H3.5M12.5 1.5V10.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+ </svg>
+ </a>
+ <a href="mailto:quzzen@yandex.ru" class="footer-email-link">
+ quzzen@yandex.ru
+ </a>
+ </div>
+ </div>
+
+ <!-- Средняя часть: Навигация, Контакты и Соцсети -->
+ <div class="footer-grid">
+ <!-- 1. Логотип и дескриптор -->
+ <div class="footer-col brand-col">
+ <a href="/" class="footer-brand-logo" aria-label="quzzeN">
+ <img src="/Logo.svg" alt="quzzeN" class="footer-logo-img">
+ </a>
+ <p class="footer-brand-desc">
+ Системный бренд-дизайн, айдентика и визуальные коммуникации для клубов, лиг, медиаспорта и киберспорта.
+ </p>
+ </div>
+
+ <!-- 2. Разделы сайта -->
+ <div class="footer-col">
+ <h4 class="col-title">Разделы</h4>
+ <ul class="col-links">
+ <li><a href="/#cases">Проекты</a></li>
+ <li><a href="/cs2-tier-list">CS2 Tier List</a></li>
+ <li><a href="/blog">Личный блог</a></li>
+ <li><a href="/#about">Подход и опыт</a></li>
+ </ul>
+ </div>
+
+ <!-- 3. Прямая связь -->
+ <div class="footer-col">
+ <h4 class="col-title">Прямая связь</h4>
+ <ul class="col-links">
+ <li><a href="https://t.me/quzzen" target="_blank">Telegram</a></li>
+ <li><a href="mailto:quzzen@yandex.ru">quzzen@yandex.ru</a></li>
+ <li><a href="tel:+79242733343">+7 (924) 273-33-43</a></li>
+ </ul>
+ </div>
+
+ <!-- 4. Портфолио и медиа -->
+ <div class="footer-col">
+ <h4 class="col-title">Медиа &amp; Портфолио</h4>
+ <div class="footer-social-row">
+ <!-- Telegram -->
+ <a href="https://t.me/quzzen" target="_blank" rel="noopener noreferrer" class="social-btn" title="Telegram">
+ <img src="/Icons/Telegram.svg" alt="Telegram">
+ </a>
+ <!-- VK -->
+ <a href="https://vk.com/quzzen" target="_blank" rel="noopener noreferrer" class="social-btn" title="ВКонтакте">
+ <img src="/Icons/VK.svg" alt="ВКонтакте">
+ </a>
+ <!-- Behance -->
+ <a href="https://behance.net/quzzen" target="_blank" rel="noopener noreferrer" class="social-btn" title="Behance">
+ <img src="/Icons/Behance.svg" alt="Behance">
+ </a>
+ </div>
+ </div>
+ </div>
+
+ <!-- Нижняя системная строка -->
+ <div class="footer-bottom">
+ <div class="footer-copyright">
+ <!-- <copy> -->quzzeN &copy; 2026. Все права защищены.<!-- </copy> -->
+ </div>
+ <div class="footer-system-copy">
+ <!-- "' --><span class="pbeFdLXK">Используются технологии <a href="https://www.ucoz.ru/"><b>uCoz</b></a></span>
+ </div>
+ </div>
+ </div>
+</footer>
+
+<!-- Стили футера -->
+<link rel="stylesheet" href="/assets/css/footer.css?v=6"><!--/U1BFOOTER1Z-->
+ </div>
+
+ <script src="/assets/js/page.js?v=1" charset="utf-8"></script>
+ 
+</body>
+</html>
+<!-- 0.02530 (s726) -->

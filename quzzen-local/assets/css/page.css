@@ -1,0 +1,181 @@
+@charset "UTF-8";
+/* si.t */
+ :root {
+ --bg-main: #0a0b0e;
+ --bg-surface: #12141a;
+ --bg-surface-elevated: #1a1d26;
+ --border: transparent;
+ --border-hover: transparent;
+ --text-main: #f4f4f6;
+ --text-muted: #8b8f9a;
+ --accent: #d2ff00; /* Киберспортивный кислотный лайм */
+ --accent-glow: rgba(210, 255, 0, 0.15);
+ --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+ --font-display: 'Inter', sans-serif;
+ }
+
+ *, *::before, *::after {
+ box-sizing: border-box;
+ margin: 0;
+ padding: 0;
+ }
+
+ html {
+ background-color: var(--bg-main);
+ color: var(--text-main);
+ font-family: var(--font-main);
+ color-scheme: dark;
+ scroll-behavior: smooth;
+ -webkit-font-smoothing: antialiased;
+ }
+
+ body {
+ background-color: var(--bg-main);
+ color: var(--text-main);
+ min-height: 100vh;
+ display: flex;
+ flex-direction: column;
+ overflow-x: clip;
+ line-height: 1.5;
+ }
+
+ .site-wrapper {
+ display: flex;
+ flex-direction: column;
+ min-height: 100vh;
+ width: 100%;
+ }
+
+ .site-main {
+ flex: 1 0 auto;
+ width: 100%;
+ max-width: none;
+ margin: 0 auto;
+ padding: 0 24px;
+ }
+
+ @media (max-width: 768px) {
+ .site-main {
+ padding: 0 16px;
+ }
+ }
+
+ /* Убираем стандартные дефолтные ссылки uCoz */
+ a {
+ color: inherit;
+ text-decoration: none;
+ transition: color 0.2s ease;
+ }
+
+ /* Отключаем стандартный курсор только на устройствах с мышью */
+@media (hover: hover) and (pointer: fine) {
+ *, *::before, *::after {
+ cursor: none !important;
+ }
+}
+
+/* Контейнер прицела */
+.cs-crosshair {
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 28px;
+ height: 28px;
+ pointer-events: none;
+ z-index: 999999;
+ transform: translate(-50%, -50%);
+ transition: width 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+ height 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+ opacity 0.2s ease;
+ opacity: 0; /* скрыт, пока курсор не зайдет на страницу */
+ display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+ .cs-crosshair {
+ display: block;
+ }
+}
+
+/* Центральная точка (Center Dot) */
+.ch-dot {
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ width: 3px;
+ height: 3px;
+ background: var(--accent);
+ transform: translate(-50%, -50%);
+ border-radius: 1px;
+ box-shadow: 0 0 6px var(--accent);
+ transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+/* 4 риски прицела */
+.ch-line {
+ position: absolute;
+ background: var(--accent);
+ box-shadow: 0 0 4px var(--accent-glow);
+ transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
+}
+
+.ch-top, .ch-bottom {
+ width: 2px;
+ height: 6px;
+ left: 50%;
+ transform: translateX(-50%);
+}
+
+.ch-left, .ch-right {
+ height: 2px;
+ width: 6px;
+ top: 50%;
+ transform: translateY(-50%);
+}
+
+.ch-top { top: 2px; }
+.ch-bottom { bottom: 2px; }
+.ch-left { left: 2px; }
+.ch-right { right: 2px; }
+
+/* СОСТОЯНИЕ ХОВЕРА: Наведение на ссылки, кнопки и карточки */
+.cs-crosshair.is-hover {
+ width: 44px;
+ height: 44px;
+}
+
+.cs-crosshair.is-hover .ch-dot {
+ transform: translate(-50%, -50%) scale(1.6);
+ background: #fff;
+ box-shadow: 0 0 10px #fff;
+}
+
+.cs-crosshair.is-hover .ch-top {
+ transform: translateX(-50%) translateY(-4px);
+}
+
+.cs-crosshair.is-hover .ch-bottom {
+ transform: translateX(-50%) translateY(4px);
+}
+
+.cs-crosshair.is-hover .ch-left {
+ transform: translateY(-50%) translateX(-4px);
+}
+
+.cs-crosshair.is-hover .ch-right {
+ transform: translateY(-50%) translateX(4px);
+}
+
+/* Клик (выстрел / отдача) */
+.cs-crosshair.is-active {
+ transform: translate(-50%, -50%) scale(0.85);
+}
+ 
+ 
+
+ html { scrollbar-gutter: stable; }
+
+.site-main{padding-left:clamp(16px,4vw,72px)!important;padding-right:clamp(16px,4vw,72px)!important}
+
+/* Главная: блоки «обо мне» перенесены на страницу /about_me — на главной скрыты */
+body.page-sitePage1 .hero-section,body.page-sitePage1 .approach-section{display:none!important}

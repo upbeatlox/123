@@ -1,0 +1,6 @@
+@charset "UTF-8";
+/* us5.t */
+					.social-accounts { padding:10px 0 3px }
+					.social-accounts a:not( .is-connected ) { opacity:.4 }
+					.social-accounts a.cursor-default, .social-accounts a.cursor-default i { cursor:default!important }
+				

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Позиция не найдена | quzzeN</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-base: #0a0b0e;
+            --bg-surface: #111319;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(210, 255, 0, 0.4);
+            --accent: #d2ff00;
+            --accent-glow: rgba(210, 255, 0, 0.25);
+            --text-main: #ffffff;
+            --text-muted: #8b92a5;
+            --font-display: 'Dela Gothic One', cursive;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% 25%, rgba(210, 255, 0, 0.07) 0%, transparent 50%),
+                linear-gradient(to bottom, #07080a, var(--bg-base));
+        }
+
+        /* Тактическая сетка */
+        body::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            pointer-events: none;
+        }
+
+        .error-container {
+            width: 100%;
+            max-width: 640px;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Логотип */
+        .error-logo {
+            margin-bottom: 24px;
+            display: inline-block;
+            transition: transform 0.25s ease;
+        }
+
+        .error-logo img {
+            height: 36px;
+            width: auto;
+            display: block;
+            filter: drop-shadow(0 0 14px var(--accent-glow));
+        }
+
+        .error-logo:hover {
+            transform: scale(1.08);
+        }
+
+        /* Плашка статуса */
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            padding: 6px 14px;
+            border-radius: 100px;
+            margin-bottom: 20px;
+        }
+
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent);
+            animation: pulseAnim 2s infinite ease-in-out;
+        }
+
+        @keyframes pulseAnim {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.4); opacity: 0.4; }
+        }
+
+        .status-pill span {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        /* Цифра 404 */
+        .error-code {
+            font-family: var(--font-display);
+            font-size: clamp(5rem, 14vw, 9rem);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -0.05em;
+            color: #fff;
+            margin-bottom: 12px;
+            text-shadow: 0 0 40px rgba(210, 255, 0, 0.15);
+            user-select: none;
+        }
+
+        .error-code span {
+            color: var(--accent);
+        }
+
+        /* Заголовок и текст */
+        .error-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.4rem, 3.2vw, 2rem);
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            color: #fff;
+            margin-bottom: 14px;
+        }
+
+        .error-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            max-width: 500px;
+            margin-bottom: 36px;
+        }
+
+        /* Кнопки навигации */
+        .error-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent);
+            color: #000;
+            padding: 13px 24px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px var(--accent-glow);
+            color: #000;
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            color: #fff;
+            padding: 13px 22px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--border-hover);
+        }
+
+        .badge-accent {
+            font-size: 0.65rem;
+            font-weight: 800;
+            background: var(--accent);
+            color: #000;
+            padding: 2px 6px;
+            border-radius: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Футер */
+        .error-footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.25);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="error-container">
+        <!-- Логотип -->
+        <a href="/" class="error-logo" aria-label="quzzeN — На главную">
+            <img src="/Logo.svg" alt="quzzeN">
+        </a>
+
+        <!-- Бейдж -->
+        <div class="status-pill">
+            <span class="pulse-dot"></span>
+            <span>ЧТО-ТО ПОШЛО НЕ ТАК</span>
+        </div>
+
+        <!-- Цифра 404 -->
+        <div class="error-code">4<span>0</span>4</div>
+
+        <!-- Заголовок и пояснение -->
+        <h1 class="error-title">ПОЗИЦИЯ НЕ НАЙДЕНА</h1>
+        <p class="error-desc">
+            Этой страницы не существует или ссылка устарела. Вернись на главную базу к актуальным кейсам или посмотри свежий разбор клубной графики.
+        </p>
+
+        <!-- Навигация -->
+        <div class="error-actions">
+            <a href="/" class="btn-primary">
+                <span>Вернуться на главную</span>
+                &rarr;
+            </a>
+            <a href="/cs2-tier-list" class="btn-secondary">
+                <span>CS2 Tier List</span>
+                <span class="badge-accent">Live</span>
+            </a>
+            <a href="/#cases" class="btn-secondary">
+                <span>Кейсы</span>
+            </a>
+        </div>
+
+        <!-- Футер -->
+        <div class="error-footer">
+            <span>quzzeN &copy; 2026 &bull; Все права защищены</span>
+        </div>
+    </div>
+
+</body>
+</html>

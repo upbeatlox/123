@@ -1,0 +1,7 @@
+@charset "UTF-8";
+/* Страница «Обо мне» — секции берут стили из home.css, здесь только отступы страницы */
+.about-page .hero-section{padding-top:clamp(40px,6vh,80px)}
+/* Имя — тем же начертанием, что «Дизайн для спорта» на главной */
+.about-name{font-family:'Inter',sans-serif!important;font-weight:600!important;text-transform:uppercase;line-height:.92!important;letter-spacing:-.035em!important;
+ font-size:clamp(3rem,7.5vw,8rem)!important;color:#fff;margin:0 0 28px}
+.about-name .intro3d-accent{color:#d2ff00}

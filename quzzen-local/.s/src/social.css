@@ -1,0 +1,30 @@
+:where(.auth-social-list,.auth-block) {align-items:center; display:flex; flex-wrap:wrap; gap:4px; justify-content:center;}
+:where(.register-social-list, .social-accounts) {align-items:center; display:flex; flex-wrap:wrap; gap:8px;}
+:where(.auth-social-list.inline-social-list) {justify-content:start; display: inline-flex; vertical-align: middle}
+:where(.login-with) {position:relative; width:var(--lw-icon-size, 30px); height:var(--lw-icon-size, 30px); display:block; background-color:var(--lw-icon-bg-color, silver); border-radius:var(--lw-icon-radius, 30px); transition:background-color .2s ease-in;}
+:where(.login-with i) {width:100%; height:100%; border-radius:var(--lw-icon-radius, 30px); display:block; background-color:var(--lw-icon-color, #ffffff); pointer-events:none; -webkit-mask:var(--lw-icon) center / contain no-repeat; mask:var(--lw-icon) center / contain no-repeat;}
+
+:where(.login-with.local) {--lw-icon-bg-color:#5E5E5E; --lw-icon:url("/.s/img/icon/social/login/local.svg");}
+:where(.login-with.uid) {--lw-icon-bg-color:#498bfa; --lw-icon:url("/.s/img/icon/social/login/uid.svg");}
+:where(.login-with.telegram) {--lw-icon-bg-color:#2aabee; --lw-icon:url("/.s/img/icon/social/login/tg.svg");}
+:where(.login-with.vkontakte) {--lw-icon-bg-color:#0077ff; --lw-icon:url("/.s/img/icon/social/login/vk.svg");}
+:where(.login-with.yandex) {--lw-icon-bg-color:#fc3f1d; --lw-icon:url("/.s/img/icon/social/login/ya.svg");}
+:where(.login-with.facebook) {--lw-icon-bg-color:#1877F2; --lw-icon:url("/.s/img/icon/social/login/fb.svg");}
+:where(.login-with.google) {--lw-icon-bg-color:#f8f8fc; border: 1px solid #c4c4c4}
+:where(.login-with.google i) {background:url("/.s/img/icon/social/login/google.svg") center center/contain no-repeat;}
+:where(.login-with.ok) {--lw-icon-bg-color:#ff7700; --lw-icon:url("/.s/img/icon/social/login/ok.svg");}
+
+:where(.auth-comments-toggles .login-with:not(.active,.google,.local)){background-color:color-mix(in srgb, var(--lw-icon-bg-color) 70%, white 50%);}
+:where(.auth-comments-toggles .login-with.google:not(.active)){filter: grayscale(1) opacity(.7)}
+
+/*social connect loader*/
+:where(.login-with.wait) {--lw-icon:url("/.s/img/icon/social/login/loader.svg"); pointer-events: none;background-color:color-mix(in srgb, var(--lw-icon-bg-color) 60%, white 40%)}
+:where(.login-with.wait i) {transform-origin:center center;animation: login-with-wait 2s linear infinite; background-image: none;}
+:where(.login-with.google.wait i) {background-color:color-mix(in srgb, #c4c4c4 60%, white 40%); -webkit-mask:var(--lw-icon) center / contain no-repeat; mask:var(--lw-icon) center / contain no-repeat;}
+@keyframes login-with-wait { 0% { transform:rotate(0deg); } 100% { transform: rotate(360deg);}}
+
+@media (hover: hover) {
+	:where(.login-with:not(.auth-comments-toggles .login-with):where(.uid,.vkontakte,.yandex,.facebook,.ok,.telegram)):hover {background-color:color-mix(in srgb, var(--lw-icon-bg-color) 70%, white 30%);}
+	:where(.login-with:not(.auth-comments-toggles .login-with).local):hover {--lw-icon-bg-color:#a5a5a5;}
+	:where(.login-with:not(.auth-comments-toggles .login-with).google):hover {--lw-icon-bg-color:#eeeeee;border: 1px solid #a5a5a5}
+}

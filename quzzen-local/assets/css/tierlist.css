@@ -1,0 +1,927 @@
+@charset "UTF-8";
+
+ :root {
+ --tier-s: #ff5b4d;
+ --tier-a: #ffeb3b;
+ --tier-b: #ffa742;
+ --tier-c: #5eff6c;
+ --tier-d: #46f0e0;
+ --tier-e: #5982ff;
+ --delta-up: #4df870;
+ --delta-down: #ff4d4d;
+ --delta-neutral: #646a7d;
+ --delta-new: #d2ff00;
+ }
+
+ .rating-page-wrap {
+ max-width: none;
+ margin: 0;
+ padding: 60px 0 120px 0;
+ color: #fff;
+ }
+
+ /* Шапка */
+ .rating-header {
+ margin-bottom: 40px;
+ }
+
+ .rating-header-meta {
+ display: flex;
+ align-items: center;
+ gap: 16px;
+ margin-bottom: 16px;
+ flex-wrap: wrap;
+ }
+
+ .rating-badge {
+ font-size: 0.72rem;
+ font-weight: 800;
+ letter-spacing: 0.12em;
+ text-transform: uppercase;
+ color: var(--accent);
+ background: var(--accent-glow);
+ padding: 4px 10px;
+ border-radius: 4px;
+ }
+
+ .rating-update-date {
+ font-size: 0.8rem;
+ color: var(--text-muted);
+ font-family: 'Inter', sans-serif;
+ }
+
+ .rating-title {
+ font-family: var(--font-display);
+ font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+ font-weight: 900;
+ letter-spacing: -0.03em;
+ line-height: 1.05;
+ margin-bottom: 16px;
+ }
+
+ .rating-desc {
+ font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+ color: var(--text-muted);
+ line-height: 1.6;
+ max-width: 780px;
+ }
+
+ .rating-desc strong {
+ color: #fff;
+ }
+
+ /* Легенда критериев */
+ .tier-legend-section {
+ background: var(--bg-surface);
+ border: 1px solid var(--border);
+ border-radius: 14px;
+ padding: 24px;
+ margin-bottom: 36px;
+ }
+
+ .legend-header {
+ margin-bottom: 16px;
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ }
+
+ .legend-title {
+ font-size: 0.72rem;
+ font-weight: 800;
+ letter-spacing: 0.12em;
+ text-transform: uppercase;
+ color: var(--text-muted);
+ }
+
+ .legend-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+ gap: 12px;
+ }
+
+ .legend-card {
+ display: flex;
+ align-items: center;
+ gap: 12px;
+ background: transparent;
+ border: 1px solid var(--border);
+ padding: 10px 0;
+ border-radius: 8px;
+ }
+
+ .legend-pill {
+ font-family: var(--font-display);
+ font-size: 0.78rem;
+ font-weight: 900;
+ padding: 3px 8px;
+ border-radius: 4px;
+ color: #000;
+ flex-shrink: 0;
+ }
+
+ .legend-text {
+ font-size: 0.8rem;
+ color: #cbd3e1;
+ line-height: 1.35;
+ }
+
+ .tier-s .legend-pill { background: var(--tier-s); }
+ .tier-a .legend-pill { background: var(--tier-a); }
+ .tier-b .legend-pill { background: var(--tier-b); }
+ .tier-c .legend-pill { background: var(--tier-c); }
+ .tier-d .legend-pill { background: var(--tier-d); }
+ .tier-e .legend-pill { background: var(--tier-e); color: #fff; }
+
+ /* Панель фильтров */
+ .rating-filter-bar {
+ display: flex;
+ gap: 8px;
+ margin-bottom: 24px;
+ flex-wrap: wrap;
+ }
+
+ .filter-btn {
+ background: var(--bg-surface);
+ border: 1px solid var(--border);
+ color: var(--text-muted);
+ font-family: var(--font-main);
+ font-size: 0.82rem;
+ font-weight: 700;
+ padding: 10px 18px;
+ border-radius: 6px;
+ cursor: pointer;
+ transition: all 0.2s ease;
+ display: inline-flex;
+ align-items: center;
+ gap: 6px;
+ }
+
+ .filter-btn:hover {
+ background: var(--bg-surface-elevated);
+ border-color: var(--border-hover);
+ color: #fff;
+ }
+
+ .filter-btn.is-active {
+ background: var(--accent);
+ color: #000;
+ border-color: var(--accent);
+ }
+
+ .filter-btn.is-active .filter-count {
+ background: rgba(0, 0, 0, 0.25);
+ color: #000;
+ }
+
+ .filter-count {
+ font-size: 0.72rem;
+ background: rgba(255, 255, 255, 0.08);
+ padding: 2px 6px;
+ border-radius: 4px;
+ font-family: 'Inter', sans-serif;
+ }
+
+ /* Карточки списка команд */
+ .rating-list {
+ display: flex;
+ flex-direction: column;
+ gap: 8px;
+ }
+
+ .rating-row-card {
+ background: var(--bg-surface);
+ border: 1px solid var(--border);
+ border-radius: 10px;
+ overflow: hidden;
+ transition: border-color 0.25s ease, transform 0.2s ease, background-color 0.2s ease;
+ }
+
+ .rating-row-card:hover {
+ border-color: rgba(210, 255, 0, 0.35);
+ background: var(--bg-surface-elevated);
+ }
+
+ .rating-row-card.is-expanded {
+ border-color: var(--accent);
+ }
+
+ .rating-row-header {
+ display: grid;
+ grid-template-columns: 50px 68px 44px 1fr 110px 32px;
+ align-items: center;
+ gap: 16px;
+ padding: 14px 20px;
+ cursor: pointer;
+ user-select: none;
+ }
+
+ .team-rank {
+ font-family: var(--font-display);
+ font-size: 1.15rem;
+ font-weight: 900;
+ color: #fff;
+ line-height: 1;
+ }
+
+ .team-delta-pill {
+ display: inline-flex;
+ align-items: center;
+ justify-content: center;
+ gap: 4px;
+ padding: 4px 8px;
+ border-radius: 4px;
+ font-family: 'Inter', sans-serif;
+ font-size: 0.76rem;
+ font-weight: 800;
+ line-height: 1;
+ width: fit-content;
+ }
+
+ .delta-up {
+ background: rgba(77, 248, 112, 0.12);
+ border: 1px solid rgba(77, 248, 112, 0.25);
+ color: var(--delta-up);
+ }
+
+ .delta-down {
+ background: rgba(255, 77, 77, 0.12);
+ border: 1px solid rgba(255, 77, 77, 0.25);
+ color: var(--delta-down);
+ }
+
+ .delta-same {
+ background: rgba(255, 255, 255, 0.03);
+ border: 1px solid var(--border);
+ color: var(--delta-neutral);
+ }
+
+ .delta-new {
+ background: var(--delta-new);
+ border: 1px solid var(--delta-new);
+ color: #000;
+ font-weight: 900;
+ font-size: 0.65rem;
+ padding: 4px 6px;
+ letter-spacing: 0.05em;
+ }
+
+ .team-logo-wrap {
+ width: 44px;
+ height: 44px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ background: rgba(255, 255, 255, 0.03);
+ border: 1px solid var(--border);
+ border-radius: 8px;
+ overflow: hidden;
+ padding: 6px;
+ flex-shrink: 0;
+ }
+
+ .team-logo-img {
+ width: 100%;
+ height: 100%;
+ object-fit: contain;
+ display: block;
+ filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+ transition: transform 0.2s ease;
+ }
+
+ .rating-row-card:hover .team-logo-img {
+ transform: scale(1.1);
+ }
+
+ .team-logo-fallback {
+ font-family: var(--font-display);
+ font-size: 0.8rem;
+ font-weight: 900;
+ color: var(--text-muted);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ width: 100%;
+ height: 100%;
+ }
+
+ .team-meta-info {
+ display: flex;
+ align-items: center;
+ gap: 12px;
+ overflow: hidden;
+ }
+
+ .team-name {
+ font-family: var(--font-main);
+ font-size: 1.05rem;
+ font-weight: 700;
+ color: #fff;
+ white-space: nowrap;
+ overflow: hidden;
+ text-overflow: ellipsis;
+ }
+
+ .team-region-tag {
+ font-size: 0.68rem;
+ font-weight: 700;
+ color: var(--text-muted);
+ background: rgba(255, 255, 255, 0.05);
+ padding: 2px 6px;
+ border-radius: 3px;
+ text-transform: uppercase;
+ letter-spacing: 0.05em;
+ }
+
+ .team-tier-badge {
+ display: inline-flex;
+ align-items: center;
+ justify-content: center;
+ font-family: var(--font-display);
+ font-size: 0.8rem;
+ font-weight: 900;
+ letter-spacing: 0.05em;
+ padding: 6px 12px;
+ border-radius: 6px;
+ text-transform: uppercase;
+ color: #000;
+ text-align: center;
+ }
+
+ .badge-tier-s { background: var(--tier-s); }
+ .badge-tier-a { background: var(--tier-a); }
+ .badge-tier-b { background: var(--tier-b); }
+ .badge-tier-c { background: var(--tier-c); }
+ .badge-tier-d { background: var(--tier-d); }
+ .badge-tier-e { background: var(--tier-e); color: #fff; }
+
+ .team-toggle-icon {
+ width: 32px;
+ height: 32px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ color: var(--text-muted);
+ transition: transform 0.25s ease, color 0.2s ease;
+ }
+
+ .rating-row-card.is-expanded .team-toggle-icon {
+ transform: rotate(180deg);
+ color: var(--accent);
+ }
+
+ .rating-row-body {
+ display: none;
+ padding: 0 20px 24px 20px;
+ border-top: 1px solid var(--border);
+ background: rgba(0, 0, 0, 0.25);
+ }
+
+ .rating-row-card.is-expanded .rating-row-body {
+ display: block;
+ }
+
+ .team-verdict-box {
+ padding: 16px 0;
+ display: flex;
+ align-items: baseline;
+ gap: 10px;
+ flex-wrap: wrap;
+ }
+
+ .verdict-tag {
+ font-size: 0.72rem;
+ font-weight: 800;
+ letter-spacing: 0.1em;
+ text-transform: uppercase;
+ color: var(--accent);
+ }
+
+ .verdict-content {
+ font-size: 0.9rem;
+ color: #cbd3e1;
+ line-height: 1.5;
+ }
+
+ /* Адаптивная сетка макетов без чёрных полос */
+ .markers-grid {
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 16px;
+ margin-top: 8px;
+ align-items: start;
+ }
+
+ .marker-card {
+ background: rgba(255, 255, 255, 0.02);
+ border: 1px solid var(--border);
+ border-radius: 10px;
+ padding: 12px;
+ display: flex;
+ flex-direction: column;
+ gap: 10px;
+ }
+
+ .marker-label {
+ font-family: var(--font-display);
+ font-size: 0.76rem;
+ font-weight: 900;
+ letter-spacing: 0.05em;
+ color: #fff;
+ text-transform: uppercase;
+ }
+
+ .marker-preview-wrap {
+ width: 100%;
+ position: relative;
+ border-radius: 8px;
+ overflow: hidden;
+ background: transparent;
+ display: flex;
+ text-decoration: none;
+ }
+
+ .marker-img {
+ width: 100%;
+ height: auto;
+ display: block;
+ border-radius: 6px;
+ border: 1px solid var(--border);
+ transition: transform 0.25s ease, border-color 0.25s ease;
+ }
+
+ .marker-preview-wrap:hover .marker-img {
+ transform: scale(1.02);
+ border-color: rgba(210, 255, 0, 0.5);
+ }
+
+ .marker-placeholder {
+ width: 100%;
+ min-height: 220px;
+ aspect-ratio: 4 / 5;
+ border: 1px dashed rgba(255, 255, 255, 0.14);
+ border-radius: 8px;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ gap: 8px;
+ color: var(--text-muted);
+ font-size: 0.72rem;
+ text-align: center;
+ background: rgba(0, 0, 0, 0.3);
+ padding: 16px;
+ }
+
+ .marker-placeholder svg {
+ opacity: 0.4;
+ }
+
+ /* СТИЛИ КОНСТРУКТОРА */
+ .custom-tier-section {
+ margin-top: 80px;
+ padding-top: 60px;
+ border-top: 1px solid var(--border);
+ }
+
+ .builder-controls-bar {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ gap: 16px;
+ margin-bottom: 24px;
+ flex-wrap: wrap;
+ }
+
+ .builder-actions-left {
+ display: flex;
+ align-items: center;
+ gap: 10px;
+ flex-wrap: wrap;
+ }
+
+ .btn-builder {
+ display: inline-flex;
+ align-items: center;
+ gap: 8px;
+ font-family: var(--font-main);
+ font-size: 0.8rem;
+ font-weight: 700;
+ padding: 10px 16px;
+ border-radius: 6px;
+ cursor: pointer;
+ transition: all 0.2s ease;
+ }
+
+ .btn-builder--ghost {
+ background: var(--bg-surface);
+ border: 1px solid var(--border);
+ color: var(--text-muted);
+ }
+
+ .btn-builder--ghost:hover {
+ background: var(--bg-surface-elevated);
+ border-color: var(--border-hover);
+ color: #fff;
+ }
+
+ /* Доска экспорта */
+ .tier-export-board {
+ background: #090a0e;
+ border: 1px solid var(--border);
+ border-radius: 14px;
+ overflow: hidden;
+ box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+ margin-bottom: 32px;
+ }
+
+ .board-export-header {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ padding: 20px 24px;
+ background: #0d0f14;
+ border-bottom: 1px solid var(--border);
+ gap: 16px;
+ flex-wrap: wrap;
+ }
+
+ .export-brand-row {
+ display: flex;
+ align-items: center;
+ gap: 14px;
+ }
+
+ .export-logo-badge {
+ display: flex;
+ align-items: center;
+ gap: 10px;
+ }
+
+ .export-favicon {
+ width: 24px;
+ height: 24px;
+ object-fit: contain;
+ }
+
+ .export-logo-fallback {
+ font-family: var(--font-display);
+ font-size: 1.1rem;
+ font-weight: 900;
+ color: var(--accent);
+ }
+
+ .export-brand-title {
+ font-family: var(--font-display);
+ font-size: 1.1rem;
+ font-weight: 900;
+ color: #fff;
+ letter-spacing: -0.02em;
+ }
+
+ .export-tag-pill {
+ font-family: 'Inter', sans-serif;
+ font-size: 0.68rem;
+ font-weight: 800;
+ letter-spacing: 0.08em;
+ color: var(--accent);
+ background: rgba(210, 255, 0, 0.08);
+ border: 1px solid rgba(210, 255, 0, 0.25);
+ padding: 3px 8px;
+ border-radius: 4px;
+ }
+
+ .export-titles {
+ display: flex;
+ flex-direction: column;
+ align-items: flex-end;
+ gap: 2px;
+ }
+
+ .export-heading {
+ font-family: var(--font-display);
+ font-size: 0.85rem;
+ font-weight: 900;
+ color: #fff;
+ letter-spacing: 0.02em;
+ }
+
+ .export-site-url {
+ font-family: 'Inter', sans-serif;
+ font-size: 0.72rem;
+ color: var(--text-muted);
+ }
+
+ .board-rows-wrap {
+ display: flex;
+ flex-direction: column;
+ background: #090a0e;
+ }
+
+ .board-row {
+ display: flex;
+ min-height: 90px;
+ border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+ }
+
+ .board-row:last-child {
+ border-bottom: none;
+ }
+
+ .board-row-label {
+ width: 80px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-family: var(--font-display);
+ font-size: 1.6rem;
+ font-weight: 900;
+ color: #000;
+ flex-shrink: 0;
+ user-select: none;
+ }
+
+ .board-row-label.tier-s { background: var(--tier-s); }
+ .board-row-label.tier-a { background: var(--tier-a); }
+ .board-row-label.tier-b { background: var(--tier-b); }
+ .board-row-label.tier-c { background: var(--tier-c); }
+ .board-row-label.tier-d { background: var(--tier-d); }
+ .board-row-label.tier-e { background: var(--tier-e); color: #fff; }
+
+ .board-dropzone {
+ flex-grow: 1;
+ display: flex;
+ flex-wrap: wrap;
+ align-content: flex-start;
+ gap: 8px;
+ padding: 10px;
+ background: rgba(0, 0, 0, 0.25);
+ min-height: 90px;
+ transition: background-color 0.2s ease;
+ }
+
+ .board-dropzone.is-drag-over {
+ background: rgba(210, 255, 0, 0.05);
+ outline: 1px dashed var(--accent);
+ }
+
+ .tier-team-chip {
+ width: 72px;
+ height: 72px;
+ background: #111319;
+ border: 1px solid var(--border);
+ border-radius: 8px;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ padding: 6px 4px;
+ gap: 4px;
+ cursor: grab;
+ user-select: none;
+ position: relative;
+ transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+ }
+
+ .tier-team-chip:active {
+ cursor: grabbing;
+ }
+
+ .tier-team-chip:hover {
+ transform: translateY(-2px);
+ border-color: rgba(210, 255, 0, 0.4);
+ box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+ }
+
+ .tier-team-chip.is-dragging {
+ opacity: 0.35;
+ transform: scale(0.9);
+ }
+
+ .chip-logo-img {
+ width: 38px;
+ height: 38px;
+ object-fit: contain;
+ display: block;
+ pointer-events: none;
+ }
+
+ .chip-logo-fallback {
+ width: 38px;
+ height: 38px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-family: var(--font-display);
+ font-size: 0.95rem;
+ font-weight: 900;
+ color: var(--accent);
+ pointer-events: none;
+ }
+
+ .chip-name {
+ font-size: 0.65rem;
+ font-weight: 700;
+ color: #fff;
+ text-align: center;
+ white-space: nowrap;
+ overflow: hidden;
+ text-overflow: ellipsis;
+ max-width: 100%;
+ line-height: 1;
+ pointer-events: none;
+ }
+
+ .board-export-footer {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ padding: 12px 24px;
+ background: #0b0c10;
+ border-top: 1px solid var(--border);
+ font-size: 0.72rem;
+ color: var(--text-muted);
+ }
+
+ .export-footer-link {
+ font-family: 'Inter', sans-serif;
+ font-weight: 800;
+ color: var(--accent);
+ }
+
+ .tier-bank-wrap {
+ background: var(--bg-surface);
+ border: 1px solid var(--border);
+ border-radius: 12px;
+ padding: 20px;
+ }
+
+ .bank-header {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ margin-bottom: 14px;
+ }
+
+ .bank-title {
+ font-size: 0.72rem;
+ font-weight: 800;
+ letter-spacing: 0.12em;
+ text-transform: uppercase;
+ color: var(--text-muted);
+ }
+
+ .bank-counter {
+ font-family: 'Inter', sans-serif;
+ font-size: 0.75rem;
+ color: var(--accent);
+ }
+
+ .bank-dropzone {
+ min-height: 100px;
+ background: rgba(0, 0, 0, 0.2);
+ border-radius: 8px;
+ border: 1px dashed rgba(255, 255, 255, 0.08);
+ }
+
+ /* Мобильная модалка для перемещения тапом */
+ .tier-mobile-modal {
+ position: fixed;
+ inset: 0;
+ background: rgba(0, 0, 0, 0.85);
+ backdrop-filter: blur(6px);
+ z-index: 9999;
+ display: none;
+ align-items: center;
+ justify-content: center;
+ padding: 20px;
+ }
+
+ .tier-mobile-modal.is-open {
+ display: flex;
+ }
+
+ .modal-box {
+ background: #111319;
+ border: 1px solid var(--border);
+ border-radius: 14px;
+ padding: 24px;
+ width: 100%;
+ max-width: 340px;
+ display: flex;
+ flex-direction: column;
+ gap: 16px;
+ box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+ }
+
+ .modal-team-title {
+ font-family: var(--font-display);
+ font-size: 1.1rem;
+ font-weight: 900;
+ color: #fff;
+ text-align: center;
+ }
+
+ .modal-tiers-grid {
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 8px;
+ }
+
+ .btn-tier-pick {
+ padding: 12px 6px;
+ font-family: var(--font-display);
+ font-size: 0.95rem;
+ font-weight: 900;
+ border-radius: 6px;
+ border: none;
+ cursor: pointer;
+ color: #000;
+ text-align: center;
+ }
+
+ .btn-tier-pick[data-tier="S"] { background: var(--tier-s); }
+ .btn-tier-pick[data-tier="A"] { background: var(--tier-a); }
+ .btn-tier-pick[data-tier="B"] { background: var(--tier-b); }
+ .btn-tier-pick[data-tier="C"] { background: var(--tier-c); }
+ .btn-tier-pick[data-tier="D"] { background: var(--tier-d); }
+ .btn-tier-pick[data-tier="E"] { background: var(--tier-e); color: #fff; }
+ .btn-tier-pick[data-tier="bank"] {
+ grid-column: 1 / -1;
+ background: #1d212c;
+ color: #fff;
+ font-size: 0.8rem;
+ }
+
+ .btn-modal-close {
+ background: none;
+ border: 1px solid var(--border);
+ color: var(--text-muted);
+ padding: 10px;
+ border-radius: 6px;
+ font-size: 0.82rem;
+ cursor: pointer;
+ }
+
+ /* Адаптив */
+ @media (max-width: 860px) {
+ .rating-row-header {
+ grid-template-columns: 44px 58px 38px 1fr auto 28px;
+ gap: 10px;
+ padding: 12px 16px;
+ }
+ .team-rank { font-size: 1rem; }
+ .team-name { font-size: 0.95rem; }
+ .team-tier-badge { font-size: 0.72rem; padding: 4px 8px; }
+ .markers-grid { grid-template-columns: 1fr; }
+ }
+
+ @media (max-width: 640px) {
+ .rating-page-wrap { padding: 40px 0 80px 0; }
+ .rating-row-header {
+ grid-template-columns: 34px 52px 34px 1fr auto;
+ gap: 8px;
+ }
+ .team-toggle-icon { display: none; }
+ .team-delta-pill { font-size: 0.7rem; padding: 3px 5px; }
+ .legend-grid { grid-template-columns: 1fr; }
+ .board-row-label { width: 56px; font-size: 1.25rem; }
+ .tier-team-chip { width: 58px; height: 58px; }
+ .chip-logo-img, .chip-logo-fallback { width: 28px; height: 28px; font-size: 0.75rem; }
+ .chip-name { font-size: 0.58rem; }
+ .board-export-header { padding: 14px 16px; }
+ .export-titles { align-items: flex-start; }
+ }
+
+/* метки без зелёной плашки — только текст */
+.rating-badge,.export-tag-pill{background:transparent!important;border:none!important;box-shadow:none!important;padding-left:0!important;padding-right:0!important}
+
+.btn-primary:hover{box-shadow:none!important}
+
+/* метки без плашек (UI/UX Pro Max: меньше визуального шума) */
+.delta-new,.team-region-tag,.filter-count{background:transparent!important;border:none!important;box-shadow:none!important;padding:0!important;border-radius:0!important}
+.delta-new{color:var(--accent)!important;font-size:.68rem;letter-spacing:.08em;font-weight:800}
+.team-region-tag{color:var(--text-muted)!important;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase}
+.filter-count{opacity:.6;margin-left:6px}
+
+/* ===== Все плашки — в текст. Тир показывается цветом текста ===== */
+.legend-pill,.team-tier-badge,.team-delta-pill{background:transparent!important;background-image:none!important;border:none!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;padding:0!important;border-radius:0!important;font-weight:900}
+.tier-s .legend-pill,.badge-tier-s{color:var(--tier-s)!important}
+.tier-a .legend-pill,.badge-tier-a{color:var(--tier-a)!important}
+.tier-b .legend-pill,.badge-tier-b{color:var(--tier-b)!important}
+.tier-c .legend-pill,.badge-tier-c{color:var(--tier-c)!important}
+.tier-d .legend-pill,.badge-tier-d{color:var(--tier-d)!important}
+.tier-e .legend-pill,.badge-tier-e{color:var(--tier-e)!important}
+.team-delta-pill{color:var(--text-muted)!important}
+/* фильтры — текстовые вкладки: активная салатовая */
+.filter-btn,.filter-btn:hover,.filter-btn.is-active{background:transparent!important;background-image:none!important;border:none!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;padding-left:0!important;padding-right:0!important;margin-right:18px}
+.filter-btn{color:var(--text-muted)!important}
+.filter-btn:hover{color:#fff!important}
+.filter-btn.is-active{color:var(--accent)!important}
+.filter-btn.is-active .filter-count{color:var(--accent)!important}
+/* второстепенная кнопка конструктора — текстовая */
+.btn-builder,.btn-builder--ghost,.btn-builder:hover,.btn-builder--ghost:hover{background:transparent!important;background-image:none!important;border:none!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;padding-left:0!important;padding-right:0!important}
+.btn-builder:hover{color:var(--accent)!important}
+
+/* надзаголовки-метки убраны */
+.rating-badge{display:none!important}
