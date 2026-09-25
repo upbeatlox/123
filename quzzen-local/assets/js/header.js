@@ -1,29 +1,44 @@
+/* Шапка: приводим любую (в т.ч. старую) разметку к виду «логотип слева — разделы по центру —
+   «Обсудить проект» справа». На планшете и телефоне разделы и кнопка скрыты, остаётся бургер (header.css).
+   Нужно, потому что шаблон шапки на сайте может быть старее, чем стили */
+(function () {
+ var inner = document.querySelector('.header-nav .header-inner');
+ if (!inner) return;
+ var side = inner.querySelector('.hdr-side'), center = inner.querySelector('.hdr-center'), actions = inner.querySelector('.header-actions');
+ if (!side) { side = document.createElement('div'); side.className = 'hdr-side'; inner.insertBefore(side, inner.firstChild); }
+ if (!center) { center = document.createElement('div'); center.className = 'hdr-center'; side.insertAdjacentElement('afterend', center); }
+ if (!actions) { actions = document.createElement('div'); actions.className = 'header-actions'; inner.appendChild(actions); }
+ var logo = inner.querySelector('.brand-logo'), toggle = inner.querySelector('#menuToggle');
+ if (logo && logo.parentNode !== side) side.appendChild(logo);
+ if (logo && !logo.querySelector('.brand-word')) logo.insertAdjacentHTML('beforeend', '<span class="brand-word">quzzeN</span>');
+ // разделы по центру — те же ссылки, что в выпадающем меню
+ if (!center.querySelector('.hdr-nav')) {
+  var nav = document.createElement('nav'); nav.className = 'hdr-nav'; nav.setAttribute('aria-label', 'Разделы');
+  var items = [].map.call(document.querySelectorAll('#siteMenu .site-menu-link'), function (a) { return [a.getAttribute('href'), a.textContent]; });
+  if (!items.length) items = [['/#cases', 'Кейсы'], ['/rating', 'Рейтинг'], ['/publ', 'Статьи'], ['/about_me', 'Обо мне'], ['/#contacts', 'Контакты']];
+  items.forEach(function (x) { var a = document.createElement('a'); a.className = 'hdr-nav-link'; a.href = x[0]; a.textContent = x[1]; nav.appendChild(a); });
+  center.appendChild(nav);
+ }
+ var cta = actions.querySelector('.btn-cta');
+ if (!cta) {
+  cta = document.createElement('a'); cta.className = 'btn-cta'; cta.href = 'https://t.me/quzzen'; cta.target = '_blank'; cta.rel = 'noopener noreferrer';
+  cta.innerHTML = '<span>Обсудить проект</span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  actions.insertBefore(cta, actions.firstChild);
+ }
+ if (toggle) {
+  if (toggle.parentNode !== actions) actions.appendChild(toggle);
+  toggle.setAttribute('aria-label', 'Меню');
+  if (!toggle.querySelector('.burger-icon')) toggle.insertAdjacentHTML('beforeend', '<span class="burger-icon" aria-hidden="true"><i></i><i></i><i></i></span>');
+ }
+})();
+
+;
 /* Прелоадер: светящийся логотип поверх страницы, пока всё не загрузится.
    Снимается после полной загрузки страницы (а на главной — ещё и 3D-сцены), максимум через 8 с */
 (function () {
  var p = document.querySelector('.site-preloader');   // уже стоит первым в шапке
  if (!p) {
   p = document.createElement('div');
-/* Шапка: приводим любую (в т.ч. старую) разметку к виду «логотип слева — меню с бургером справа».
-   Нужно, потому что шаблон шапки на сайте может быть старее, чем стили */
-(function () {
- var inner = document.querySelector('.header-nav .header-inner');
- if (!inner) return;
- var side = inner.querySelector('.hdr-side'), actions = inner.querySelector('.header-actions');
- if (!side) { side = document.createElement('div'); side.className = 'hdr-side'; inner.insertBefore(side, inner.firstChild); }
- if (!actions) { actions = document.createElement('div'); actions.className = 'header-actions'; inner.appendChild(actions); }
- var logo = inner.querySelector('.brand-logo'), toggle = inner.querySelector('#menuToggle');
- if (logo && logo.parentNode !== side) side.appendChild(logo);
- if (toggle) {
-  if (toggle.parentNode !== actions) actions.appendChild(toggle);
-  toggle.setAttribute('aria-label', 'Меню');
-  if (!toggle.querySelector('.burger-icon')) toggle.insertAdjacentHTML('beforeend', '<span class="burger-icon" aria-hidden="true"><i></i><i></i><i></i></span>');
- }
- actions.querySelectorAll('.btn-cta').forEach(function (b) { b.remove(); });
- var center = inner.querySelector('.hdr-center'); if (center && !center.children.length) center.remove();
-})();
-
-;
   p.className = 'site-preloader'; p.setAttribute('aria-hidden', 'true');
   p.innerHTML = '<img src="/Logo.svg" alt="">';
   (document.body || document.documentElement).appendChild(p);
@@ -180,7 +195,7 @@
  [['preload', '/assets/vendor/three/build/three.module.min.js', 'script'],
   ['preload', '/assets/vendor/three/examples/jsm/loaders/GLTFLoader.js', 'script'],
   ['preload', '/assets/3d/logo-glass.glb?v=1', 'fetch'],
-  ['preload', '/assets/img/intro-works.jpg?v=1', 'image']].forEach(function (x) {
+  ['preload', '/assets/img/logo-glass-poster.webp', 'image']].forEach(function (x) {
   var l = document.createElement('link'); l.rel = x[0]; l.href = x[1];
   if (x[2]) { l.as = x[2]; if (x[2] !== 'image') l.crossOrigin = 'anonymous'; }
   h.appendChild(l);
@@ -188,54 +203,119 @@
 })();
 
 ;
-/* Первый экран v4 (фото-герой со смазанным движением, в цветах бренда): фото справа + салатовый шлейф
-   + зерно; слева крупный лёгкий заголовок с печатающимся словом; справа вертикальное меню разделов.
-   3D-логотип скрыт (не удалён) */
+/* Первый экран v5 (по референсу): стеклянный 3D-логотип по центру; поверх — огромный заголовок «лесенкой»
+   в три строки (последнее слово печатается) и салатовая кнопка «Смотреть кейсы»; стеклянные карточки:
+   слева у первой строки — кто я, внизу слева и справа — цифры со стрелкой. Шапка над экраном прозрачная.
+   Фото-экран v4 отключён (картинки и стили не удалены). Стили — header.css, 3D — intro3d.js */
 (function () {
- function build() {
-  var sec = document.getElementById('intro3d'), st = sec && sec.querySelector('.intro3d-sticky');
-  if (!st || sec.classList.contains('intro-v4')) return;
-  sec.classList.remove('intro-v2', 'intro-v3'); sec.classList.add('intro-v4');
-  st.querySelectorAll('.hero2,.hero3,.hero3-photo,.intro3d-poster').forEach(function (e) { e.remove(); });
+ var ARROW = '<svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+ var DOWN = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+ // слова из прежнего первого экрана (бэкап от 24.09.2026)
+ var WORDS = ['киберспорта', 'медиаспорта', 'про-клубов', 'спортивных лиг', 'турниров', 'блогеров', 'стримеров'];
+ var LONGEST = WORDS.reduce(function (a, b) { return b.length > a.length ? b : a; });
+ var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+ function build(sec, st) {
+  sec.classList.remove('intro-v2', 'intro-v3', 'intro-v4'); sec.classList.add('intro-v5');
+  st.querySelectorAll('.hero2,.hero3,.hero3-photo,.hero4,.hero5,.intro3d-poster').forEach(function (e) { e.remove(); });
+  var clients = document.querySelector('.clients-section'); if (clients && !clients.id) clients.id = 'clients';
   st.insertAdjacentHTML('beforeend',
-   '<div class="hero4">' +
-    '<div class="hero4-glow"></div>' +
-    '<img class="hero4-photo" src="/assets/img/intro-photo-bw.jpg?v=1" alt="Денис Савицкий" fetchpriority="high">' +
-    '<img class="hero4-smear" src="/assets/img/intro-smear.jpg?v=1" alt="" aria-hidden="true">' +
-    '<div class="hero4-grain" aria-hidden="true"></div>' +
-    '<div class="hero4-copy">' +
-     '<p class="hero4-kicker">Денис Савицкий — арт-директор и бренд-дизайнер</p>' +
-     '<h1 class="hero3-title hero4-title">Дизайн для спорта<br>и <span class="hero3-type">киберспорта</span><span class="hero3-caret"></span></h1>' +
-     '<p class="hero4-lead">Айдентика, форма команд и визуальные экосистемы: от бренд-платформы до мерча и SMM.</p>' +
+   '<img class="intro3d-poster" src="/assets/img/logo-glass-poster.webp" alt="" aria-hidden="true">' +
+   '<div class="hero5">' +
+    '<div class="hero5-center">' +
+     '<h1 class="hero5-title">' +
+      '<span class="hero5-line hero5-l1">Дизайн для</span> ' +
+      '<span class="hero5-line hero5-l2">спорта и</span> ' +
+      '<span class="hero5-line hero5-l3"><span class="hero3-type">' + WORDS[0] + '</span><span class="hero3-caret" aria-hidden="true"></span></span>' +
+     '</h1>' +
+     '<a class="hero5-cta hero5-anim" href="#cases"><span>Смотреть кейсы</span>' + DOWN + '</a>' +
     '</div>' +
-    '<nav class="hero4-nav" aria-label="Разделы">' +
-     '<a href="#cases" class="is-active">Кейсы</a><a href="/rating">Рейтинг</a><a href="/publ">Статьи</a>' +
-    '</nav>' +
+    '<div class="hero5-card hero5-about hero5-anim">' +
+     '<p class="hero5-about-name"><span class="hero5-dot" aria-hidden="true"></span>Денис Савицкий</p>' +
+     '<p class="hero5-about-role">Арт-директор и бренд-дизайнер</p>' +
+     '<p class="hero5-tags"><span>Айдентика</span><span>Форма</span><span>Мерч</span><span>SMM</span></p>' +
+    '</div>' +
+    '<a class="hero5-card hero5-stat hero5-stat--left hero5-anim" href="#clients">' +
+     '<span class="hero5-stat-label">Клиенты и проекты</span><span class="hero5-stat-arrow">' + ARROW + '</span>' +
+     '<span class="hero5-stat-num">35+</span><span class="hero5-stat-sub">клубов, лиг и брендов</span>' +
+    '</a>' +
+    '<a class="hero5-card hero5-stat hero5-stat--right hero5-anim" href="/rating">' +
+     '<span class="hero5-stat-label">CS2 Design Tier List</span><span class="hero5-stat-arrow">' + ARROW + '</span>' +
+     '<span class="hero5-stat-num">20+</span><span class="hero5-stat-sub">команд в рейтинге</span>' +
+    '</a>' +
    '</div>');
  }
+
+ // кегль заголовка — по CSS, но уменьшаем, если строка с самым длинным словом не влезает в ширину
+ function fitter(hero) {
+  var title = hero.querySelector('.hero5-title'), type = hero.querySelector('.hero3-type');
+  return function fit() {
+   hero.style.removeProperty('--h5-fs');
+   var keep = type.textContent; type.textContent = LONGEST;
+   var fs = parseFloat(getComputedStyle(title).fontSize), right = title.getBoundingClientRect().right, k = 1;
+   title.querySelectorAll('.hero5-line').forEach(function (ln) {
+    var r = document.createRange(); r.selectNodeContents(ln); var b = r.getBoundingClientRect();
+    if (b.right > right) k = Math.min(k, (right - b.left) / b.width);
+   });
+   if (k < 1) hero.style.setProperty('--h5-fs', (fs * k * 0.97).toFixed(1) + 'px');
+   type.textContent = keep;
+  };
+ }
+
  // «печатная машинка»: последнее слово стирается бэкспейсом и печатается новое
- function typer() {
-  var el = document.querySelector('.hero3-type');
-  if (!el || el.dataset.typing) return; el.dataset.typing = '1';
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  // слова из прежнего первого экрана (бэкап от 24.09.2026)
-  var words = ['киберспорта', 'медиаспорта', 'про-клубов', 'спортивных лиг', 'турниров', 'блогеров', 'стримеров'];
-  // фиксируем ширину заголовка по самому длинному слову — подпись справа не «ездит» при печати
-  var title = el.closest('.hero3-title'), keep = el.textContent, longest = words.reduce(function (a, b) { return b.length > a.length ? b : a; });
-  function lockWidth() { title.style.minWidth = ''; el.textContent = longest; title.style.minWidth = title.getBoundingClientRect().width + 'px'; el.textContent = text; }
-  var text = keep;
-  lockWidth(); window.addEventListener('resize', lockWidth);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(lockWidth);
-  var wi = 0, del = true; text = words[0];
+ function typer(el) {
+  if (reduce || el.dataset.typing) return; el.dataset.typing = '1';
+  var wi = 0, del = true, text = WORDS[0];
   function step() {
-   var w = words[wi], d;
-   if (del) { text = text.slice(0, -1); d = 45; if (!text) { del = false; wi = (wi + 1) % words.length; d = 350; } }
-   else { text = words[wi].slice(0, text.length + 1); d = 85; if (text === words[wi]) { del = true; d = 2000; } }
+   var d;
+   if (del) { text = text.slice(0, -1); d = 45; if (!text) { del = false; wi = (wi + 1) % WORDS.length; d = 350; } }
+   else { text = WORDS[wi].slice(0, text.length + 1); d = 85; if (text === WORDS[wi]) { del = true; d = 2000; } }
    el.textContent = text;
    setTimeout(step, d);
   }
-  setTimeout(step, 2200);
+  setTimeout(step, 2600);
  }
- function start() { build(); typer(); }
+
+ // появление — когда снят прелоадер (иначе анимация пройдёт под ним); потом анимации снимаются,
+ // чтобы карточки гасли при прокрутке по общему правилу
+ function reveal(sec, then) {
+  var fired = false;
+  function go() {
+   if (fired) return; fired = true;
+   sec.classList.add('hero5-go'); then();
+   setTimeout(function () { sec.classList.add('hero5-done'); }, reduce ? 0 : 2400);
+  }
+  var p = document.querySelector('.site-preloader');
+  if (!p || p.classList.contains('is-done') || p.style.display === 'none') return go();
+  new MutationObserver(function (m, o) { if (p.classList.contains('is-done')) { o.disconnect(); setTimeout(go, 250); } })
+   .observe(p, { attributes: true, attributeFilter: ['class'] });
+  setTimeout(go, 9000);
+ }
+
+ // шапка прозрачная, пока страница в самом верху; «Обсудить проект» в углу (телефон, планшет)
+ // прячется, пока виден первый экран — там уже есть кнопка и карточки
+ function watch(sec) {
+  var root = document.documentElement, queued = false;
+  function upd() {
+   queued = false;
+   var r = sec.getBoundingClientRect();
+   root.classList.toggle('hdr-over-hero', window.scrollY < 24);
+   root.classList.toggle('intro-on', r.bottom > window.innerHeight * 0.4);
+  }
+  function req() { if (!queued) { queued = true; requestAnimationFrame(upd); } }
+  window.addEventListener('scroll', req, { passive: true }); window.addEventListener('resize', req);
+  upd();
+ }
+
+ function start() {
+  var sec = document.getElementById('intro3d'), st = sec && sec.querySelector('.intro3d-sticky');
+  if (!st || sec.classList.contains('intro-v5')) return;
+  build(sec, st);
+  var hero = st.querySelector('.hero5'), fit = fitter(hero);
+  fit(); window.addEventListener('resize', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  watch(sec);
+  reveal(sec, function () { typer(hero.querySelector('.hero3-type')); });
+ }
  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();

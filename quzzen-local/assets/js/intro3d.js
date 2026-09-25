@@ -108,6 +108,12 @@ if (section && canvas) {
       const top = g.createRadialGradient(0, 0, 0, 0, 0, H * 0.75);
       top.addColorStop(0, 'rgba(230,236,245,0.16)'); top.addColorStop(0.5, 'rgba(200,210,225,0.05)'); top.addColorStop(1, 'rgba(0,0,0,0)');
       g.fillStyle = top; g.fillRect(-W, -H, W * 2, H * 3); g.restore();
+      // салатовое свечение прямо за логотипом: стекло преломляет его в яркие грани и переливы
+      g.save(); g.globalCompositeOperation = 'screen'; g.filter = 'blur(50px)';
+      g.translate(W / 2, H * 0.48); g.scale(0.8, 1);
+      const aura = g.createRadialGradient(0, 0, 0, 0, 0, H * 0.5);
+      aura.addColorStop(0, 'rgba(210,255,0,0.24)'); aura.addColorStop(0.45, 'rgba(210,255,0,0.08)'); aura.addColorStop(1, 'rgba(210,255,0,0)');
+      g.fillStyle = aura; g.fillRect(-W, -H, W * 2, H * 2); g.restore();
       g.save(); g.globalCompositeOperation = 'screen'; g.filter = 'blur(40px)';
       g.translate(W / 2, H * 1.02); g.scale(3.2, 1);
       const floor = g.createRadialGradient(0, 0, 0, 0, 0, H * 0.28);
@@ -182,6 +188,9 @@ if (section && canvas) {
     }, undefined, fallback);
     setTimeout(() => { if (!section.classList.contains('is-ready')) fallback(); }, 9000);
 
+    // без переходов: при «уменьшить движение» глобальное правило сайта включает transition на всех свойствах,
+    // и отступ замерялся посреди перехода — секция съезжала вправо и появлялась горизонтальная прокрутка
+    section.style.transitionProperty = 'none';
     // Секция всегда ровно на всю ширину окна, от левого края — считаем по реальному положению
     // родителя, а не формулой calc(50% - 50vw): она ломается, если контейнер не по центру
     function fitSection() {
@@ -198,10 +207,11 @@ if (section && canvas) {
       if (!w || !h) return;
       renderer.setSize(w, h, false);
       camera.aspect = w / h;
-      // камера отъезжает так, чтобы логотип занимал ~42% высоты и не больше 70% ширины экрана
+      // камера отъезжает так, чтобы логотип занимал ~70% высоты (заголовок первого экрана идёт поверх него)
+      // и не больше 70% ширины экрана; на телефоне — почти во всю ширину
       const half = THREE.MathUtils.degToRad(camera.fov / 2);
-      const byH = (modelSize.y / 2) / Math.tan(half) / (camera.aspect > 1.2 ? 0.78 : 0.5);
-      const byW = (modelSize.x / 2) / (Math.tan(half) * camera.aspect) / 0.70;
+      const byH = (modelSize.y / 2) / Math.tan(half) / (camera.aspect > 1.2 ? 0.7 : 0.5);
+      const byW = (modelSize.x / 2) / (Math.tan(half) * camera.aspect) / (camera.aspect < 0.7 ? 0.88 : 0.70);
       camera.position.z = Math.max(byH, byW) + modelSize.z / 2;
       // на широком экране логотип смещён вправо от центра, освобождая место под заголовок
       offsetX = camera.aspect > 1.2 ? 2 * Math.tan(half) * camera.position.z * camera.aspect * 0 : 0;   // логотип строго по центру
@@ -240,6 +250,16 @@ if (section && canvas) {
 
     new IntersectionObserver((e) => { visible = e[0].isIntersecting; }).observe(section);
 
+    // логотип чуть поворачивается вслед за курсором (только мышь, без «уменьшить движение»)
+    const aim = { x: 0, y: 0 }, look = { x: 0, y: 0 };
+    if (!reduce && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      window.addEventListener('pointermove', (e) => {
+        aim.x = e.clientX / window.innerWidth * 2 - 1;
+        aim.y = e.clientY / window.innerHeight * 2 - 1;
+      }, { passive: true });
+      document.documentElement.addEventListener('pointerleave', () => { aim.x = 0; aim.y = 0; });
+    }
+
     const clock = new THREE.Clock();
     function frame() {
       requestAnimationFrame(frame);
@@ -252,8 +272,9 @@ if (section && canvas) {
       const idle = reduce ? 0 : 1 - p;
       pivot.position.x = offsetX;
       pivot.position.y = modelSize.y * 0.04 + Math.sin(t * 1.1) * 0.08 * idle;   // чуть выше центра экрана
-      const swayY = Math.sin(t * 0.6) * 0.35 * idle;
-      const swayX = Math.sin(t * 0.8 + 1) * 0.12 * idle;
+      look.x += (aim.x - look.x) * 0.05; look.y += (aim.y - look.y) * 0.05;
+      const swayY = (Math.sin(t * 0.6) * 0.35 + look.x * 0.3) * idle;
+      const swayX = (Math.sin(t * 0.8 + 1) * 0.12 + look.y * 0.18) * idle;
 
       // прокрутка: полный оборот + наклон, уменьшение и растворение
       pivot.rotation.y = swayY + p * Math.PI * 2;
