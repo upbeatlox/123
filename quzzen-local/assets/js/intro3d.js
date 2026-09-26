@@ -75,63 +75,64 @@ if (section && canvas) {
       }
     }, undefined, () => { worksLeft--; }));
 
-    // Фон внутри сцены — непрозрачный (иначе стекло его не преломляет), без линий:
-    // тёмная база и несколько мягких световых пятен разной яркости. Сквозь стекло они
-    // растягиваются в плавные переливы и радужные края — так преломление читается красиво.
-    // Фон сцены (рисуется в canvas → текстура): фото справа, растворяющееся влево в темноту,
-    // белый контровой свет справа сверху. Фон внутри 3D-сцены, поэтому стекло его преломляет.
-    let W = 2048, H = 1152; const bgCanvas = document.createElement('canvas');
-    bgCanvas.width = W; bgCanvas.height = H;
-    let photoImg = null, bgAspect = 0;
+    // Фон внутри сцены — непрозрачный (иначе стекло его не преломляет): чистая тьма, мягкое салатовое свечение
+    // за логотипом и верхние строки заголовка первого экрана. Строки рисуются здесь ровно поверх их HTML-копии
+    // (координаты присылает header.js событием 'intro3d:text'), поэтому стекло честно преломляет буквы.
+    // Печатающееся слово остаётся обычным текстом страницы — его не нужно перерисовывать в 3D.
+    let W = 2048, H = 1152, bgKey = '', bgTimer = 0;
+    const bgCanvas = document.createElement('canvas'); bgCanvas.width = W; bgCanvas.height = H;
+    const baseCanvas = document.createElement('canvas');            // фон без текста — пересобирается только при смене размера
     const bgTex = new THREE.CanvasTexture(bgCanvas);
     bgTex.colorSpace = THREE.SRGBColorSpace; bgTex.generateMipmaps = false; bgTex.minFilter = THREE.LinearFilter;
-    // чёрно-белая копия фото (по пикселям — работает во всех браузерах, включая Safari);
-    // салатовый контровой свет потом ложится поверх
-    let bwCache = null;
-    function bwPhoto(img) {
-      if (bwCache) return bwCache;
-      const c = document.createElement('canvas'); c.width = img.width; c.height = img.height;
-      const x = c.getContext('2d'); x.drawImage(img, 0, 0);
-      const d = x.getImageData(0, 0, c.width, c.height), p = d.data;
-      for (let i = 0; i < p.length; i += 4) { const l = p[i] * 0.2126 + p[i + 1] * 0.7152 + p[i + 2] * 0.0722; p[i] = p[i + 1] = p[i + 2] = l; }
-      x.putImageData(d, 0, 0);
-      return (bwCache = c);
-    }
-    function drawBg(photo) {
-      const g = bgCanvas.getContext('2d');
-      g.globalCompositeOperation = 'source-over'; g.filter = 'none';
+    let spot = { fx: 0.68, fy: 0.28 };                               // где стоит логотип (доли экрана) — туда же свечение
+    let sceneText = null, textPending = false;
+
+    function buildBase() {
+      baseCanvas.width = W; baseCanvas.height = H;
+      const g = baseCanvas.getContext('2d', { willReadFrequently: true });
       g.fillStyle = '#0a0b0e'; g.fillRect(0, 0, W, H);
-      // свет: салатовое свечение за логотипом и тонкое свечение «пола» снизу; верх сцены — ровно цвет фона страницы
-      // (без «софтбокса» сверху), поэтому под шапкой никогда не появляется более светлая полоса
-      // салатовое свечение прямо за логотипом: стекло преломляет его в яркие грани и переливы
+      // салатовое свечение прямо за стеклом: оно преломляется в яркие грани, остальной фон — чистая тьма
       g.save(); g.globalCompositeOperation = 'screen'; g.filter = 'blur(50px)';
-      g.translate(W * (W / H > 1.2 ? 0.6 : 0.5), H * 0.52); g.scale(0.8, 1);
-      const aura = g.createRadialGradient(0, 0, 0, 0, 0, H * 0.5);
-      aura.addColorStop(0, 'rgba(236,255,150,0.30)'); aura.addColorStop(0.45, 'rgba(210,255,0,0.08)'); aura.addColorStop(1, 'rgba(210,255,0,0)');
+      g.translate(W * spot.fx, H * spot.fy); g.scale(0.9, 1);
+      const aura = g.createRadialGradient(0, 0, 0, 0, 0, H * 0.42);
+      aura.addColorStop(0, 'rgba(236,255,150,0.14)'); aura.addColorStop(0.45, 'rgba(210,255,0,0.045)'); aura.addColorStop(1, 'rgba(210,255,0,0)');
       g.fillStyle = aura; g.fillRect(-W, -H, W * 2, H * 2); g.restore();
-      g.save(); g.globalCompositeOperation = 'screen'; g.filter = 'blur(40px)';
-      g.translate(W / 2, H * 1.02); g.scale(3.2, 1);
-      const floor = g.createRadialGradient(0, 0, 0, 0, 0, H * 0.28);
-      floor.addColorStop(0, 'rgba(210,255,0,0.16)'); floor.addColorStop(0.6, 'rgba(210,255,0,0.04)'); floor.addColorStop(1, 'rgba(210,255,0,0)');
-      g.fillStyle = floor; g.fillRect(-W, -H, W * 2, H * 2); g.restore();
-      g.save(); g.filter = 'none';
-      const vig = g.createRadialGradient(W / 2, H * 0.48, H * 0.35, W / 2, H * 0.48, Math.max(W, H) * 0.8);
-      vig.addColorStop(0, 'rgba(10,11,14,0)'); vig.addColorStop(1, 'rgba(10,11,14,0.6)');   // к краям — в цвет фона, не темнее его
-      g.fillStyle = vig; g.fillRect(0, 0, W, H); g.restore();
-      g.filter = 'none';
-      // огромный ник в фоне убран (по макету) — фон только тьма и луч света
       // дизеринг от «ступенек» в тёмных градиентах
       const img = g.getImageData(0, 0, W, H), d = img.data;
       for (let i = 0; i < d.length; i += 4) { const n = (Math.random() - 0.5) * 4; d[i] += n; d[i + 1] += n; d[i + 2] += n; }
       g.putImageData(img, 0, 0);
+    }
+    function composeBg() {
+      const g = bgCanvas.getContext('2d');
+      g.drawImage(baseCanvas, 0, 0);
+      if (sceneText && sceneText.length) {
+        const k = W / Math.max(1, canvas.clientWidth);              // CSS-пиксели → пиксели текстуры
+        g.save(); g.textBaseline = 'alphabetic'; g.fillStyle = '#ffffff';
+        for (const ln of sceneText) {
+          g.font = `${ln.weight} ${ln.size * k}px Inter, sans-serif`;
+          if ('letterSpacing' in g) g.letterSpacing = `${ln.tracking * k}px`;
+          g.fillText(ln.text, ln.x * k, ln.y * k);
+        }
+        g.restore();
+      }
       bgTex.needsUpdate = true;
     }
-    drawBg(null);
-    if (document.fonts && document.fonts.ready) document.fonts.load('600 100px Inter').then(() => drawBg(photoImg)).catch(() => {});
-    const photo = new Image();
-    photo.onload = () => { photoImg = photo; drawBg(photo); };
-    // фон первого экрана — приглушённый коллаж работ
-    // коллаж на фоне отключён — фон теперь типографика (ник). Вернуть: photo.src = '/assets/img/intro-works.jpg?v=1';
+    // размер текстуры фона — по реальным пикселям холста (чёткие буквы на ретине), с разумным потолком
+    function refreshBg(now) {
+      const cw = canvas.clientWidth, ch = canvas.clientHeight;
+      if (!cw || !ch) return;
+      let h = Math.min(Math.max(Math.round(ch * renderer.getPixelRatio()), 720), weak ? 1152 : 1600);
+      let w = Math.round(h * cw / ch); if (w > 4096) { w = 4096; h = Math.round(w * ch / cw); }
+      const key = `${w}x${h}@${spot.fx},${spot.fy}`;
+      if (key === bgKey) return;
+      const run = () => { bgKey = key; W = w; H = h; bgCanvas.width = W; bgCanvas.height = H; bgTex.dispose(); buildBase(); composeBg(); };
+      clearTimeout(bgTimer);
+      if (now) run(); else bgTimer = setTimeout(run, 180);          // при перетаскивании окна — один раз в конце
+    }
+    window.addEventListener('intro3d:text', (e) => {
+      sceneText = e.detail && e.detail.lines ? e.detail.lines : null;
+      composeBg(); textPending = !!sceneText;
+    });
     const backdrop = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: bgTex, toneMapped: false }));
     backdrop.position.z = -3; scene.add(backdrop);
 
@@ -144,7 +145,7 @@ if (section && canvas) {
 
     const pivot = new THREE.Group(); scene.add(pivot);
     let modelSize = new THREE.Vector3(4.2, 4, 1); // уточняется после загрузки
-    let offsetX = 0;
+    let offsetX = 0, offsetY = 0;
     const modelMats = [];
 
     new GLTFLoader().load('/assets/3d/logo-glass.glb?v=1', (gltf) => {
@@ -162,17 +163,17 @@ if (section && canvas) {
         if (o.isMesh && o.material) {
           const m = o.material;
           if (m.isMeshPhysicalMaterial) {
-            m.transmission = 1; m.thickness = 0.9; m.ior = 1.5;
-            m.roughness = 0.15; m.metalness = 0;                    // лёгкая матовость: стекло светлее и мягче, не «тяжёлое» (0 — полностью прозрачное)
+            m.transmission = 1; m.thickness = 1.1; m.ior = 1.5;
+            m.roughness = 0.03; m.metalness = 0;                    // почти прозрачное: буквы заголовка за стеклом видны и преломляются
             m.dispersion = 0;                                       // без дисперсии — она давала цветные «пиксельные» каймы                                      // радужное расслоение на гранях
             m.clearcoat = 1; m.clearcoatRoughness = 0.04;
             m.specularIntensity = 0.6;
             m.color = new THREE.Color(0xf6ffd0);                     // светлый салатовый: стекло пропускает фон, а не красит его в пластик                     // фирменный салатовый — окрашивает прозрачное стекло                     // почти белое стекло — цвет даёт толщина
-            m.attenuationColor = new THREE.Color(0xd2ff00); m.attenuationDistance = 4;   // насыщенный #d2ff00 в толще и на торцах, как у цветного стекла
+            m.attenuationColor = new THREE.Color(0xd2ff00); m.attenuationDistance = 3;   // насыщенный #d2ff00 в толще и на торцах, как у цветного стекла
             m.emissive = new THREE.Color(0x000000); m.emissiveIntensity = 0;    // в толще цвет чуть гуще, как у цветного стекла
-            m.iridescence = 0.15; m.iridescenceIOR = 1.3; m.iridescenceThicknessRange = [120, 420];
+            m.iridescence = 0.3; m.iridescenceIOR = 1.3; m.iridescenceThicknessRange = [120, 420];   // радужная плёнка на гранях
           }
-          m.envMapIntensity = 2.2;
+          m.envMapIntensity = 1.9;
           m.transparent = true;
           modelMats.push(m);
           m.needsUpdate = true;
@@ -197,32 +198,29 @@ if (section && canvas) {
     fitSection();
     window.addEventListener('resize', fitSection);
 
+    // где стоит логотип (доли экрана) и какую часть высоты/ширины занимает — под композицию первого экрана:
+    // заголовок слева, стекло справа сверху и заходит на две верхние строки (печатающееся слово ниже — не задевает)
+    function layoutFor(aspect) {
+      if (aspect > 1.2) return { fx: 0.68, fy: 0.28, fillH: 0.4 };
+      if (aspect > 0.9) return { fx: 0.66, fy: 0.3, fillH: 0.36 };
+      return { fx: 0.6, fy: 0.34, fillW: 0.66 };                      // телефон и планшет вертикально — по ширине
+    }
     function resize() {
       const w = canvas.clientWidth, h = canvas.clientHeight;
       if (!w || !h) return;
       renderer.setSize(w, h, false);
       camera.aspect = w / h;
-      // камера отъезжает так, чтобы логотип занимал ~70% высоты (заголовок первого экрана идёт поверх него)
-      // и не больше 70% ширины экрана; на телефоне — почти во всю ширину
-      const half = THREE.MathUtils.degToRad(camera.fov / 2);
-      const byH = (modelSize.y / 2) / Math.tan(half) / (camera.aspect > 1.2 ? 0.7 : 0.5);
-      const byW = (modelSize.x / 2) / (Math.tan(half) * camera.aspect) / (camera.aspect < 0.7 ? 0.88 : 0.70);
-      camera.position.z = Math.max(byH, byW) + modelSize.z / 2;
-      // на широком экране логотип смещён вправо от центра, освобождая место под заголовок
-      offsetX = camera.aspect > 1.2 ? 2 * Math.tan(half) * camera.position.z * camera.aspect * 0.1 : 0;   // на широком экране — правее центра (как на витрине)
-      // фон ровно на весь кадр (с запасом на покачивание)
-      const d = camera.position.z - backdrop.position.z;
-      const vh = 2 * Math.tan(half) * d * 1.02;
+      const L = layoutFor(camera.aspect), t = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+      const dist = L.fillW ? (modelSize.x / 2) / (t * camera.aspect) / L.fillW : (modelSize.y / 2) / t / L.fillH;
+      camera.position.z = dist + modelSize.z / 2;
+      const visH = 2 * t * camera.position.z, visW = visH * camera.aspect;    // видимая область на глубине логотипа
+      offsetX = (L.fx - 0.5) * visW; offsetY = (0.5 - L.fy) * visH;
+      spot = { fx: L.fx, fy: L.fy };
+      // фон ровно на весь кадр (без запаса) — буквы в нём совпадают с HTML-текстом до пикселя
+      const vh = 2 * t * (camera.position.z - backdrop.position.z);
       backdrop.scale.set(vh * camera.aspect, vh, 1);
-      // холст фона — в тех же пропорциях, что экран: фото сохраняет свои пропорции
-      if (Math.abs(camera.aspect - bgAspect) > 0.01) {
-        bgAspect = camera.aspect;
-        H = 1152; W = Math.round(H * camera.aspect);
-        bgCanvas.width = W; bgCanvas.height = H;
-        bgTex.dispose();
-        drawBg(photoImg);
-      }
       camera.updateProjectionMatrix();
+      refreshBg(!bgKey);
     }
     window.addEventListener('resize', resize);
     resize();
@@ -266,7 +264,7 @@ if (section && canvas) {
       // покачивание на входе (затухает по мере прокрутки)
       const idle = reduce ? 0 : 1 - p;
       pivot.position.x = offsetX;
-      pivot.position.y = modelSize.y * -0.03 + Math.sin(t * 1.1) * 0.08 * idle;   // чуть выше центра экрана
+      pivot.position.y = offsetY + Math.sin(t * 1.1) * 0.08 * idle;
       look.x += (aim.x - look.x) * 0.05; look.y += (aim.y - look.y) * 0.05;
       const swayY = (Math.sin(t * 0.6) * 0.35 + look.x * 0.3) * idle;
       const swayX = (Math.sin(t * 0.8 + 1) * 0.12 + look.y * 0.18) * idle;
@@ -284,6 +282,8 @@ if (section && canvas) {
       pivot.visible = fadeModel > 0.001;
 
       renderer.render(scene, camera);
+      // строки заголовка уже нарисованы в сцене и видны — HTML-копию можно прятать (header.js)
+      if (textPending && section.classList.contains('is-ready')) { textPending = false; window.dispatchEvent(new Event('intro3d:text-shown')); }
     }
     frame();
   }
