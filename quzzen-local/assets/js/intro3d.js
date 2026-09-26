@@ -100,7 +100,7 @@ if (section && canvas) {
     function drawBg(photo) {
       const g = bgCanvas.getContext('2d');
       g.globalCompositeOperation = 'source-over'; g.filter = 'none';
-      g.fillStyle = '#121419'; g.fillRect(0, 0, W, H);
+      g.fillStyle = '#0a0b0e'; g.fillRect(0, 0, W, H);
       // мягкий свет: сверху — нейтральный «софтбокс» над логотипом, снизу — тонкое салатовое свечение «пола»,
       // по краям — затемнение (виньетка). Спокойно и симметрично, без диагональных лучей
       g.save(); g.globalCompositeOperation = 'screen'; g.filter = 'blur(60px)';
@@ -110,7 +110,7 @@ if (section && canvas) {
       g.fillStyle = top; g.fillRect(-W, -H, W * 2, H * 3); g.restore();
       // салатовое свечение прямо за логотипом: стекло преломляет его в яркие грани и переливы
       g.save(); g.globalCompositeOperation = 'screen'; g.filter = 'blur(50px)';
-      g.translate(W / 2, H * 0.48); g.scale(0.8, 1);
+      g.translate(W * (W / H > 1.2 ? 0.6 : 0.5), H * 0.52); g.scale(0.8, 1);
       const aura = g.createRadialGradient(0, 0, 0, 0, 0, H * 0.5);
       aura.addColorStop(0, 'rgba(236,255,150,0.30)'); aura.addColorStop(0.45, 'rgba(210,255,0,0.08)'); aura.addColorStop(1, 'rgba(210,255,0,0)');
       g.fillStyle = aura; g.fillRect(-W, -H, W * 2, H * 2); g.restore();
@@ -121,7 +121,7 @@ if (section && canvas) {
       g.fillStyle = floor; g.fillRect(-W, -H, W * 2, H * 2); g.restore();
       g.save(); g.filter = 'none';
       const vig = g.createRadialGradient(W / 2, H * 0.48, H * 0.35, W / 2, H * 0.48, Math.max(W, H) * 0.8);
-      vig.addColorStop(0, 'rgba(10,11,14,0)'); vig.addColorStop(1, 'rgba(10,11,14,0.35)');
+      vig.addColorStop(0, 'rgba(10,11,14,0)'); vig.addColorStop(1, 'rgba(6,7,9,0.6)');
       g.fillStyle = vig; g.fillRect(0, 0, W, H); g.restore();
       g.filter = 'none';
       // огромный ник в фоне убран (по макету) — фон только тьма и луч света
@@ -210,11 +210,11 @@ if (section && canvas) {
       // камера отъезжает так, чтобы логотип занимал ~70% высоты (заголовок первого экрана идёт поверх него)
       // и не больше 70% ширины экрана; на телефоне — почти во всю ширину
       const half = THREE.MathUtils.degToRad(camera.fov / 2);
-      const byH = (modelSize.y / 2) / Math.tan(half) / (camera.aspect > 1.2 ? 0.64 : 0.5);
+      const byH = (modelSize.y / 2) / Math.tan(half) / (camera.aspect > 1.2 ? 0.7 : 0.5);
       const byW = (modelSize.x / 2) / (Math.tan(half) * camera.aspect) / (camera.aspect < 0.7 ? 0.88 : 0.70);
       camera.position.z = Math.max(byH, byW) + modelSize.z / 2;
       // на широком экране логотип смещён вправо от центра, освобождая место под заголовок
-      offsetX = camera.aspect > 1.2 ? 2 * Math.tan(half) * camera.position.z * camera.aspect * 0 : 0;   // логотип строго по центру
+      offsetX = camera.aspect > 1.2 ? 2 * Math.tan(half) * camera.position.z * camera.aspect * 0.1 : 0;   // на широком экране — правее центра (как на витрине)
       // фон ровно на весь кадр (с запасом на покачивание)
       const d = camera.position.z - backdrop.position.z;
       const vh = 2 * Math.tan(half) * d * 1.02;
@@ -271,7 +271,7 @@ if (section && canvas) {
       // покачивание на входе (затухает по мере прокрутки)
       const idle = reduce ? 0 : 1 - p;
       pivot.position.x = offsetX;
-      pivot.position.y = modelSize.y * 0.04 + Math.sin(t * 1.1) * 0.08 * idle;   // чуть выше центра экрана
+      pivot.position.y = modelSize.y * -0.03 + Math.sin(t * 1.1) * 0.08 * idle;   // чуть выше центра экрана
       look.x += (aim.x - look.x) * 0.05; look.y += (aim.y - look.y) * 0.05;
       const swayY = (Math.sin(t * 0.6) * 0.35 + look.x * 0.3) * idle;
       const swayX = (Math.sin(t * 0.8 + 1) * 0.12 + look.y * 0.18) * idle;
@@ -279,6 +279,7 @@ if (section && canvas) {
       // прокрутка: полный оборот + наклон, уменьшение и растворение
       pivot.rotation.y = swayY + p * Math.PI * 2;
       pivot.rotation.x = swayX + p * 0.35;
+      pivot.rotation.z = -0.2 * (1 - p);                 // лёгкий наклон, как у товара на витрине
       const s = 1 - p * 0.45;
       pivot.scale.setScalar(s);
       // логотип исчезает в том же темпе, что и текст (в CSS: opacity = 1 - p * 1.15)

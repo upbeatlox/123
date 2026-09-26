@@ -203,67 +203,80 @@
 })();
 
 ;
-/* Первый экран v7 (по референсу, много воздуха): слева узкая панель — знак, «Денис Савицкий» вертикально и фото;
-   рядом карточка кейсов; справа большая скруглённая панель со стеклянным 3D-логотипом и вырезом снизу-слева,
-   в который заходит заголовок. Никакого лишнего текста. Стили — header.css, 3D — intro3d.js */
+/* Первый экран v8 (по референсу «техно-витрина»): тёмная сцена с тонкими линиями сетки и кругами,
+   большой стеклянный 3D-логотип в центре под наклоном, пиксельный заголовок слева вверху (последнее слово печатается),
+   HUD-кольцо с именем справа, карточка «кто я» слева, соцсети и подпись внизу. Стили — header.css, 3D — intro3d.js */
 (function () {
  var DOWN = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+ var ARROW = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
  // слова из прежнего первого экрана (бэкап от 24.09.2026)
  var WORDS = ['киберспорта', 'медиаспорта', 'про-клубов', 'спортивных лиг', 'турниров', 'блогеров', 'стримеров'];
  var LONGEST = WORDS.reduce(function (a, b) { return b.length > a.length ? b : a; });
  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
- function build(sec, st) {
-  sec.classList.remove('intro-v2', 'intro-v3', 'intro-v4', 'intro-v5'); sec.classList.add('intro-v7');
-  st.querySelectorAll('.hero2,.hero3,.hero3-photo,.hero4,.hero5,.hero7,.intro3d-poster').forEach(function (e) { e.remove(); });
-  st.insertAdjacentHTML('beforeend',
-   '<div class="hero7">' +
-    '<aside class="hero7-rail hero7-anim">' +
-     '<img class="hero7-rail-logo" src="/Logo.svg" alt="">' +
-     '<span class="hero7-rail-name">Денис Савицкий</span>' +
-     '<a class="hero7-rail-me" href="/about_me" title="Обо мне — Денис Савицкий">ДС</a>' +
-    '</aside>' +
-    '<div class="hero7-left">' +
-     '<a class="hero7-card hero7-anim" href="#cases">' +
-      '<img class="hero7-card-img" src="/assets/img/works/w1.jpg" alt="">' +
-      '<span class="hero7-card-body">' +
-       '<span class="hero7-card-text">Айдентика, форма и SMM для клубов, лиг и киберспортивных команд</span>' +
-       '<span class="hero7-card-btn"><span>Смотреть кейсы</span><i>' + DOWN + '</i></span>' +
-      '</span>' +
-     '</a>' +
-    '</div>' +
-    '<div class="hero7-panel hero7-anim">' +
-     '<img class="intro3d-poster" src="/assets/img/logo-glass-poster.webp" alt="" aria-hidden="true">' +
-     '<span class="hero7-notch"></span><span class="hero7-corner hero7-corner--a"></span><span class="hero7-corner hero7-corner--b"></span>' +
-     '<span class="hero7-note">35+ клубов, лиг и брендов</span>' +
-    '</div>' +
-    '<div class="hero7-copy">' +
-     '<p class="hero7-kicker hero7-anim">Арт-директор и бренд-дизайнер</p>' +
-     '<h1 class="hero7-title">' +
-      '<span class="hero7-line">Дизайн для спорта</span> ' +
-      '<span class="hero7-line">и <span class="hero3-type">' + WORDS[0] + '</span><span class="hero3-caret" aria-hidden="true"></span></span>' +
-     '</h1>' +
-     '<a class="hero7-cta hero7-anim" href="#cases"><span>Смотреть кейсы</span>' + DOWN + '</a>' +
-    '</div>' +
-   '</div>');
-  // 3D-холст переезжает внутрь панели и пересчитывает размер
-  var panel = st.querySelector('.hero7-panel'), canvas = document.getElementById('intro3dCanvas');
-  if (canvas) panel.insertBefore(canvas, panel.firstChild);
-  window.dispatchEvent(new Event('resize'));
+ // шрифты витрины: пиксельный для заголовка, моноширинный для «технических» подписей
+ if (!document.querySelector('link[data-hero8-fonts]')) {
+  var lf = document.createElement('link'); lf.rel = 'stylesheet'; lf.setAttribute('data-hero8-fonts', '');
+  lf.href = 'https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@400;500;700;800&display=swap';
+  document.head.appendChild(lf);
  }
 
- // кегль заголовка — по CSS, но уменьшаем, если строка с самым длинным словом не влезает в ширину
+ function build(sec, st) {
+  sec.classList.remove('intro-v2', 'intro-v3', 'intro-v4', 'intro-v5', 'intro-v7'); sec.classList.add('intro-v8');
+  st.querySelectorAll('.hero2,.hero3,.hero3-photo,.hero4,.hero5,.hero7,.hero8,.intro3d-poster').forEach(function (e) { e.remove(); });
+  st.insertAdjacentHTML('beforeend',
+   '<img class="intro3d-poster" src="/assets/img/logo-glass-poster.webp" alt="" aria-hidden="true">' +
+   '<div class="hero8">' +
+    '<div class="hero8-grid" aria-hidden="true"><i class="v1"></i><i class="v2"></i><i class="h1"></i><i class="c1"></i><i class="c2"></i></div>' +
+    '<div class="hero8-head">' +
+     '<p class="hero8-kicker hero8-anim">// quzzeN — бренд-дизайн</p>' +
+     '<h1 class="hero8-title">' +
+      '<span class="hero8-line">Дизайн для</span> ' +
+      '<span class="hero8-line">спорта и</span> ' +
+      '<span class="hero8-line"><span class="hero3-type">' + WORDS[0] + '</span><span class="hero3-caret" aria-hidden="true"></span></span>' +
+     '</h1>' +
+    '</div>' +
+    '<a class="hero8-card hero8-anim" href="/about_me">' +
+     '<span class="hero8-card-tag">Обо мне</span>' +
+     '<img class="hero8-card-img" src="/assets/img/works/w1.jpg" alt="">' +
+     '<span class="hero8-card-text"><b>Денис Савицкий</b> — независимый арт-директор и бренд-дизайнер. Айдентика, форма команд, мерч и SMM.</span>' +
+    '</a>' +
+    '<a class="hero8-hud hero8-anim" href="/rating" aria-label="CS2 Design Tier List">' +
+     '<svg class="hero8-ring" viewBox="0 0 200 200" aria-hidden="true">' +
+      '<circle cx="100" cy="100" r="92" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1"/>' +
+      '<circle cx="100" cy="100" r="92" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-dasharray="70 508" transform="rotate(-150 100 100)"/>' +
+      '<circle cx="100" cy="100" r="92" fill="none" stroke="#d2ff00" stroke-width="3" stroke-linecap="round" stroke-dasharray="22 556" transform="rotate(30 100 100)"/>' +
+      '<circle cx="100" cy="100" r="74" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="1" stroke-dasharray="2 6"/>' +
+     '</svg>' +
+     '<span class="hero8-hud-pill">CS2 Tier List</span>' +
+     '<span class="hero8-hud-arrow">' + ARROW + '</span>' +
+    '</a>' +
+    '<div class="hero8-bottom hero8-anim">' +
+     '<div class="hero8-social">' +
+      '<a href="https://t.me/quzzen" target="_blank" rel="noopener" aria-label="Telegram"><img src="/Icons/Telegram.svg" alt=""></a>' +
+      '<a href="https://vk.com/quzzen" target="_blank" rel="noopener" aria-label="ВКонтакте"><img src="/Icons/VK.svg" alt=""></a>' +
+      '<a href="https://behance.net/quzzen" target="_blank" rel="noopener" aria-label="Behance"><img src="/Icons/Behance.svg" alt=""></a>' +
+     '</div>' +
+     '<p class="hero8-foot">Чита · Worldwide Remote</p>' +
+    '</div>' +
+    '<a class="hero8-scroll hero8-anim" href="#cases"><span>Смотреть кейсы</span>' + DOWN + '</a>' +
+   '</div>');
+  // холст мог остаться в панели прошлой версии — возвращаем на весь экран
+  var canvas = document.getElementById('intro3dCanvas');
+  if (canvas && canvas.parentNode !== st) { st.insertBefore(canvas, st.firstChild); window.dispatchEvent(new Event('resize')); }
+ }
+
+ // кегль заголовка — по CSS, но уменьшаем, если строка с самым длинным словом не влезает в отведённую ширину
  function fitter(hero) {
-  var copy = hero.querySelector('.hero7-copy'), title = hero.querySelector('.hero7-title'), type = hero.querySelector('.hero3-type');
+  var head = hero.querySelector('.hero8-head'), title = hero.querySelector('.hero8-title'), type = hero.querySelector('.hero3-type');
   return function fit() {
-   hero.style.removeProperty('--h7-fs');
+   hero.style.removeProperty('--h8-fs');
    var keep = type.textContent; type.textContent = LONGEST;
-   var fs = parseFloat(getComputedStyle(title).fontSize), box = copy.getBoundingClientRect(), k = 1;
-   title.querySelectorAll('.hero7-line').forEach(function (ln) {
+   var fs = parseFloat(getComputedStyle(title).fontSize), box = head.getBoundingClientRect(), k = 1;
+   title.querySelectorAll('.hero8-line').forEach(function (ln) {
     var r = document.createRange(); r.selectNodeContents(ln); var b = r.getBoundingClientRect();
     if (b.right > box.right) k = Math.min(k, (box.right - b.left) / b.width);
    });
-   if (k < 1) hero.style.setProperty('--h7-fs', (fs * k * 0.97).toFixed(1) + 'px');
+   if (k < 1) hero.style.setProperty('--h8-fs', (fs * k * 0.97).toFixed(1) + 'px');
    type.textContent = keep;
   };
  }
@@ -314,11 +327,11 @@
 
  function start() {
   var sec = document.getElementById('intro3d'), st = sec && sec.querySelector('.intro3d-sticky');
-  if (!st || sec.classList.contains('intro-v7')) return;
+  if (!st || sec.classList.contains('intro-v8')) return;
   build(sec, st);
-  var hero = st.querySelector('.hero7'), fit = fitter(hero);
+  var hero = st.querySelector('.hero8'), fit = fitter(hero);
   fit(); window.addEventListener('resize', fit);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  if (document.fonts) { document.fonts.ready.then(fit); document.fonts.load('40px "Press Start 2P"').then(fit).catch(function () {}); }
   watch(sec);
   reveal(sec, function () { typer(hero.querySelector('.hero3-type')); });
  }
