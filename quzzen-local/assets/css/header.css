@@ -668,9 +668,9 @@ html.intro-on .float-cta{opacity:0;transform:translateY(12px);pointer-events:non
 .hero10{--h10-fs:clamp(3rem,min(8.4vw,14.5vh),10.5rem);position:absolute;inset:0;z-index:2;pointer-events:none;opacity:calc(1 - var(--intro-p,0))}
 .hero10 a{pointer-events:auto;text-decoration:none}
 
-/* заголовок: Inter Light, капс, строки «лесенкой» */
+/* заголовок: Inter 600, капс, строки «лесенкой» (на телефоне — ровно по левому краю) */
 .hero10-title{position:absolute;left:var(--site-pad);right:var(--site-pad);top:calc(76px + clamp(48px,15vh,160px));margin:0;color:#fff;
- font:300 var(--h10-fs)/.9 'Inter',sans-serif;letter-spacing:-.05em;text-transform:uppercase;filter:blur(calc(var(--intro-p,0) * 18px))}
+ font:600 var(--h10-fs)/.9 'Inter',sans-serif;letter-spacing:-.05em;text-transform:uppercase;filter:blur(calc(var(--intro-p,0) * 18px))}
 .hero10-line{display:block;white-space:nowrap}
 .hero10-l1{padding-left:3%}
 .hero10-l2{padding-left:38%}
@@ -705,11 +705,11 @@ html.intro-on .float-cta{opacity:0;transform:translateY(12px);pointer-events:non
 
 @media (max-width:900px){
  .hero10{--h10-fs:12.6vw}
- .hero10-title{top:44%}
- .hero10-l1{padding-left:0}.hero10-l2{padding-left:20%}.hero10-l3{padding-left:0}
+ .hero10-title{top:50%}
+ .hero10-l1,.hero10-l2,.hero10-l3{padding-left:0}
  .hero10-aside{left:var(--site-pad);max-width:none;bottom:clamp(20px,4vh,40px)}
  .hero10-lead{font-size:.88rem;margin-bottom:16px}
- .intro-v10 .intro3d-poster{left:60%;top:34%;height:auto;width:66vw}
+ .intro-v10 .intro3d-poster{left:60%;top:38%;height:auto;width:66vw}
 }
 .hero10-cta{white-space:nowrap;flex:0 0 auto}.hero10-soc{flex:none}
 @media (max-width:400px){

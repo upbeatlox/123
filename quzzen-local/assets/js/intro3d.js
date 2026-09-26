@@ -203,7 +203,7 @@ if (section && canvas) {
     function layoutFor(aspect) {
       if (aspect > 1.2) return { fx: 0.68, fy: 0.28, fillH: 0.4 };
       if (aspect > 0.9) return { fx: 0.66, fy: 0.3, fillH: 0.36 };
-      return { fx: 0.6, fy: 0.34, fillW: 0.66 };                      // телефон и планшет вертикально — по ширине
+      return { fx: 0.6, fy: 0.38, fillW: 0.66 };                      // телефон и планшет вертикально — по ширине
     }
     function resize() {
       const w = canvas.clientWidth, h = canvas.clientHeight;

@@ -213,7 +213,7 @@
 })();
 
 ;
-/* Первый экран v10 (по референсу): тёмная сцена, огромный тонкий заголовок «лесенкой», стеклянный 3D-логотип
+/* Первый экран v10 (по референсу): тёмная сцена, огромный заголовок «лесенкой», стеклянный 3D-логотип
    справа сверху заходит на верхние строки — и преломляет их (строки рисуются внутри 3D-сцены, см. intro3d.js),
    справа внизу — короткий абзац с фото и прежние кнопки. Последнее слово заголовка печатается. Стили — header.css */
 (function () {
@@ -293,7 +293,7 @@
    window.dispatchEvent(new CustomEvent('intro3d:text', { detail: { lines: null } }));
    clearTimeout(timer); timer = setTimeout(send, 260);
   });
-  var fontReady = document.fonts && document.fonts.load ? document.fonts.load('300 100px Inter').catch(function () {}) : Promise.resolve();
+  var fontReady = document.fonts && document.fonts.load ? document.fonts.load('600 100px Inter').catch(function () {}) : Promise.resolve();
   function start() { fontReady.then(function () { requestAnimationFrame(send); }); }
   if (sec.classList.contains('hero-done')) start();
   else new MutationObserver(function (m, o) { if (sec.classList.contains('hero-done')) { o.disconnect(); start(); } })
