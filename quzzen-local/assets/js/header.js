@@ -204,7 +204,7 @@
 ;
 /* Первый экран v8 (по референсу «техно-витрина»): тёмная сцена с тонкими линиями сетки и кругами,
    большой стеклянный 3D-логотип в центре под наклоном, крупный заголовок слева вверху (последнее слово печатается),
-   HUD-кольцо с именем справа, карточка «кто я» слева, соцсети и подпись внизу. Стили — header.css, 3D — intro3d.js */
+   карточка с фото «кто я» слева, соцсети и подпись внизу. Стили — header.css, 3D — intro3d.js */
 (function () {
  var DOWN = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
  var ARROW = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -219,7 +219,7 @@
   st.insertAdjacentHTML('beforeend',
    '<img class="intro3d-poster" src="/assets/img/logo-glass-poster.webp" alt="" aria-hidden="true">' +
    '<div class="hero8">' +
-    '<div class="hero8-grid" aria-hidden="true"><i class="v1"></i><i class="v2"></i><i class="h1"></i><i class="c1"></i><i class="c2"></i></div>' +
+    '<div class="hero8-grid" aria-hidden="true"><i class="v1"></i><i class="v2"></i><i class="h1"></i><i class="c1"></i></div>' +
     '<div class="hero8-head">' +
      '<h1 class="hero8-title">' +
       '<span class="hero8-line">Дизайн для</span> ' +
@@ -228,19 +228,8 @@
      '</h1>' +
     '</div>' +
     '<a class="hero8-card hero8-anim" href="/about_me">' +
-     '<span class="hero8-card-tag">Обо мне</span>' +
-     '<img class="hero8-card-img" src="/assets/img/works/w1.jpg" alt="">' +
+     '<img class="hero8-card-img" src="/assets/img/intro-photo.jpg" alt="Денис Савицкий">' +
      '<span class="hero8-card-text"><b>Денис Савицкий</b> — независимый арт-директор и бренд-дизайнер. Айдентика, форма команд, мерч и SMM.</span>' +
-    '</a>' +
-    '<a class="hero8-hud hero8-anim" href="/rating" aria-label="CS2 Design Tier List">' +
-     '<svg class="hero8-ring" viewBox="0 0 200 200" aria-hidden="true">' +
-      '<circle cx="100" cy="100" r="92" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1"/>' +
-      '<circle cx="100" cy="100" r="92" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-dasharray="70 508" transform="rotate(-150 100 100)"/>' +
-      '<circle cx="100" cy="100" r="92" fill="none" stroke="#d2ff00" stroke-width="3" stroke-linecap="round" stroke-dasharray="22 556" transform="rotate(30 100 100)"/>' +
-      '<circle cx="100" cy="100" r="74" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="1" stroke-dasharray="2 6"/>' +
-     '</svg>' +
-     '<span class="hero8-hud-pill">CS2 Tier List</span>' +
-     '<span class="hero8-hud-arrow">' + ARROW + '</span>' +
     '</a>' +
     '<div class="hero8-bottom hero8-anim">' +
      '<div class="hero8-social">' +
@@ -308,7 +297,8 @@
   function upd() {
    queued = false;
    var r = sec.getBoundingClientRect();
-   root.classList.toggle('hdr-over-hero', window.scrollY < 24);
+   root.classList.toggle('hdr-over-hero', r.bottom > 90);
+   root.classList.toggle('hdr-at-top', window.scrollY < 24);
    root.classList.toggle('intro-on', r.bottom > window.innerHeight * 0.4);
   }
   function req() { if (!queued) { queued = true; requestAnimationFrame(upd); } }
@@ -316,9 +306,18 @@
   upd();
  }
 
+ // если над страницей есть что-то ещё (например, панель администратора uCoz), первый экран становится ниже
+ // на эту высоту — иначе его низ (соцсети, «Смотреть кейсы») уходит за край окна
+ function fitHeight(sec) {
+  var shift = Math.max(0, Math.round(sec.getBoundingClientRect().top + window.scrollY));
+  sec.style.setProperty('--hero-shift', shift + 'px');
+  if (shift) window.dispatchEvent(new Event('resize'));
+ }
+
  function start() {
   var sec = document.getElementById('intro3d'), st = sec && sec.querySelector('.intro3d-sticky');
   if (!st || sec.classList.contains('intro-v8')) return;
+  fitHeight(sec); window.addEventListener('load', function () { fitHeight(sec); });
   build(sec, st);
   var hero = st.querySelector('.hero8'), fit = fitter(hero);
   fit(); window.addEventListener('resize', fit);

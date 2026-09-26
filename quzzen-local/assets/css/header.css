@@ -633,7 +633,7 @@ html .header-nav .header-inner{display:grid!important;grid-template-columns:1fr 
 .hdr-nav-link::after{content:"";position:absolute;left:50%;bottom:0;width:4px;height:4px;border-radius:50%;background:#d2ff00;transform:translate(-50%,4px) scale(0);transition:transform .25s cubic-bezier(.22,1,.36,1)}
 .hdr-nav-link:hover{color:#fff}
 .hdr-nav-link:hover::after{transform:translate(-50%,4px) scale(1)}
-html .header-inner .header-actions .btn-cta{display:inline-flex!important;align-items:center;gap:10px;padding:13px 22px;border-radius:999px;background:#fff;color:#0a0b0e!important;
+html .header-inner .header-actions .btn-cta{display:inline-flex!important;align-items:center;gap:10px;padding:13px 20px;border-radius:10px;background:#fff;color:#0a0b0e!important;
  font:600 .9rem/1 'Inter',sans-serif;box-shadow:none;transform:none;transition:background-color .2s,transform .2s}
 html .header-inner .header-actions .btn-cta:hover{background:#d2ff00;transform:translateY(-1px)}
 @media (min-width:1025px){.menu-toggle{display:none!important}.float-cta{display:none!important}}
@@ -644,6 +644,10 @@ html .header-inner .header-actions .btn-cta:hover{background:#d2ff00;transform:t
 /* над первым экраном шапка прозрачная, при прокрутке — снова тёмная с размытием */
 .header-nav{transition:background-color .35s ease,-webkit-backdrop-filter .35s ease,backdrop-filter .35s ease}
 html.hdr-over-hero:not(.menu-open) .header-nav{background:transparent!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+html.hdr-over-hero:not(.menu-open):not(.hdr-at-top) .header-nav::before{content:"";position:absolute;left:0;right:0;top:0;height:160px;z-index:-1;pointer-events:none;
+ background:linear-gradient(to bottom,rgba(10,11,14,.96) 0%,rgba(10,11,14,.82) 38%,rgba(10,11,14,.35) 70%,rgba(10,11,14,0) 100%)}
+/* над первым экраном — без плашки: в самом верху прозрачная, при прокрутке — мягкий градиент без резкого края */
+html.hdr-over-hero .header-nav{border-bottom-color:transparent!important;box-shadow:none!important}
 /* угловая «Обсудить проект» (телефон, планшет) не спорит с карточками первого экрана */
 .float-cta{transition:background-color .2s,transform .3s,opacity .3s}
 html.intro-on .float-cta{opacity:0;transform:translateY(12px);pointer-events:none}
@@ -666,12 +670,10 @@ html.intro-on .float-cta{opacity:0;transform:translateY(12px);pointer-events:non
 .hero8-grid .v1,.hero8-grid .v2{top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,.07) 15%,rgba(255,255,255,.07) 85%,transparent)}
 .hero8-grid .v1{left:33.33%}.hero8-grid .v2{left:78%}
 .hero8-grid .h1{left:0;right:0;top:66%;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,.07) 10%,rgba(255,255,255,.07) 90%,transparent)}
-.hero8-grid .c1,.hero8-grid .c2{left:60%;top:52%;border-radius:50%;transform:translate(-50%,-50%);border:1px solid rgba(255,255,255,.07)}
-.hero8-grid .c1{width:min(84vh,70vw);height:min(84vh,70vw)}
-.hero8-grid .c2{width:min(58vh,48vw);height:min(58vh,48vw);border-style:dashed;border-color:rgba(255,255,255,.06)}
+.hero8-grid .c1{left:60%;top:52%;width:min(84vh,70vw);height:min(84vh,70vw);border-radius:50%;transform:translate(-50%,-50%);border:1px solid rgba(255,255,255,.06)}
 
 /* заголовок: Inter, слева вверху */
-.hero8-head{position:absolute;left:var(--pad);top:calc(76px + clamp(28px,6vh,72px));width:min(54%,760px)}
+.hero8-head{position:absolute;left:var(--pad);top:calc(76px + clamp(28px,6vh,72px));width:min(54%,760px);opacity:calc(1 - var(--intro-p,0) * 2.6)}
 .hero8-kicker{margin:0 0 22px;color:rgba(255,255,255,.5);font:500 .82rem/1 var(--mono);letter-spacing:.02em}
 .hero8-title{margin:0;color:#fff;font:700 var(--h8-fs)/.92 'Inter',sans-serif;letter-spacing:-.05em;text-transform:uppercase}
 .hero8-line{display:block;white-space:nowrap}
@@ -679,33 +681,23 @@ html.intro-on .float-cta{opacity:0;transform:translateY(12px);pointer-events:non
 .hero8-title .hero3-caret{width:.06em;height:.72em;margin-left:.05em}
 
 /* карточка «обо мне»: слева по центру высоты */
-.hero8-card{position:absolute;left:var(--pad);top:62%;display:grid;grid-template-columns:auto 72px minmax(0,1fr);align-items:center;gap:14px;width:min(380px,32vw);
- padding:12px 16px 12px 12px;border-radius:14px;background:rgba(18,20,25,.72);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.62);
+.hero8-card{position:absolute;left:var(--pad);top:62%;display:grid;grid-template-columns:76px minmax(0,1fr);align-items:center;gap:16px;width:min(380px,32vw);
+ padding:10px 16px 10px 10px;border-radius:10px;background:rgba(18,20,25,.72);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.62);
  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:border-color .3s}
 .hero8-card:hover{border-color:rgba(210,255,0,.4)}
-.hero8-card-tag{writing-mode:vertical-rl;transform:rotate(180deg);color:rgba(255,255,255,.45);font:500 .66rem/1 var(--mono);letter-spacing:.14em;text-transform:uppercase}
-.hero8-card-img{width:72px;height:72px;object-fit:cover;border-radius:10px}
+.hero8-card-img{width:76px;height:76px;object-fit:cover;object-position:58% 22%;border-radius:6px;filter:brightness(1.45) contrast(1.05)}
 .hero8-card-text{font:400 .8rem/1.45 'Inter',sans-serif}
 .hero8-card-text b{color:#fff;font-weight:600}
 
-/* HUD-кольцо справа — ссылка на рейтинг */
-.hero8-hud{position:absolute;left:78%;top:30%;width:clamp(140px,13vw,210px);aspect-ratio:1;transform:translate(-50%,-50%);display:grid;place-items:center}
-.hero8-ring{position:absolute;inset:0;width:100%;height:100%;animation:h8Spin 24s linear infinite}
-@keyframes h8Spin{to{transform:rotate(360deg)}}
-.hero8-hud-pill{position:relative;padding:9px 14px;border-radius:999px;background:#fff;color:#0a0b0e;font:500 .74rem/1 var(--mono);letter-spacing:.02em;white-space:nowrap;transition:background-color .2s}
-.hero8-hud-arrow{position:absolute;right:10%;bottom:12%;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.25);color:#fff;transition:background-color .2s,color .2s,border-color .2s}
-.hero8-hud:hover .hero8-hud-pill{background:#d2ff00}
-.hero8-hud:hover .hero8-hud-arrow{background:#d2ff00;border-color:#d2ff00;color:#0a0b0e}
-
 /* низ: соцсети + подпись слева, «Смотреть кейсы» справа */
-.hero8-bottom{position:absolute;left:var(--pad);bottom:clamp(20px,4vh,40px);display:flex;align-items:center;gap:18px}
+.hero8-bottom{position:absolute;left:var(--pad);bottom:clamp(24px,4.5vh,44px);display:flex;align-items:center;gap:18px}
 .hero8-social{display:flex;gap:6px}
 .hero8-social a{display:grid;place-items:center;width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.06);transition:background-color .2s}
 .hero8-social a:hover{background:#d2ff00}
 .hero8-social a:hover img{filter:brightness(0)}
 .hero8-social img{width:15px;height:15px}
 .hero8-foot{margin:0;color:rgba(255,255,255,.45);font:400 .74rem/1 var(--mono);letter-spacing:.04em}
-.hero8-scroll{position:absolute;right:var(--pad);bottom:clamp(20px,4vh,40px);display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;background:#d2ff00;color:#0a0b0e!important;
+.hero8-scroll{position:absolute;right:var(--pad);bottom:clamp(24px,4.5vh,44px);display:inline-flex;align-items:center;gap:10px;padding:15px 22px;border-radius:10px;background:#d2ff00;color:#0a0b0e!important;
  font:600 .9rem/1 'Inter',sans-serif;transition:background-color .2s,transform .2s}
 .hero8-scroll:hover{background:#fff;transform:translateY(-2px)}
 
@@ -716,18 +708,19 @@ html.intro-on .float-cta{opacity:0;transform:translateY(12px);pointer-events:non
 .hero-go:not(.hero-done) .hero8-line:nth-child(2){animation-delay:.1s}
 .hero-go:not(.hero-done) .hero8-line:nth-child(3){animation-delay:.2s}
 .hero-go:not(.hero-done) .hero8-card{animation-delay:.35s}
-.hero-go:not(.hero-done) .hero8-hud{animation-delay:.45s}
 .hero-go:not(.hero-done) .hero8-bottom,.hero-go:not(.hero-done) .hero8-scroll{animation-delay:.55s}
 
 @media (max-width:900px){
  .hero8{--h8-fs:11vw}
  .hero8-head{top:calc(76px + 20px);width:auto;right:var(--pad)}
- .hero8-grid .v2,.hero8-hud,.hero8-foot{display:none}
+ .hero8-grid .v2{display:none}
  .hero8-grid .v1{left:50%}
- .hero8-grid .c1,.hero8-grid .c2{left:50%;top:55%}
- .hero8-grid .c1{width:92vw;height:92vw}.hero8-grid .c2{width:64vw;height:64vw}
+ .hero8-grid .c1{left:50%;top:55%;width:92vw;height:92vw}
  .intro-v8 .intro3d-poster{left:50%;top:55%;height:auto;width:78vw}
  .hero8-card{top:auto;bottom:calc(clamp(20px,4vh,40px) + 60px);right:var(--pad);width:auto}
  .hero8-bottom{bottom:clamp(20px,4vh,40px)}
 }
-@media (prefers-reduced-motion: reduce){.hero8-title .hero3-caret{display:none}.hero8-ring{animation:none}}
+@media (prefers-reduced-motion: reduce){.hero8-title .hero3-caret{display:none}}
+/* высота первого экрана = окно минус то, что стоит над страницей (панель администратора uCoz и т.п.) */
+.intro3d.intro-v8{height:calc(100svh - var(--hero-shift,0px))!important}
+.intro-v8 .intro3d-sticky{height:calc(100svh - var(--hero-shift,0px))!important}

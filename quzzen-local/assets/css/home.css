@@ -464,8 +464,8 @@
 .dprofile-all-btn::after{content:none!important}
 @media (max-width:860px){.section-header{grid-template-columns:minmax(0,1fr)}.section-header .section-desc,.section-header>a{justify-self:start}}
 
-/* кнопки-призывы — одна форма на всём сайте: салатовая «пилюля», как на первом экране */
-.btn-primary,.sloy-cta-btn{border-radius:999px!important;padding:16px 26px!important;font:600 .95rem/1 'Inter',sans-serif!important;background:#d2ff00!important;color:#0a0b0e!important;transition:background-color .2s,transform .2s!important}
+/* кнопки-призывы — одна форма на всём сайте: салатовые, слегка скруглённые (10px), как было изначально */
+.btn-primary,.sloy-cta-btn{border-radius:10px!important;padding:16px 26px!important;font:600 .95rem/1 'Inter',sans-serif!important;background:#d2ff00!important;color:#0a0b0e!important;transition:background-color .2s,transform .2s!important}
 .btn-primary:hover,.sloy-cta-btn:hover{background:#fff!important;transform:translateY(-2px)!important;box-shadow:none!important}
 
 /* --- Клиенты: ровная сетка логотипов в тонких линиях --- */
