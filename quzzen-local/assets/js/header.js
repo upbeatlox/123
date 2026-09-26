@@ -204,7 +204,7 @@
 
 ;
 /* Первый экран v8 (по референсу «техно-витрина»): тёмная сцена с тонкими линиями сетки и кругами,
-   большой стеклянный 3D-логотип в центре под наклоном, пиксельный заголовок слева вверху (последнее слово печатается),
+   большой стеклянный 3D-логотип в центре под наклоном, крупный заголовок слева вверху (последнее слово печатается),
    HUD-кольцо с именем справа, карточка «кто я» слева, соцсети и подпись внизу. Стили — header.css, 3D — intro3d.js */
 (function () {
  var DOWN = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -213,12 +213,6 @@
  var WORDS = ['киберспорта', 'медиаспорта', 'про-клубов', 'спортивных лиг', 'турниров', 'блогеров', 'стримеров'];
  var LONGEST = WORDS.reduce(function (a, b) { return b.length > a.length ? b : a; });
  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- // шрифты витрины: пиксельный для заголовка, моноширинный для «технических» подписей
- if (!document.querySelector('link[data-hero8-fonts]')) {
-  var lf = document.createElement('link'); lf.rel = 'stylesheet'; lf.setAttribute('data-hero8-fonts', '');
-  lf.href = 'https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@400;500;700;800&display=swap';
-  document.head.appendChild(lf);
- }
 
  function build(sec, st) {
   sec.classList.remove('intro-v2', 'intro-v3', 'intro-v4', 'intro-v5', 'intro-v7'); sec.classList.add('intro-v8');
@@ -256,7 +250,6 @@
       '<a href="https://vk.com/quzzen" target="_blank" rel="noopener" aria-label="ВКонтакте"><img src="/Icons/VK.svg" alt=""></a>' +
       '<a href="https://behance.net/quzzen" target="_blank" rel="noopener" aria-label="Behance"><img src="/Icons/Behance.svg" alt=""></a>' +
      '</div>' +
-     '<p class="hero8-foot">Чита · Worldwide Remote</p>' +
     '</div>' +
     '<a class="hero8-scroll hero8-anim" href="#cases"><span>Смотреть кейсы</span>' + DOWN + '</a>' +
    '</div>');
@@ -331,7 +324,7 @@
   build(sec, st);
   var hero = st.querySelector('.hero8'), fit = fitter(hero);
   fit(); window.addEventListener('resize', fit);
-  if (document.fonts) { document.fonts.ready.then(fit); document.fonts.load('40px "Press Start 2P"').then(fit).catch(function () {}); }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
   watch(sec);
   reveal(sec, function () { typer(hero.querySelector('.hero3-type')); });
  }
