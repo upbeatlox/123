@@ -594,3 +594,10 @@ html body .services-section .services-grid>.service-card.is-wide-feature{grid-te
 .case-card .case-snippet{-webkit-line-clamp:2!important}       /* кейсы — описание в 2 строки */
 .sloy-bottom-info span{display:none}
 .tier-teaser-section,.squad-section{row-gap:0}
+
+/* v9 — без «шума»: английские метки у услуг (FOUNDATION, IDENTITY…), «SUBSCRIPTION» у 07,
+   подписи у цифр «Экономии» (ЭКОНОМИКА, СКОРОСТЬ…) убраны; у специалистов остаётся только номер (см. header.js) */
+.services-grid .service-chip,.is-wide-feature .service-chip,.sloy-card .sloy-tag{display:none!important}
+html body .services-section .services-grid>.service-card:not(.is-wide-feature){grid-template-columns:72px 1fr 36px!important;grid-template-areas:"num name arrow" ". lead ." ". list ."!important}
+@media (max-width:768px){html body .services-section .services-grid>.service-card:not(.is-wide-feature){grid-template-columns:40px 1fr 28px!important;grid-template-areas:"num name arrow" ". lead ." ". list ."!important}}
+

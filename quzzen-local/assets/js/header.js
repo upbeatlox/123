@@ -202,6 +202,17 @@
 })();
 
 ;
+/* Специалисты «Команды под ключ»: от кода «01 // CRAFT» остаётся только номер «01» — без «технического» шума */
+(function () {
+ function clean() {
+  document.querySelectorAll('.spec-code').forEach(function (el) {
+   var t = el.textContent; if (t.indexOf('//') > -1) el.textContent = t.split('//')[0].trim();
+  });
+ }
+ if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', clean); else clean();
+})();
+
+;
 /* Первый экран v8 (по референсу «техно-витрина»): тёмная сцена с тонкими линиями сетки и кругами,
    большой стеклянный 3D-логотип в центре под наклоном, крупный заголовок слева вверху (последнее слово печатается),
    карточка с фото «кто я» слева, соцсети и подпись внизу. Стили — header.css, 3D — intro3d.js */

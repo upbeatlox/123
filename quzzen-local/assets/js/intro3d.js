@@ -101,13 +101,8 @@ if (section && canvas) {
       const g = bgCanvas.getContext('2d');
       g.globalCompositeOperation = 'source-over'; g.filter = 'none';
       g.fillStyle = '#0a0b0e'; g.fillRect(0, 0, W, H);
-      // мягкий свет: сверху — нейтральный «софтбокс» над логотипом, снизу — тонкое салатовое свечение «пола»,
-      // по краям — затемнение (виньетка). Спокойно и симметрично, без диагональных лучей
-      g.save(); g.globalCompositeOperation = 'screen'; g.filter = 'blur(60px)';
-      g.translate(W / 2, -H * 0.05); g.scale(1.6, 1);
-      const top = g.createRadialGradient(0, 0, 0, 0, 0, H * 0.75);
-      top.addColorStop(0, 'rgba(230,236,245,0.16)'); top.addColorStop(0.5, 'rgba(200,210,225,0.05)'); top.addColorStop(1, 'rgba(0,0,0,0)');
-      g.fillStyle = top; g.fillRect(-W, -H, W * 2, H * 3); g.restore();
+      // свет: салатовое свечение за логотипом и тонкое свечение «пола» снизу; верх сцены — ровно цвет фона страницы
+      // (без «софтбокса» сверху), поэтому под шапкой никогда не появляется более светлая полоса
       // салатовое свечение прямо за логотипом: стекло преломляет его в яркие грани и переливы
       g.save(); g.globalCompositeOperation = 'screen'; g.filter = 'blur(50px)';
       g.translate(W * (W / H > 1.2 ? 0.6 : 0.5), H * 0.52); g.scale(0.8, 1);
@@ -121,7 +116,7 @@ if (section && canvas) {
       g.fillStyle = floor; g.fillRect(-W, -H, W * 2, H * 2); g.restore();
       g.save(); g.filter = 'none';
       const vig = g.createRadialGradient(W / 2, H * 0.48, H * 0.35, W / 2, H * 0.48, Math.max(W, H) * 0.8);
-      vig.addColorStop(0, 'rgba(10,11,14,0)'); vig.addColorStop(1, 'rgba(6,7,9,0.6)');
+      vig.addColorStop(0, 'rgba(10,11,14,0)'); vig.addColorStop(1, 'rgba(10,11,14,0.6)');   // к краям — в цвет фона, не темнее его
       g.fillStyle = vig; g.fillRect(0, 0, W, H); g.restore();
       g.filter = 'none';
       // огромный ник в фоне убран (по макету) — фон только тьма и луч света

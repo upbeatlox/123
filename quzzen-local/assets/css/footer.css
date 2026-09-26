@@ -337,7 +337,12 @@
 .footer-main-btn{border-radius:10px!important;padding:16px 26px!important;font-weight:600!important;transition:background-color .2s,transform .2s!important}
 .footer-main-btn:hover{background:#fff!important;box-shadow:none!important}
 .audit-text{font-size:clamp(1rem,1.2vw,1.12rem)!important}
-.cta-location{font-size:.875rem!important}
 /* v7 — один абзац вместо двух, больше воздуха */
 .footer-audit-content .audit-text+.audit-text{display:none!important}
 .site-footer{padding-top:clamp(96px,11vw,176px)!important}
+/* v9 — без служебных мелочей: «Chita (GMT+9) / Worldwide Remote» и «Созвон занимает не более 90 минут» убраны */
+.footer-cta-meta,.audit-highlight{display:none!important}
+.footer-headline{margin-top:0!important}
+
+/* подвал — того же цвета, что страница: без заметного «стыка» над ним */
+.site-footer{background:#0a0b0e!important}
