@@ -10,7 +10,6 @@
  if (!actions) { actions = document.createElement('div'); actions.className = 'header-actions'; inner.appendChild(actions); }
  var logo = inner.querySelector('.brand-logo'), toggle = inner.querySelector('#menuToggle');
  if (logo && logo.parentNode !== side) side.appendChild(logo);
- if (logo && !logo.querySelector('.brand-word')) logo.insertAdjacentHTML('beforeend', '<span class="brand-word">quzzeN</span>');
  // разделы по центру — те же ссылки, что в выпадающем меню
  if (!center.querySelector('.hdr-nav')) {
   var nav = document.createElement('nav'); nav.className = 'hdr-nav'; nav.setAttribute('aria-label', 'Разделы');
@@ -222,7 +221,6 @@
    '<div class="hero8">' +
     '<div class="hero8-grid" aria-hidden="true"><i class="v1"></i><i class="v2"></i><i class="h1"></i><i class="c1"></i><i class="c2"></i></div>' +
     '<div class="hero8-head">' +
-     '<p class="hero8-kicker hero8-anim">// quzzeN — бренд-дизайн</p>' +
      '<h1 class="hero8-title">' +
       '<span class="hero8-line">Дизайн для</span> ' +
       '<span class="hero8-line">спорта и</span> ' +
